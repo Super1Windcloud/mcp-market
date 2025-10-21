@@ -1,21 +1,39 @@
 import type { ForgeConfig } from "@electron-forge/shared-types";
-import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { MakerDeb } from "@electron-forge/maker-deb";
 import { MakerRpm } from "@electron-forge/maker-rpm";
 import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
+import { MakerWix } from "@electron-forge/maker-wix";
 
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     icon: "src/assets/icon", // This will look for icon.ico on Windows, icon.icns on macOS, and icon.png on Linux
+    extraResource: ["public"],
   },
 
-  rebuildConfig: {},
+  rebuildConfig: {
+
+  },
+
   makers: [
-    new MakerSquirrel({}),
+    new MakerWix({
+      name: "MCP Market",
+      description: "An Electron + Vite App using WSI installer",
+      manufacturer: "Superwindcloud",
+      version: "1.0.0",
+      exe: "mcp-market",
+      shortcutName: "MCP Market",
+      defaultInstallMode: "perUser",
+      shortName: "mcp-market",
+      ui: {
+        chooseDirectory: true,
+      },
+
+    }),
+    // new MakerSquirrel({}),
     new MakerZIP({}, ["darwin"]),
     new MakerRpm({}),
     new MakerDeb({}),

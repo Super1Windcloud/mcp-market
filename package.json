@@ -5,7 +5,7 @@
   "description": "这是 一个精选的优秀模型上下文协议 (MCP) 服务器市场",
   "main": ".vite/build/main.js",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "author": {
     "name": "SuperWIndCloud",
     "email": "ss1178933440@gmail.com"
@@ -31,6 +31,7 @@
     "@electron-forge/maker-deb": "^7.10.2",
     "@electron-forge/maker-rpm": "^7.10.2",
     "@electron-forge/maker-squirrel": "^7.10.2",
+    "@electron-forge/maker-wix": "^7.10.2",
     "@electron-forge/maker-zip": "^7.10.2",
     "@electron-forge/plugin-auto-unpack-natives": "^7.10.2",
     "@electron-forge/plugin-fuses": "^7.10.2",

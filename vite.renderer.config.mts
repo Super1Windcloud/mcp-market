@@ -17,6 +17,8 @@ export default defineConfig({
       },
     }),
   ],
+  publicDir: path.resolve(__dirname, "public"),
+
   resolve: {
     preserveSymlinks: true,
     alias: {

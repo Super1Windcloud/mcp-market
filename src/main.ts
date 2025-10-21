@@ -5,13 +5,18 @@ import {
   installExtension,
   REACT_DEVELOPER_TOOLS,
 } from "electron-devtools-installer";
+import { writeSomeLogs } from "@/utils";
 
 const inDevelopment = process.env.NODE_ENV === "development";
 
 const iconPath = path.join(__dirname, "/public/icon.jpg");
 
-if (inDevelopment) console.log(iconPath);
-process.exit();
+if (inDevelopment) {
+  console.log(iconPath);
+  process.exit();
+} else {
+  writeSomeLogs(iconPath);
+}
 
 function createWindow() {
   const preload = path.join(__dirname, "preload.js");

@@ -11,3 +11,6 @@ export const isMacOS = (): boolean => {
     typeof window !== "undefined" && window.navigator.platform.includes("Mac")
   );
 };
+
+
+
