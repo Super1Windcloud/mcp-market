@@ -12,14 +12,7 @@ const config: ForgeConfig = {
     asar: true,
     icon: "src/assets/icon", // This will look for icon.ico on Windows, icon.icns on macOS, and icon.png on Linux
   },
-  makers: [
-    new MakerSquirrel({
-      // For Windows, we need to specify the icon paths if they exist
-    }),
-    new MakerZIP({}, ["darwin"]),  // For macOS
-    new MakerRpm({}),              // For Red Hat/Fedora
-    new MakerDeb({}),              // For Debian/Ubuntu
-  ],
+
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({}),
