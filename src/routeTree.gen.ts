@@ -9,12 +9,96 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SecondRouteImport } from './routes/second'
+import { Route as WeatherRouteImport } from './routes/weather'
+import { Route as UtilitiesRouteImport } from './routes/utilities'
+import { Route as TravelRouteImport } from './routes/travel'
+import { Route as SocialRouteImport } from './routes/social'
+import { Route as ProductivityRouteImport } from './routes/productivity'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as MediaRouteImport } from './routes/media'
+import { Route as LifestyleRouteImport } from './routes/lifestyle'
+import { Route as InformationRouteImport } from './routes/information'
+import { Route as HealthRouteImport } from './routes/health'
+import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as EntertainmentRouteImport } from './routes/entertainment'
+import { Route as EducationRouteImport } from './routes/education'
+import { Route as DevelopmentRouteImport } from './routes/development'
+import { Route as BusinessRouteImport } from './routes/business'
 import { Route as IndexRouteImport } from './routes/index'
 
-const SecondRoute = SecondRouteImport.update({
-  id: '/second',
-  path: '/second',
+const WeatherRoute = WeatherRouteImport.update({
+  id: '/weather',
+  path: '/weather',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UtilitiesRoute = UtilitiesRouteImport.update({
+  id: '/utilities',
+  path: '/utilities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelRoute = TravelRouteImport.update({
+  id: '/travel',
+  path: '/travel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SocialRoute = SocialRouteImport.update({
+  id: '/social',
+  path: '/social',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductivityRoute = ProductivityRouteImport.update({
+  id: '/productivity',
+  path: '/productivity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MediaRoute = MediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LifestyleRoute = LifestyleRouteImport.update({
+  id: '/lifestyle',
+  path: '/lifestyle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InformationRoute = InformationRouteImport.update({
+  id: '/information',
+  path: '/information',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HealthRoute = HealthRouteImport.update({
+  id: '/health',
+  path: '/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntertainmentRoute = EntertainmentRouteImport.update({
+  id: '/entertainment',
+  path: '/entertainment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationRoute = EducationRouteImport.update({
+  id: '/education',
+  path: '/education',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevelopmentRoute = DevelopmentRouteImport.update({
+  id: '/development',
+  path: '/development',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BusinessRoute = BusinessRouteImport.update({
+  id: '/business',
+  path: '/business',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +109,240 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/second': typeof SecondRoute
+  '/business': typeof BusinessRoute
+  '/development': typeof DevelopmentRoute
+  '/education': typeof EducationRoute
+  '/entertainment': typeof EntertainmentRoute
+  '/finance': typeof FinanceRoute
+  '/health': typeof HealthRoute
+  '/information': typeof InformationRoute
+  '/lifestyle': typeof LifestyleRoute
+  '/media': typeof MediaRoute
+  '/news': typeof NewsRoute
+  '/productivity': typeof ProductivityRoute
+  '/social': typeof SocialRoute
+  '/travel': typeof TravelRoute
+  '/utilities': typeof UtilitiesRoute
+  '/weather': typeof WeatherRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/second': typeof SecondRoute
+  '/business': typeof BusinessRoute
+  '/development': typeof DevelopmentRoute
+  '/education': typeof EducationRoute
+  '/entertainment': typeof EntertainmentRoute
+  '/finance': typeof FinanceRoute
+  '/health': typeof HealthRoute
+  '/information': typeof InformationRoute
+  '/lifestyle': typeof LifestyleRoute
+  '/media': typeof MediaRoute
+  '/news': typeof NewsRoute
+  '/productivity': typeof ProductivityRoute
+  '/social': typeof SocialRoute
+  '/travel': typeof TravelRoute
+  '/utilities': typeof UtilitiesRoute
+  '/weather': typeof WeatherRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/second': typeof SecondRoute
+  '/business': typeof BusinessRoute
+  '/development': typeof DevelopmentRoute
+  '/education': typeof EducationRoute
+  '/entertainment': typeof EntertainmentRoute
+  '/finance': typeof FinanceRoute
+  '/health': typeof HealthRoute
+  '/information': typeof InformationRoute
+  '/lifestyle': typeof LifestyleRoute
+  '/media': typeof MediaRoute
+  '/news': typeof NewsRoute
+  '/productivity': typeof ProductivityRoute
+  '/social': typeof SocialRoute
+  '/travel': typeof TravelRoute
+  '/utilities': typeof UtilitiesRoute
+  '/weather': typeof WeatherRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/second'
+  fullPaths:
+    | '/'
+    | '/business'
+    | '/development'
+    | '/education'
+    | '/entertainment'
+    | '/finance'
+    | '/health'
+    | '/information'
+    | '/lifestyle'
+    | '/media'
+    | '/news'
+    | '/productivity'
+    | '/social'
+    | '/travel'
+    | '/utilities'
+    | '/weather'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/second'
-  id: '__root__' | '/' | '/second'
+  to:
+    | '/'
+    | '/business'
+    | '/development'
+    | '/education'
+    | '/entertainment'
+    | '/finance'
+    | '/health'
+    | '/information'
+    | '/lifestyle'
+    | '/media'
+    | '/news'
+    | '/productivity'
+    | '/social'
+    | '/travel'
+    | '/utilities'
+    | '/weather'
+  id:
+    | '__root__'
+    | '/'
+    | '/business'
+    | '/development'
+    | '/education'
+    | '/entertainment'
+    | '/finance'
+    | '/health'
+    | '/information'
+    | '/lifestyle'
+    | '/media'
+    | '/news'
+    | '/productivity'
+    | '/social'
+    | '/travel'
+    | '/utilities'
+    | '/weather'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  SecondRoute: typeof SecondRoute
+  BusinessRoute: typeof BusinessRoute
+  DevelopmentRoute: typeof DevelopmentRoute
+  EducationRoute: typeof EducationRoute
+  EntertainmentRoute: typeof EntertainmentRoute
+  FinanceRoute: typeof FinanceRoute
+  HealthRoute: typeof HealthRoute
+  InformationRoute: typeof InformationRoute
+  LifestyleRoute: typeof LifestyleRoute
+  MediaRoute: typeof MediaRoute
+  NewsRoute: typeof NewsRoute
+  ProductivityRoute: typeof ProductivityRoute
+  SocialRoute: typeof SocialRoute
+  TravelRoute: typeof TravelRoute
+  UtilitiesRoute: typeof UtilitiesRoute
+  WeatherRoute: typeof WeatherRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/second': {
-      id: '/second'
-      path: '/second'
-      fullPath: '/second'
-      preLoaderRoute: typeof SecondRouteImport
+    '/weather': {
+      id: '/weather'
+      path: '/weather'
+      fullPath: '/weather'
+      preLoaderRoute: typeof WeatherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/utilities': {
+      id: '/utilities'
+      path: '/utilities'
+      fullPath: '/utilities'
+      preLoaderRoute: typeof UtilitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel': {
+      id: '/travel'
+      path: '/travel'
+      fullPath: '/travel'
+      preLoaderRoute: typeof TravelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/social': {
+      id: '/social'
+      path: '/social'
+      fullPath: '/social'
+      preLoaderRoute: typeof SocialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/productivity': {
+      id: '/productivity'
+      path: '/productivity'
+      fullPath: '/productivity'
+      preLoaderRoute: typeof ProductivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/media': {
+      id: '/media'
+      path: '/media'
+      fullPath: '/media'
+      preLoaderRoute: typeof MediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lifestyle': {
+      id: '/lifestyle'
+      path: '/lifestyle'
+      fullPath: '/lifestyle'
+      preLoaderRoute: typeof LifestyleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/information': {
+      id: '/information'
+      path: '/information'
+      fullPath: '/information'
+      preLoaderRoute: typeof InformationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/health': {
+      id: '/health'
+      path: '/health'
+      fullPath: '/health'
+      preLoaderRoute: typeof HealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entertainment': {
+      id: '/entertainment'
+      path: '/entertainment'
+      fullPath: '/entertainment'
+      preLoaderRoute: typeof EntertainmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education': {
+      id: '/education'
+      path: '/education'
+      fullPath: '/education'
+      preLoaderRoute: typeof EducationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/development': {
+      id: '/development'
+      path: '/development'
+      fullPath: '/development'
+      preLoaderRoute: typeof DevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/business': {
+      id: '/business'
+      path: '/business'
+      fullPath: '/business'
+      preLoaderRoute: typeof BusinessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +357,21 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  SecondRoute: SecondRoute,
+  BusinessRoute: BusinessRoute,
+  DevelopmentRoute: DevelopmentRoute,
+  EducationRoute: EducationRoute,
+  EntertainmentRoute: EntertainmentRoute,
+  FinanceRoute: FinanceRoute,
+  HealthRoute: HealthRoute,
+  InformationRoute: InformationRoute,
+  LifestyleRoute: LifestyleRoute,
+  MediaRoute: MediaRoute,
+  NewsRoute: NewsRoute,
+  ProductivityRoute: ProductivityRoute,
+  SocialRoute: SocialRoute,
+  TravelRoute: TravelRoute,
+  UtilitiesRoute: UtilitiesRoute,
+  WeatherRoute: WeatherRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

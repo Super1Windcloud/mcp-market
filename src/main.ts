@@ -13,7 +13,6 @@ const iconPath = path.join(__dirname, "/public/icon.jpg");
 
 if (inDevelopment) {
   console.log(iconPath);
-  process.exit();
 } else {
   writeSomeLogs(iconPath);
 }

@@ -6,6 +6,9 @@ import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
 import { MakerWix } from "@electron-forge/maker-wix";
+import MakerSquirrel from "@electron-forge/maker-squirrel";
+import MakerDMG from "@electron-forge/maker-dmg";
+import MakerPKG from "@electron-forge/maker-pkg";
 
 const config: ForgeConfig = {
   packagerConfig: {
@@ -14,11 +17,15 @@ const config: ForgeConfig = {
     extraResource: ["public"],
   },
 
-  rebuildConfig: {
-
-  },
+  rebuildConfig: {},
 
   makers: [
+    new MakerSquirrel({}),
+    new MakerZIP({}, ["darwin"]),
+    new MakerDMG({}),
+    new MakerPKG({}),
+    new MakerRpm({}),
+    new MakerDeb({}),
     new MakerWix({
       name: "MCP Market",
       description: "An Electron + Vite App using WSI installer",
@@ -33,10 +40,6 @@ const config: ForgeConfig = {
       },
 
     }),
-    // new MakerSquirrel({}),
-    new MakerZIP({}, ["darwin"]),
-    new MakerRpm({}),
-    new MakerDeb({}),
   ],
   plugins: [
     new VitePlugin({
