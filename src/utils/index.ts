@@ -6,7 +6,6 @@ class FileLogger {
   private readonly maxFileSize: number;
 
   constructor(logDir: string = "./logs", maxFileSize: number = 10 * 1024 * 1024) {
-    // 确保日志目录存在
     if (!fs.existsSync(logDir)) {
       fs.mkdirSync(logDir, { recursive: true });
     }
@@ -32,7 +31,6 @@ class FileLogger {
         await fs.promises.rename(this.logFilePath, newPath);
       }
     } catch (error) {
-      // 文件不存在，无需处理
       console.error("Failed to get file stats:", error);
     }
   }
@@ -71,7 +69,11 @@ class FileLogger {
 }
 
 
-export  function  writeSomeLogs(...messages :string[]) {
+export function writeSomeLogs(...messages: string[]) {
   const logger = new FileLogger();
-  messages.forEach((message) => logger.info(message))
+  messages.forEach((message) => logger.info(message));
+}
+
+export function  isDev(){
+  return process.env.NODE_ENV==='development'
 }

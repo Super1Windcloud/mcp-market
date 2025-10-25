@@ -9,26 +9,69 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkplaceRouteImport } from './routes/workplace'
 import { Route as WeatherRouteImport } from './routes/weather'
+import { Route as VersionControlRouteImport } from './routes/version-control'
 import { Route as UtilitiesRouteImport } from './routes/utilities'
+import { Route as TtsRouteImport } from './routes/tts'
 import { Route as TravelRouteImport } from './routes/travel'
+import { Route as TranslationRouteImport } from './routes/translation'
+import { Route as SupportRouteImport } from './routes/support'
+import { Route as SportsRouteImport } from './routes/sports'
 import { Route as SocialRouteImport } from './routes/social'
+import { Route as SecurityRouteImport } from './routes/security'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as ProductivityRouteImport } from './routes/productivity'
+import { Route as OtherToolsRouteImport } from './routes/other-tools'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as MultimediaRouteImport } from './routes/multimedia'
+import { Route as MonitoringRouteImport } from './routes/monitoring'
 import { Route as MediaRouteImport } from './routes/media'
+import { Route as MarketingRouteImport } from './routes/marketing'
+import { Route as LocationRouteImport } from './routes/location'
 import { Route as LifestyleRouteImport } from './routes/lifestyle'
+import { Route as KnowledgeRouteImport } from './routes/knowledge'
 import { Route as InformationRouteImport } from './routes/information'
 import { Route as HealthRouteImport } from './routes/health'
+import { Route as GamingRouteImport } from './routes/gaming'
 import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as FileSystemsRouteImport } from './routes/file-systems'
 import { Route as EntertainmentRouteImport } from './routes/entertainment'
+import { Route as EmbeddedRouteImport } from './routes/embedded'
 import { Route as EducationRouteImport } from './routes/education'
 import { Route as DevelopmentRouteImport } from './routes/development'
+import { Route as DeveloperToolsRouteImport } from './routes/developer-tools'
+import { Route as DeliveryRouteImport } from './routes/delivery'
+import { Route as DatabasesRouteImport } from './routes/databases'
+import { Route as DataScienceRouteImport } from './routes/data-science'
+import { Route as DataPlatformsRouteImport } from './routes/data-platforms'
+import { Route as CustomerDataRouteImport } from './routes/customer-data'
+import { Route as CommunicationRouteImport } from './routes/communication'
+import { Route as CommandLineRouteImport } from './routes/command-line'
+import { Route as CodingAgentsRouteImport } from './routes/coding-agents'
+import { Route as CodeExecutionRouteImport } from './routes/code-execution'
+import { Route as CloudRouteImport } from './routes/cloud'
 import { Route as BusinessRouteImport } from './routes/business'
+import { Route as BrowserRouteImport } from './routes/browser'
+import { Route as BioRouteImport } from './routes/bio'
+import { Route as ArtRouteImport } from './routes/art'
+import { Route as AggregatorsRouteImport } from './routes/aggregators'
+import { Route as AerospaceAndAstrodynamicsRouteImport } from './routes/aerospace-and-astrodynamics'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WorkplaceRoute = WorkplaceRouteImport.update({
+  id: '/workplace',
+  path: '/workplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WeatherRoute = WeatherRouteImport.update({
   id: '/weather',
   path: '/weather',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VersionControlRoute = VersionControlRouteImport.update({
+  id: '/version-control',
+  path: '/version-control',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UtilitiesRoute = UtilitiesRouteImport.update({
@@ -36,9 +79,29 @@ const UtilitiesRoute = UtilitiesRouteImport.update({
   path: '/utilities',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TtsRoute = TtsRouteImport.update({
+  id: '/tts',
+  path: '/tts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TravelRoute = TravelRouteImport.update({
   id: '/travel',
   path: '/travel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TranslationRoute = TranslationRouteImport.update({
+  id: '/translation',
+  path: '/translation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SportsRoute = SportsRouteImport.update({
+  id: '/sports',
+  path: '/sports',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SocialRoute = SocialRouteImport.update({
@@ -46,9 +109,24 @@ const SocialRoute = SocialRouteImport.update({
   path: '/social',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductivityRoute = ProductivityRouteImport.update({
   id: '/productivity',
   path: '/productivity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OtherToolsRoute = OtherToolsRouteImport.update({
+  id: '/other-tools',
+  path: '/other-tools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRoute = NewsRouteImport.update({
@@ -56,14 +134,39 @@ const NewsRoute = NewsRouteImport.update({
   path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MultimediaRoute = MultimediaRouteImport.update({
+  id: '/multimedia',
+  path: '/multimedia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MonitoringRoute = MonitoringRouteImport.update({
+  id: '/monitoring',
+  path: '/monitoring',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MediaRoute = MediaRouteImport.update({
   id: '/media',
   path: '/media',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketingRoute = MarketingRouteImport.update({
+  id: '/marketing',
+  path: '/marketing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationRoute = LocationRouteImport.update({
+  id: '/location',
+  path: '/location',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LifestyleRoute = LifestyleRouteImport.update({
   id: '/lifestyle',
   path: '/lifestyle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeRoute = KnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InformationRoute = InformationRouteImport.update({
@@ -76,14 +179,29 @@ const HealthRoute = HealthRouteImport.update({
   path: '/health',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GamingRoute = GamingRouteImport.update({
+  id: '/gaming',
+  path: '/gaming',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FinanceRoute = FinanceRouteImport.update({
   id: '/finance',
   path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FileSystemsRoute = FileSystemsRouteImport.update({
+  id: '/file-systems',
+  path: '/file-systems',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EntertainmentRoute = EntertainmentRouteImport.update({
   id: '/entertainment',
   path: '/entertainment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmbeddedRoute = EmbeddedRouteImport.update({
+  id: '/embedded',
+  path: '/embedded',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EducationRoute = EducationRouteImport.update({
@@ -96,11 +214,92 @@ const DevelopmentRoute = DevelopmentRouteImport.update({
   path: '/development',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeveloperToolsRoute = DeveloperToolsRouteImport.update({
+  id: '/developer-tools',
+  path: '/developer-tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeliveryRoute = DeliveryRouteImport.update({
+  id: '/delivery',
+  path: '/delivery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatabasesRoute = DatabasesRouteImport.update({
+  id: '/databases',
+  path: '/databases',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataScienceRoute = DataScienceRouteImport.update({
+  id: '/data-science',
+  path: '/data-science',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataPlatformsRoute = DataPlatformsRouteImport.update({
+  id: '/data-platforms',
+  path: '/data-platforms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomerDataRoute = CustomerDataRouteImport.update({
+  id: '/customer-data',
+  path: '/customer-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunicationRoute = CommunicationRouteImport.update({
+  id: '/communication',
+  path: '/communication',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommandLineRoute = CommandLineRouteImport.update({
+  id: '/command-line',
+  path: '/command-line',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CodingAgentsRoute = CodingAgentsRouteImport.update({
+  id: '/coding-agents',
+  path: '/coding-agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CodeExecutionRoute = CodeExecutionRouteImport.update({
+  id: '/code-execution',
+  path: '/code-execution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CloudRoute = CloudRouteImport.update({
+  id: '/cloud',
+  path: '/cloud',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BusinessRoute = BusinessRouteImport.update({
   id: '/business',
   path: '/business',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BrowserRoute = BrowserRouteImport.update({
+  id: '/browser',
+  path: '/browser',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BioRoute = BioRouteImport.update({
+  id: '/bio',
+  path: '/bio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtRoute = ArtRouteImport.update({
+  id: '/art',
+  path: '/art',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AggregatorsRoute = AggregatorsRouteImport.update({
+  id: '/aggregators',
+  path: '/aggregators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AerospaceAndAstrodynamicsRoute =
+  AerospaceAndAstrodynamicsRouteImport.update({
+    id: '/aerospace-and-astrodynamics',
+    path: '/aerospace-and-astrodynamics',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -109,142 +308,387 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aerospace-and-astrodynamics': typeof AerospaceAndAstrodynamicsRoute
+  '/aggregators': typeof AggregatorsRoute
+  '/art': typeof ArtRoute
+  '/bio': typeof BioRoute
+  '/browser': typeof BrowserRoute
   '/business': typeof BusinessRoute
+  '/cloud': typeof CloudRoute
+  '/code-execution': typeof CodeExecutionRoute
+  '/coding-agents': typeof CodingAgentsRoute
+  '/command-line': typeof CommandLineRoute
+  '/communication': typeof CommunicationRoute
+  '/customer-data': typeof CustomerDataRoute
+  '/data-platforms': typeof DataPlatformsRoute
+  '/data-science': typeof DataScienceRoute
+  '/databases': typeof DatabasesRoute
+  '/delivery': typeof DeliveryRoute
+  '/developer-tools': typeof DeveloperToolsRoute
   '/development': typeof DevelopmentRoute
   '/education': typeof EducationRoute
+  '/embedded': typeof EmbeddedRoute
   '/entertainment': typeof EntertainmentRoute
+  '/file-systems': typeof FileSystemsRoute
   '/finance': typeof FinanceRoute
+  '/gaming': typeof GamingRoute
   '/health': typeof HealthRoute
   '/information': typeof InformationRoute
+  '/knowledge': typeof KnowledgeRoute
   '/lifestyle': typeof LifestyleRoute
+  '/location': typeof LocationRoute
+  '/marketing': typeof MarketingRoute
   '/media': typeof MediaRoute
+  '/monitoring': typeof MonitoringRoute
+  '/multimedia': typeof MultimediaRoute
   '/news': typeof NewsRoute
+  '/other-tools': typeof OtherToolsRoute
   '/productivity': typeof ProductivityRoute
+  '/search': typeof SearchRoute
+  '/security': typeof SecurityRoute
   '/social': typeof SocialRoute
+  '/sports': typeof SportsRoute
+  '/support': typeof SupportRoute
+  '/translation': typeof TranslationRoute
   '/travel': typeof TravelRoute
+  '/tts': typeof TtsRoute
   '/utilities': typeof UtilitiesRoute
+  '/version-control': typeof VersionControlRoute
   '/weather': typeof WeatherRoute
+  '/workplace': typeof WorkplaceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aerospace-and-astrodynamics': typeof AerospaceAndAstrodynamicsRoute
+  '/aggregators': typeof AggregatorsRoute
+  '/art': typeof ArtRoute
+  '/bio': typeof BioRoute
+  '/browser': typeof BrowserRoute
   '/business': typeof BusinessRoute
+  '/cloud': typeof CloudRoute
+  '/code-execution': typeof CodeExecutionRoute
+  '/coding-agents': typeof CodingAgentsRoute
+  '/command-line': typeof CommandLineRoute
+  '/communication': typeof CommunicationRoute
+  '/customer-data': typeof CustomerDataRoute
+  '/data-platforms': typeof DataPlatformsRoute
+  '/data-science': typeof DataScienceRoute
+  '/databases': typeof DatabasesRoute
+  '/delivery': typeof DeliveryRoute
+  '/developer-tools': typeof DeveloperToolsRoute
   '/development': typeof DevelopmentRoute
   '/education': typeof EducationRoute
+  '/embedded': typeof EmbeddedRoute
   '/entertainment': typeof EntertainmentRoute
+  '/file-systems': typeof FileSystemsRoute
   '/finance': typeof FinanceRoute
+  '/gaming': typeof GamingRoute
   '/health': typeof HealthRoute
   '/information': typeof InformationRoute
+  '/knowledge': typeof KnowledgeRoute
   '/lifestyle': typeof LifestyleRoute
+  '/location': typeof LocationRoute
+  '/marketing': typeof MarketingRoute
   '/media': typeof MediaRoute
+  '/monitoring': typeof MonitoringRoute
+  '/multimedia': typeof MultimediaRoute
   '/news': typeof NewsRoute
+  '/other-tools': typeof OtherToolsRoute
   '/productivity': typeof ProductivityRoute
+  '/search': typeof SearchRoute
+  '/security': typeof SecurityRoute
   '/social': typeof SocialRoute
+  '/sports': typeof SportsRoute
+  '/support': typeof SupportRoute
+  '/translation': typeof TranslationRoute
   '/travel': typeof TravelRoute
+  '/tts': typeof TtsRoute
   '/utilities': typeof UtilitiesRoute
+  '/version-control': typeof VersionControlRoute
   '/weather': typeof WeatherRoute
+  '/workplace': typeof WorkplaceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aerospace-and-astrodynamics': typeof AerospaceAndAstrodynamicsRoute
+  '/aggregators': typeof AggregatorsRoute
+  '/art': typeof ArtRoute
+  '/bio': typeof BioRoute
+  '/browser': typeof BrowserRoute
   '/business': typeof BusinessRoute
+  '/cloud': typeof CloudRoute
+  '/code-execution': typeof CodeExecutionRoute
+  '/coding-agents': typeof CodingAgentsRoute
+  '/command-line': typeof CommandLineRoute
+  '/communication': typeof CommunicationRoute
+  '/customer-data': typeof CustomerDataRoute
+  '/data-platforms': typeof DataPlatformsRoute
+  '/data-science': typeof DataScienceRoute
+  '/databases': typeof DatabasesRoute
+  '/delivery': typeof DeliveryRoute
+  '/developer-tools': typeof DeveloperToolsRoute
   '/development': typeof DevelopmentRoute
   '/education': typeof EducationRoute
+  '/embedded': typeof EmbeddedRoute
   '/entertainment': typeof EntertainmentRoute
+  '/file-systems': typeof FileSystemsRoute
   '/finance': typeof FinanceRoute
+  '/gaming': typeof GamingRoute
   '/health': typeof HealthRoute
   '/information': typeof InformationRoute
+  '/knowledge': typeof KnowledgeRoute
   '/lifestyle': typeof LifestyleRoute
+  '/location': typeof LocationRoute
+  '/marketing': typeof MarketingRoute
   '/media': typeof MediaRoute
+  '/monitoring': typeof MonitoringRoute
+  '/multimedia': typeof MultimediaRoute
   '/news': typeof NewsRoute
+  '/other-tools': typeof OtherToolsRoute
   '/productivity': typeof ProductivityRoute
+  '/search': typeof SearchRoute
+  '/security': typeof SecurityRoute
   '/social': typeof SocialRoute
+  '/sports': typeof SportsRoute
+  '/support': typeof SupportRoute
+  '/translation': typeof TranslationRoute
   '/travel': typeof TravelRoute
+  '/tts': typeof TtsRoute
   '/utilities': typeof UtilitiesRoute
+  '/version-control': typeof VersionControlRoute
   '/weather': typeof WeatherRoute
+  '/workplace': typeof WorkplaceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/aerospace-and-astrodynamics'
+    | '/aggregators'
+    | '/art'
+    | '/bio'
+    | '/browser'
     | '/business'
+    | '/cloud'
+    | '/code-execution'
+    | '/coding-agents'
+    | '/command-line'
+    | '/communication'
+    | '/customer-data'
+    | '/data-platforms'
+    | '/data-science'
+    | '/databases'
+    | '/delivery'
+    | '/developer-tools'
     | '/development'
     | '/education'
+    | '/embedded'
     | '/entertainment'
+    | '/file-systems'
     | '/finance'
+    | '/gaming'
     | '/health'
     | '/information'
+    | '/knowledge'
     | '/lifestyle'
+    | '/location'
+    | '/marketing'
     | '/media'
+    | '/monitoring'
+    | '/multimedia'
     | '/news'
+    | '/other-tools'
     | '/productivity'
+    | '/search'
+    | '/security'
     | '/social'
+    | '/sports'
+    | '/support'
+    | '/translation'
     | '/travel'
+    | '/tts'
     | '/utilities'
+    | '/version-control'
     | '/weather'
+    | '/workplace'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/aerospace-and-astrodynamics'
+    | '/aggregators'
+    | '/art'
+    | '/bio'
+    | '/browser'
     | '/business'
+    | '/cloud'
+    | '/code-execution'
+    | '/coding-agents'
+    | '/command-line'
+    | '/communication'
+    | '/customer-data'
+    | '/data-platforms'
+    | '/data-science'
+    | '/databases'
+    | '/delivery'
+    | '/developer-tools'
     | '/development'
     | '/education'
+    | '/embedded'
     | '/entertainment'
+    | '/file-systems'
     | '/finance'
+    | '/gaming'
     | '/health'
     | '/information'
+    | '/knowledge'
     | '/lifestyle'
+    | '/location'
+    | '/marketing'
     | '/media'
+    | '/monitoring'
+    | '/multimedia'
     | '/news'
+    | '/other-tools'
     | '/productivity'
+    | '/search'
+    | '/security'
     | '/social'
+    | '/sports'
+    | '/support'
+    | '/translation'
     | '/travel'
+    | '/tts'
     | '/utilities'
+    | '/version-control'
     | '/weather'
+    | '/workplace'
   id:
     | '__root__'
     | '/'
+    | '/aerospace-and-astrodynamics'
+    | '/aggregators'
+    | '/art'
+    | '/bio'
+    | '/browser'
     | '/business'
+    | '/cloud'
+    | '/code-execution'
+    | '/coding-agents'
+    | '/command-line'
+    | '/communication'
+    | '/customer-data'
+    | '/data-platforms'
+    | '/data-science'
+    | '/databases'
+    | '/delivery'
+    | '/developer-tools'
     | '/development'
     | '/education'
+    | '/embedded'
     | '/entertainment'
+    | '/file-systems'
     | '/finance'
+    | '/gaming'
     | '/health'
     | '/information'
+    | '/knowledge'
     | '/lifestyle'
+    | '/location'
+    | '/marketing'
     | '/media'
+    | '/monitoring'
+    | '/multimedia'
     | '/news'
+    | '/other-tools'
     | '/productivity'
+    | '/search'
+    | '/security'
     | '/social'
+    | '/sports'
+    | '/support'
+    | '/translation'
     | '/travel'
+    | '/tts'
     | '/utilities'
+    | '/version-control'
     | '/weather'
+    | '/workplace'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AerospaceAndAstrodynamicsRoute: typeof AerospaceAndAstrodynamicsRoute
+  AggregatorsRoute: typeof AggregatorsRoute
+  ArtRoute: typeof ArtRoute
+  BioRoute: typeof BioRoute
+  BrowserRoute: typeof BrowserRoute
   BusinessRoute: typeof BusinessRoute
+  CloudRoute: typeof CloudRoute
+  CodeExecutionRoute: typeof CodeExecutionRoute
+  CodingAgentsRoute: typeof CodingAgentsRoute
+  CommandLineRoute: typeof CommandLineRoute
+  CommunicationRoute: typeof CommunicationRoute
+  CustomerDataRoute: typeof CustomerDataRoute
+  DataPlatformsRoute: typeof DataPlatformsRoute
+  DataScienceRoute: typeof DataScienceRoute
+  DatabasesRoute: typeof DatabasesRoute
+  DeliveryRoute: typeof DeliveryRoute
+  DeveloperToolsRoute: typeof DeveloperToolsRoute
   DevelopmentRoute: typeof DevelopmentRoute
   EducationRoute: typeof EducationRoute
+  EmbeddedRoute: typeof EmbeddedRoute
   EntertainmentRoute: typeof EntertainmentRoute
+  FileSystemsRoute: typeof FileSystemsRoute
   FinanceRoute: typeof FinanceRoute
+  GamingRoute: typeof GamingRoute
   HealthRoute: typeof HealthRoute
   InformationRoute: typeof InformationRoute
+  KnowledgeRoute: typeof KnowledgeRoute
   LifestyleRoute: typeof LifestyleRoute
+  LocationRoute: typeof LocationRoute
+  MarketingRoute: typeof MarketingRoute
   MediaRoute: typeof MediaRoute
+  MonitoringRoute: typeof MonitoringRoute
+  MultimediaRoute: typeof MultimediaRoute
   NewsRoute: typeof NewsRoute
+  OtherToolsRoute: typeof OtherToolsRoute
   ProductivityRoute: typeof ProductivityRoute
+  SearchRoute: typeof SearchRoute
+  SecurityRoute: typeof SecurityRoute
   SocialRoute: typeof SocialRoute
+  SportsRoute: typeof SportsRoute
+  SupportRoute: typeof SupportRoute
+  TranslationRoute: typeof TranslationRoute
   TravelRoute: typeof TravelRoute
+  TtsRoute: typeof TtsRoute
   UtilitiesRoute: typeof UtilitiesRoute
+  VersionControlRoute: typeof VersionControlRoute
   WeatherRoute: typeof WeatherRoute
+  WorkplaceRoute: typeof WorkplaceRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/workplace': {
+      id: '/workplace'
+      path: '/workplace'
+      fullPath: '/workplace'
+      preLoaderRoute: typeof WorkplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/weather': {
       id: '/weather'
       path: '/weather'
       fullPath: '/weather'
       preLoaderRoute: typeof WeatherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/version-control': {
+      id: '/version-control'
+      path: '/version-control'
+      fullPath: '/version-control'
+      preLoaderRoute: typeof VersionControlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/utilities': {
@@ -254,11 +698,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UtilitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tts': {
+      id: '/tts'
+      path: '/tts'
+      fullPath: '/tts'
+      preLoaderRoute: typeof TtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel': {
       id: '/travel'
       path: '/travel'
       fullPath: '/travel'
       preLoaderRoute: typeof TravelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/translation': {
+      id: '/translation'
+      path: '/translation'
+      fullPath: '/translation'
+      preLoaderRoute: typeof TranslationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sports': {
+      id: '/sports'
+      path: '/sports'
+      fullPath: '/sports'
+      preLoaderRoute: typeof SportsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/social': {
@@ -268,11 +740,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SocialRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/productivity': {
       id: '/productivity'
       path: '/productivity'
       fullPath: '/productivity'
       preLoaderRoute: typeof ProductivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/other-tools': {
+      id: '/other-tools'
+      path: '/other-tools'
+      fullPath: '/other-tools'
+      preLoaderRoute: typeof OtherToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news': {
@@ -282,6 +775,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/multimedia': {
+      id: '/multimedia'
+      path: '/multimedia'
+      fullPath: '/multimedia'
+      preLoaderRoute: typeof MultimediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/monitoring': {
+      id: '/monitoring'
+      path: '/monitoring'
+      fullPath: '/monitoring'
+      preLoaderRoute: typeof MonitoringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/media': {
       id: '/media'
       path: '/media'
@@ -289,11 +796,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MediaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketing': {
+      id: '/marketing'
+      path: '/marketing'
+      fullPath: '/marketing'
+      preLoaderRoute: typeof MarketingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location': {
+      id: '/location'
+      path: '/location'
+      fullPath: '/location'
+      preLoaderRoute: typeof LocationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lifestyle': {
       id: '/lifestyle'
       path: '/lifestyle'
       fullPath: '/lifestyle'
       preLoaderRoute: typeof LifestyleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge': {
+      id: '/knowledge'
+      path: '/knowledge'
+      fullPath: '/knowledge'
+      preLoaderRoute: typeof KnowledgeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/information': {
@@ -310,6 +838,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HealthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gaming': {
+      id: '/gaming'
+      path: '/gaming'
+      fullPath: '/gaming'
+      preLoaderRoute: typeof GamingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/finance': {
       id: '/finance'
       path: '/finance'
@@ -317,11 +852,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/file-systems': {
+      id: '/file-systems'
+      path: '/file-systems'
+      fullPath: '/file-systems'
+      preLoaderRoute: typeof FileSystemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/entertainment': {
       id: '/entertainment'
       path: '/entertainment'
       fullPath: '/entertainment'
       preLoaderRoute: typeof EntertainmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/embedded': {
+      id: '/embedded'
+      path: '/embedded'
+      fullPath: '/embedded'
+      preLoaderRoute: typeof EmbeddedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/education': {
@@ -338,11 +887,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevelopmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/developer-tools': {
+      id: '/developer-tools'
+      path: '/developer-tools'
+      fullPath: '/developer-tools'
+      preLoaderRoute: typeof DeveloperToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/delivery': {
+      id: '/delivery'
+      path: '/delivery'
+      fullPath: '/delivery'
+      preLoaderRoute: typeof DeliveryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/databases': {
+      id: '/databases'
+      path: '/databases'
+      fullPath: '/databases'
+      preLoaderRoute: typeof DatabasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-science': {
+      id: '/data-science'
+      path: '/data-science'
+      fullPath: '/data-science'
+      preLoaderRoute: typeof DataScienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-platforms': {
+      id: '/data-platforms'
+      path: '/data-platforms'
+      fullPath: '/data-platforms'
+      preLoaderRoute: typeof DataPlatformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customer-data': {
+      id: '/customer-data'
+      path: '/customer-data'
+      fullPath: '/customer-data'
+      preLoaderRoute: typeof CustomerDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/communication': {
+      id: '/communication'
+      path: '/communication'
+      fullPath: '/communication'
+      preLoaderRoute: typeof CommunicationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/command-line': {
+      id: '/command-line'
+      path: '/command-line'
+      fullPath: '/command-line'
+      preLoaderRoute: typeof CommandLineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coding-agents': {
+      id: '/coding-agents'
+      path: '/coding-agents'
+      fullPath: '/coding-agents'
+      preLoaderRoute: typeof CodingAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/code-execution': {
+      id: '/code-execution'
+      path: '/code-execution'
+      fullPath: '/code-execution'
+      preLoaderRoute: typeof CodeExecutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cloud': {
+      id: '/cloud'
+      path: '/cloud'
+      fullPath: '/cloud'
+      preLoaderRoute: typeof CloudRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/business': {
       id: '/business'
       path: '/business'
       fullPath: '/business'
       preLoaderRoute: typeof BusinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/browser': {
+      id: '/browser'
+      path: '/browser'
+      fullPath: '/browser'
+      preLoaderRoute: typeof BrowserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bio': {
+      id: '/bio'
+      path: '/bio'
+      fullPath: '/bio'
+      preLoaderRoute: typeof BioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/art': {
+      id: '/art'
+      path: '/art'
+      fullPath: '/art'
+      preLoaderRoute: typeof ArtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aggregators': {
+      id: '/aggregators'
+      path: '/aggregators'
+      fullPath: '/aggregators'
+      preLoaderRoute: typeof AggregatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aerospace-and-astrodynamics': {
+      id: '/aerospace-and-astrodynamics'
+      path: '/aerospace-and-astrodynamics'
+      fullPath: '/aerospace-and-astrodynamics'
+      preLoaderRoute: typeof AerospaceAndAstrodynamicsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -357,21 +1018,54 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AerospaceAndAstrodynamicsRoute: AerospaceAndAstrodynamicsRoute,
+  AggregatorsRoute: AggregatorsRoute,
+  ArtRoute: ArtRoute,
+  BioRoute: BioRoute,
+  BrowserRoute: BrowserRoute,
   BusinessRoute: BusinessRoute,
+  CloudRoute: CloudRoute,
+  CodeExecutionRoute: CodeExecutionRoute,
+  CodingAgentsRoute: CodingAgentsRoute,
+  CommandLineRoute: CommandLineRoute,
+  CommunicationRoute: CommunicationRoute,
+  CustomerDataRoute: CustomerDataRoute,
+  DataPlatformsRoute: DataPlatformsRoute,
+  DataScienceRoute: DataScienceRoute,
+  DatabasesRoute: DatabasesRoute,
+  DeliveryRoute: DeliveryRoute,
+  DeveloperToolsRoute: DeveloperToolsRoute,
   DevelopmentRoute: DevelopmentRoute,
   EducationRoute: EducationRoute,
+  EmbeddedRoute: EmbeddedRoute,
   EntertainmentRoute: EntertainmentRoute,
+  FileSystemsRoute: FileSystemsRoute,
   FinanceRoute: FinanceRoute,
+  GamingRoute: GamingRoute,
   HealthRoute: HealthRoute,
   InformationRoute: InformationRoute,
+  KnowledgeRoute: KnowledgeRoute,
   LifestyleRoute: LifestyleRoute,
+  LocationRoute: LocationRoute,
+  MarketingRoute: MarketingRoute,
   MediaRoute: MediaRoute,
+  MonitoringRoute: MonitoringRoute,
+  MultimediaRoute: MultimediaRoute,
   NewsRoute: NewsRoute,
+  OtherToolsRoute: OtherToolsRoute,
   ProductivityRoute: ProductivityRoute,
+  SearchRoute: SearchRoute,
+  SecurityRoute: SecurityRoute,
   SocialRoute: SocialRoute,
+  SportsRoute: SportsRoute,
+  SupportRoute: SupportRoute,
+  TranslationRoute: TranslationRoute,
   TravelRoute: TravelRoute,
+  TtsRoute: TtsRoute,
   UtilitiesRoute: UtilitiesRoute,
+  VersionControlRoute: VersionControlRoute,
   WeatherRoute: WeatherRoute,
+  WorkplaceRoute: WorkplaceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

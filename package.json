@@ -23,7 +23,8 @@
     "test:watch": "vitest watch",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
-    "test:all": "vitest run && playwright test"
+    "test:all": "vitest run && playwright test",
+    "knip": "knip"
   },
   "license": "MIT",
   "devDependencies": {
@@ -49,13 +50,12 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/electron-squirrel-startup": "^1.0.2",
     "@types/eslint-config-prettier": "^6.11.3",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.9.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "1.0.0",
     "electron": "^38.2.2",
-    "electron-devtools-installer": "^4.0.0",
     "electron-playwright-helpers": "^1.8.2",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
@@ -64,12 +64,16 @@
     "eslint-plugin-react-hooks": "^7.0.0",
     "globals": "^16.4.0",
     "jsdom": "^27.0.0",
+    "knip": "^5.66.2",
+    "mdast": "^2.3.2",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.0",
+    "remark-parse": "^11.0.0",
     "tailwindcss": "^4.1.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1",
+    "unified": "^11.0.5",
     "vite": "^7.1.10",
     "vitest": "^3.2.4"
   },
@@ -82,7 +86,6 @@
     "@tailwindcss/vite": "^4.1.14",
     "@tanstack/react-query": "^5.90.3",
     "@tanstack/react-router": "^1.132.47",
-    "@tanstack/react-router-devtools": "^1.133.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "electron-squirrel-startup": "^1.0.1",
@@ -94,6 +97,7 @@
     "react-use": "^17.6.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^4.1.12"
+    "zod": "^4.1.12",
+    "zustand": "^5.0.8"
   }
 }

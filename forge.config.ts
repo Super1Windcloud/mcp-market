@@ -13,8 +13,17 @@ import MakerPKG from "@electron-forge/maker-pkg";
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    icon: "src/assets/icon", // This will look for icon.ico on Windows, icon.icns on macOS, and icon.png on Linux
+    icon: "src/assets/icon",
     extraResource: ["public"],
+    osxSign: {},
+    osxNotarize: {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      tool: 'notarytool',
+      appleId: process.env.APPLE_ID || '',
+      appleIdPassword: process.env.APPLE_PASSWORD || '',
+      teamId: process.env.APPLE_TEAM_ID  || ' '
+    }
   },
 
   rebuildConfig: {},

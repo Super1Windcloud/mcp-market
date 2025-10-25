@@ -1,6 +1,6 @@
 import React from "react";
 import BaseLayout from "@/layouts/BaseLayout";
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { Outlet, createRootRoute, } from "@tanstack/react-router";
 
 
 function Root() {

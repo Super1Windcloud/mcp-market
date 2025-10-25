@@ -13,16 +13,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const prettierIgnorePath = path.resolve(__dirname, ".prettierignore");
 
-/** @type {import('eslint').Linter.Config[]} */
+/** @type {import("eslint").Linter.Config[]} */
 export default defineConfig([
-  includeIgnoreFile(prettierIgnorePath),
-  {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-  },
+
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
   reactHooks.configs.flat.recommended,
   eslintPluginPrettierRecommended,
   ...tseslint.configs.recommended,
+  includeIgnoreFile(prettierIgnorePath),
+  {
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    rules: {
+      "@typescript-eslint/ban-ts-comment": ["error", {
+        "ts-ignore": "allow-with-description",
+      }],
+    },
+  },
+
 ]);

@@ -1,7 +1,7 @@
-import React from "react";
 import DragWindowRegion from "@/components/DragWindowRegion";
 import NavigationMenu from "@/components/template/NavigationMenu";
 import ToggleTheme from "@/components/ToggleTheme";
+import React from "react";
 
 export default function BaseLayout({
                                      children,
@@ -9,14 +9,22 @@ export default function BaseLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <div className="flex flex-col h-screen">
       <DragWindowRegion title="Mcp Market" />
-      <main className={"flex flex-row w-full  justify-center items-center "}>
-        <h1 className="text-3xl font-bold  self-center">🌐 MCP Servers 市场</h1>
+
+      <div className="flex flex-row w-full justify-center items-center p-2">
+        <h1 className="text-3xl font-bold self-center">🌐 MCP Servers 市场</h1>
         <ToggleTheme />
-      </main>
-      <NavigationMenu />
-      <main className="">{children}</main>
-    </main>
+      </div>
+
+      <div className="flex flex-1 w-full h-full ">
+        <NavigationMenu />
+        <main style={{
+          scrollbarWidth: "none",
+        }} className="flex-1  h-full  w-full overflow-y-auto">
+          {children}
+        </main>
+      </div>
+    </div>
   );
 }
