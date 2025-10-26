@@ -5,6 +5,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { FreeMcpSources } from "../../../scripts/constant";
 import { isDev } from "@/utils";
 import { useMcpsStateStore } from "@/store";
+import { useEffectOnce } from "react-use";
 
 export interface McpCategory {
   icon?: React.ReactNode;
@@ -32,6 +33,9 @@ export default function Sidebar() {
     await navigate({ to: route, replace: true });
   };
 
+  useEffectOnce(() => {
+    navigate({ to: "/", replace: true });
+  });
   const categories = useMemo(() => {
     const mcpSources = FreeMcpSources;
     const results = [{
@@ -61,14 +65,7 @@ export default function Sidebar() {
     const mcpSources = FreeMcpSources;
     const myMcp = {
       label: "🦀 我的MCP",
-      mcps: [{
-        name: "NeteaseCloud MCP",
-        url: "https://github.com/Super1WindClou",
-        "desc": "网易云音乐MCP智能控制器，提供全局快捷键、搜索单曲播放、搜索歌单播放、自定义歌单管理、每日推荐和私人漫游等丰富功能",
-
-      }, {
-        name :""
-      }] as McpSourceType[],
+      mcps: [] as McpSourceType[],
       route: "/",
     };
     const results = [myMcp];
@@ -94,6 +91,7 @@ export default function Sidebar() {
   useEffect(() => {
     setAllMcps(allMcpsList);
   }, [allMcpsList, setAllMcps]);
+
 
   return (
     <aside style={{

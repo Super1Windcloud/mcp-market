@@ -12,13 +12,20 @@ interface ThemeModeContext {
   system: () => Promise<boolean>;
   current: () => Promise<"dark" | "light" | "system">;
 }
+
 interface ElectronWindow {
   minimize: () => Promise<void>;
   maximize: () => Promise<void>;
   close: () => Promise<void>;
 }
 
+interface ElectronAPI {
+  openUrl: (url: string) => Promise<void>;
+  joinPath: (...args: string[]) => Promise<string>;
+}
+
 declare interface Window {
   themeMode: ThemeModeContext;
   electronWindow: ElectronWindow;
+  electronAPI: ElectronAPI;
 }

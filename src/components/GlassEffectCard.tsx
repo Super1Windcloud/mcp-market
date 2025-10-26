@@ -1,6 +1,8 @@
 import React from "react";
 
-export function GlassEffectCard({ children }: { children: React.ReactNode }) {
+export function GlassEffectCard({ children, className }: {
+  children: React.ReactNode, className ?: string
+}) {
   return (
     <div
       style={
@@ -14,6 +16,7 @@ export function GlassEffectCard({ children }: { children: React.ReactNode }) {
           padding: "1rem",
         }
       }
+      className={className}
     >
       {children}
     </div>

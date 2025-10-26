@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import { defineConfig } from "vite";
+import { codeInspectorPlugin } from "code-inspector-plugin";
 
 export default defineConfig({
   plugins: [
@@ -15,6 +16,9 @@ export default defineConfig({
       babel: {
         plugins: ["babel-plugin-react-compiler"],
       },
+    }),
+    codeInspectorPlugin({
+      bundler: "vite",
     }),
   ],
   publicDir: path.resolve(__dirname, "public"),

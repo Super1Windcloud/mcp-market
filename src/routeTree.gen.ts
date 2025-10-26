@@ -51,6 +51,7 @@ import { Route as CommandLineRouteImport } from './routes/command-line'
 import { Route as CodingAgentsRouteImport } from './routes/coding-agents'
 import { Route as CodeExecutionRouteImport } from './routes/code-execution'
 import { Route as CloudRouteImport } from './routes/cloud'
+import { Route as ChatMcpRouteImport } from './routes/chat-mcp'
 import { Route as BusinessRouteImport } from './routes/business'
 import { Route as BrowserRouteImport } from './routes/browser'
 import { Route as BioRouteImport } from './routes/bio'
@@ -269,6 +270,11 @@ const CloudRoute = CloudRouteImport.update({
   path: '/cloud',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChatMcpRoute = ChatMcpRouteImport.update({
+  id: '/chat-mcp',
+  path: '/chat-mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BusinessRoute = BusinessRouteImport.update({
   id: '/business',
   path: '/business',
@@ -314,6 +320,7 @@ export interface FileRoutesByFullPath {
   '/bio': typeof BioRoute
   '/browser': typeof BrowserRoute
   '/business': typeof BusinessRoute
+  '/chat-mcp': typeof ChatMcpRoute
   '/cloud': typeof CloudRoute
   '/code-execution': typeof CodeExecutionRoute
   '/coding-agents': typeof CodingAgentsRoute
@@ -365,6 +372,7 @@ export interface FileRoutesByTo {
   '/bio': typeof BioRoute
   '/browser': typeof BrowserRoute
   '/business': typeof BusinessRoute
+  '/chat-mcp': typeof ChatMcpRoute
   '/cloud': typeof CloudRoute
   '/code-execution': typeof CodeExecutionRoute
   '/coding-agents': typeof CodingAgentsRoute
@@ -417,6 +425,7 @@ export interface FileRoutesById {
   '/bio': typeof BioRoute
   '/browser': typeof BrowserRoute
   '/business': typeof BusinessRoute
+  '/chat-mcp': typeof ChatMcpRoute
   '/cloud': typeof CloudRoute
   '/code-execution': typeof CodeExecutionRoute
   '/coding-agents': typeof CodingAgentsRoute
@@ -470,6 +479,7 @@ export interface FileRouteTypes {
     | '/bio'
     | '/browser'
     | '/business'
+    | '/chat-mcp'
     | '/cloud'
     | '/code-execution'
     | '/coding-agents'
@@ -521,6 +531,7 @@ export interface FileRouteTypes {
     | '/bio'
     | '/browser'
     | '/business'
+    | '/chat-mcp'
     | '/cloud'
     | '/code-execution'
     | '/coding-agents'
@@ -572,6 +583,7 @@ export interface FileRouteTypes {
     | '/bio'
     | '/browser'
     | '/business'
+    | '/chat-mcp'
     | '/cloud'
     | '/code-execution'
     | '/coding-agents'
@@ -624,6 +636,7 @@ export interface RootRouteChildren {
   BioRoute: typeof BioRoute
   BrowserRoute: typeof BrowserRoute
   BusinessRoute: typeof BusinessRoute
+  ChatMcpRoute: typeof ChatMcpRoute
   CloudRoute: typeof CloudRoute
   CodeExecutionRoute: typeof CodeExecutionRoute
   CodingAgentsRoute: typeof CodingAgentsRoute
@@ -964,6 +977,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CloudRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chat-mcp': {
+      id: '/chat-mcp'
+      path: '/chat-mcp'
+      fullPath: '/chat-mcp'
+      preLoaderRoute: typeof ChatMcpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/business': {
       id: '/business'
       path: '/business'
@@ -1024,6 +1044,7 @@ const rootRouteChildren: RootRouteChildren = {
   BioRoute: BioRoute,
   BrowserRoute: BrowserRoute,
   BusinessRoute: BusinessRoute,
+  ChatMcpRoute: ChatMcpRoute,
   CloudRoute: CloudRoute,
   CodeExecutionRoute: CodeExecutionRoute,
   CodingAgentsRoute: CodingAgentsRoute,
