@@ -13,8 +13,8 @@ export class LLMClient {
   }
 
   async getResponse(messages: Message[]): Promise<string> {
-    console.warn("context", messages);
     const url = "https://api.siliconflow.cn/v1/chat/completions";
+    console.log(messages);
     const payload = {
       messages,
       model: "deepseek-ai/DeepSeek-V3",

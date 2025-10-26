@@ -1,4 +1,6 @@
-import { spawn, ChildProcess } from "child_process";
+import { ChildProcess, spawn } from "child_process";
+import fs from "fs";
+import path from "path";
 import { EventEmitter } from "events";
 
 export interface ToolSchema {
@@ -63,47 +65,96 @@ export class Server extends EventEmitter {
 
   async initialize(): Promise<void> {
     return new Promise((resolve, reject) => {
-      const isWin = process.platform === "win32";
-      const cmd = isWin && this.config.command === "npx" ? "npx.cmd" : this.config.command;
+      const { command, argsPrefix, needsShell } = this.resolveCommand();
+      const spawnArgs = [...argsPrefix, ...this.config.args];
 
-      const proc = spawn(cmd, this.config.args, {
+      const proc = spawn(command, spawnArgs, {
         env: { ...process.env, ...(this.config.env || {}) },
         stdio: ["pipe", "pipe", "pipe"],
-        shell: isWin,
+        shell: needsShell,
       });
 
       this.process = proc;
 
-      let ready = false;
+      let handshakeRequested = false;
+      let initializationSettled = false;
 
-      proc.stdout.on("data", async (data) => {
-        const text = data.toString().trim();
-        console.log(`[${this.name}] stdout:`, text);
-        if (/ready/i.test(text)) {
-          console.log(`[${this.name}] ✅ 检测到 ready 信号`);
+      const settleInitialization = () => {
+        if (initializationSettled) return;
+        initializationSettled = true;
+        if (!this.capabilities) {
+          this.capabilities = { progress: true };
+        }
+        resolve();
+      };
 
-          const initId = Math.floor(Math.random() * 100000);
-          const initPayload = {
-            jsonrpc: "2.0",
-            id: initId,
-            method: "initialize",
-            params: { capabilities: {} },
-          };
+      const requestInitialize = () => {
+        if (handshakeRequested || !this.process) return;
+        handshakeRequested = true;
 
-          const initReq = new Promise((resolve, reject) => {
-            this.pendingRequests.set(initId, { resolve, reject });
+        const initId = Math.floor(Math.random() * 100000);
+        const initPayload = {
+          jsonrpc: "2.0",
+          id: initId,
+          method: "initialize",
+          params: {
+            protocolVersion: "1.0",
+            capabilities: {},
+            clientInfo: {
+              name: "mcp-market",
+              version: "1.0.0",
+            },
+          },
+        };
+
+        const initReq = new Promise<Record<string, unknown> | void>((resolveInit, rejectInit) => {
+          this.pendingRequests.set(initId, {
+            resolve: resolveInit,
+            reject: rejectInit,
+          });
+        });
+
+        this.process.stdin?.write(JSON.stringify(initPayload) + "\n");
+
+        initReq
+          .then((result) => {
+            if (result && typeof result === "object" && "capabilities" in result) {
+              this.capabilities = result.capabilities as Record<string, unknown>;
+            }
+            console.log(`[${this.name}] ✅ JSON-RPC initialize 完成`);
+            settleInitialization();
+          })
+          .catch((err) => {
+            console.warn(
+              `[${this.name}] ⚠️ initialize 请求失败: ${
+                err instanceof Error ? err.message : String(err)
+              }`,
+            );
+            settleInitialization();
           });
 
-          this.process?.stdin?.write(JSON.stringify(initPayload) + "\n");
-          await initReq;
+        setTimeout(() => {
+          if (!initializationSettled) {
+            this.pendingRequests.delete(initId);
+            console.warn(`[${this.name}] ⚠️ initialize 响应超时，继续执行`);
+            settleInitialization();
+          }
+        }, 3000);
+      };
 
-          ready = true;
-          this.capabilities = { progress: true };
-          resolve();
+      proc.stdout.on("data", async (data) => {
+        const rawText = data.toString();
+        const trimmed = rawText.trim();
+        if (trimmed) {
+          console.log(`[${this.name}] stdout:`, trimmed);
+        }
+        if (/ready/i.test(rawText)) {
+          console.log(`[${this.name}] ✅ 检测到 ready 信号`);
+          requestInitialize();
         }
 
         try {
-          const lines = text.split("\n");
+          const lines = rawText.split(/\r?\n/);
           for (const line of lines) {
             if (!line.trim()) continue;
             const resp = JSON.parse(line);
@@ -128,10 +179,20 @@ export class Server extends EventEmitter {
         reject(err);
       });
 
+      proc.on("exit", (code, signal) => {
+        if (!initializationSettled) {
+          reject(
+            new Error(
+              `[${this.name}] 进程在初始化前退出，code: ${code ?? "null"} signal: ${signal ?? "null"}`,
+            ),
+          );
+        }
+      });
+
       setTimeout(() => {
-        if (!ready) {
-          console.warn(`[${this.name}] ⚠️ 未检测到 ready 信号，继续执行`);
-          resolve();
+        if (!handshakeRequested) {
+          console.warn(`[${this.name}] ⚠️ 未检测到 ready 信号，尝试直接初始化`);
+          requestInitialize();
         }
       }, 5000);
     });
@@ -185,8 +246,7 @@ export class Server extends EventEmitter {
 
     this.process.stdin?.write(JSON.stringify(payload) + "\n");
 
-    const result = await req;
-    return result?.result;
+    return await req;
   }
 
 
@@ -196,5 +256,30 @@ export class Server extends EventEmitter {
       this.process.kill();
       this.process = null;
     }
+  }
+
+  private resolveCommand(): { command: string; argsPrefix: string[]; needsShell: boolean } {
+    const configured = this.config.command;
+    if (process.platform !== "win32") {
+      return { command: configured, argsPrefix: [], needsShell: false };
+    }
+
+    if (configured === "npx") {
+      const nodeDir = path.dirname(process.execPath);
+      const npxCli = path.join(nodeDir, "node_modules", "npm", "bin", "npx-cli.js");
+      if (fs.existsSync(npxCli)) {
+        return { command: process.execPath, argsPrefix: [npxCli], needsShell: false };
+      }
+
+      const npxCmd = path.join(nodeDir, "npx.cmd");
+      if (fs.existsSync(npxCmd)) {
+        return { command: npxCmd, argsPrefix: [], needsShell: true };
+      }
+
+      return { command: "npx.cmd", argsPrefix: [], needsShell: true };
+    }
+
+    const needsShell = /\.cmd$/i.test(configured);
+    return { command: configured, argsPrefix: [], needsShell };
   }
 }
