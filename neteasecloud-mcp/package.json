@@ -1,0 +1,37 @@
+{
+  "name": "neteasecloud-mcp",
+  "version": "0.1.0",
+  "description": "Model Context Protocol server for controlling NetEase Cloud Music (TypeScript port)",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsx src/server.ts",
+    "lint": "eslint . --ext .ts --max-warnings 0"
+  },
+  "dependencies": {
+    "fastmcp": "^3.22.0",
+    "ps-list": "^9.0.0",
+    "selenium-webdriver": "^4.38.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "eslint": "^9.38.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "netease",
+    "cloudmusic",
+    "selenium",
+    "typescript"
+  ],
+  "author": "Auto-converted by Codex",
+  "license": "MIT"
+}

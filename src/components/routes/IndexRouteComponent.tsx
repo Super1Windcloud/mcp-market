@@ -34,7 +34,13 @@ const IndexRouteComponent: React.FC = () => {
 
               <button
                 onClick={async () => {
-                  await navigate({ to: "/chat-mcp", replace: true });
+                  await navigate({
+                    to: "/chat-mcp", replace: true, search: {
+                      name: item.name,
+                      desc: item.desc,
+                      url: item.url,
+                    },
+                  });
                 }}
                 className="
       flex items-center justify-center gap-2

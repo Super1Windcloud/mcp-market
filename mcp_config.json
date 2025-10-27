@@ -1,10 +1,17 @@
 {
   "mcpServers": {
+    "neteasecloud": {
+      "command": "npx",
+      "args": [
+        "tsx",
+        "neteasecloud-mcp/src/server.ts"
+      ]
+    },
     "web-search": {
+      "command": "npx",
       "args": [
         "open-websearch@latest"
       ],
-      "command": "npx",
       "env": {
         "MODE": "stdio",
         "DEFAULT_SEARCH_ENGINE": "duckduckgo",
