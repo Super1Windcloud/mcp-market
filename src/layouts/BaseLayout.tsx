@@ -17,11 +17,14 @@ export default function BaseLayout({
         <ToggleTheme />
       </div>
 
-      <div className="flex flex-1 w-full h-full ">
+      <div className="flex flex-1 w-full h-full min-h-0">
         <NavigationMenu />
-        <main style={{
-          scrollbarWidth: "none",
-        }} className="flex-1  h-full  w-full overflow-y-auto">
+        <main
+          style={{
+            scrollbarWidth: "none",
+          }}
+          className="flex-1 h-full w-full overflow-y-auto min-h-0"
+        >
           {children}
         </main>
       </div>

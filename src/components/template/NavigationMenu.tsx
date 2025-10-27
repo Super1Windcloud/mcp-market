@@ -94,9 +94,12 @@ export default function Sidebar() {
 
 
   return (
-    <aside style={{
-      scrollbarWidth: "none",
-    }} className="w-50  text-gray-200 h-screen overflow-y-auto pb-10">
+    <aside
+      style={{
+        scrollbarWidth: "none",
+      }}
+      className="w-50 flex-shrink-0 text-gray-200 h-full min-h-0 overflow-y-auto pb-10"
+    >
       <ul className="space-y-1">
         {categories.map(({ label, route }, index) => (
           <li

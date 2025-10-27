@@ -42,6 +42,8 @@ Feature Notes
 
 - Global hotkey tooling has been removed; playback control now relies on
   URL scheme launches only.
+- Selenium-based tools now include `pause_playback`, which toggles playback
+  using the same ChromeDriver session as the daily recommendation helpers.
 - Window minimisation support has been removed; tools still launch NetEase
   but they no longer attempt to minimise the client window automatically.
 - Selenium automation requires ChromeDriver compatible with the local Chrome

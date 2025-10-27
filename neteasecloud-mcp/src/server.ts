@@ -673,6 +673,81 @@ registerTool(
   }
 );
 
+registerTool(
+  "pause_playback",
+  {
+    description: "Pause the current NetEase playback via Selenium automation"
+  },
+  async () => {
+    if (!SELENIUM_AVAILABLE) {
+      return {
+        success: false,
+        message: "Selenium不可用",
+        solution: "请安装selenium-webdriver依赖并配置ChromeDriver"
+      };
+    }
+
+    const config = loadNeteaseConfig();
+    const neteasePath = config.netease_music_path ?? "";
+    if (!neteasePath) {
+      return {
+        success: false,
+        message: "网易云音乐路径未配置",
+        solution: "请设置环境变量 NETEASE_MUSIC_PATH 或在 netease_config.json 中配置 netease_music_path"
+      };
+    }
+
+    if (!fs.existsSync(neteasePath)) {
+      return {
+        success: false,
+        message: `网易云音乐路径无效: ${neteasePath}`,
+        solution: "请重新设置环境变量 NETEASE_MUSIC_PATH 或在 netease_config.json 中配置正确的路径"
+      };
+    }
+
+    const controller = await ensureDailyController();
+
+    if (!(await controller.connectToNetease())) {
+      return {
+        success: false,
+        message: "无法连接到网易云音乐",
+        details: [
+          "可能的原因:",
+          "1. 网易云音乐启动失败",
+          "2. ChromeDriver连接失败",
+          "3. 调试端口被占用"
+        ]
+      };
+    }
+
+    const wasPlaying = await controller.isPlaying();
+    const paused = await controller.pausePlayback();
+    const stillPlaying = await controller.isPlaying();
+
+    if (paused) {
+      return {
+        success: true,
+        message: stillPlaying ? "当前没有检测到播放任务，无需暂停。" : "✅ 已暂停播放。",
+        data: {
+          was_playing_before: wasPlaying,
+          is_playing_after: stillPlaying,
+          platform: getPlatform()
+        }
+      };
+    }
+
+    return {
+      success: false,
+      message: "暂停播放失败",
+      details: {
+        was_playing_before: wasPlaying,
+        is_playing_after: stillPlaying,
+        platform: getPlatform()
+      }
+    };
+  }
+);
+
 server
   .start({ transportType: "stdio" })
   .catch((error) => {

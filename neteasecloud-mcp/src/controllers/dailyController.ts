@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
 import psList from "ps-list";
-import { Builder, By, until, WebElement } from "selenium-webdriver";
+import { Builder, By, WebElement } from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome.js";
 import type { NeteaseConfig } from "../types/config.js";
 
@@ -127,6 +127,30 @@ export class DailyRecommendController {
     }
   }
 
+  async pausePlayback(): Promise<boolean> {
+    if (!this.driver) {
+      return false;
+    }
+
+    try {
+      if (!(await this.isPlaying())) {
+        return true;
+      }
+
+      const button = await this.findActionButton(2);
+      if (!button) {
+        return false;
+      }
+
+      await button.click();
+      await delay(300);
+      return !(await this.isPlaying());
+    } catch (error) {
+      console.error("[DailyController] pausePlayback failed:", error);
+      return false;
+    }
+  }
+
   async getCurrentMusic(): Promise<string> {
     if (!this.driver) return "";
     try {
@@ -164,14 +188,14 @@ export class DailyRecommendController {
 
       try {
         button = await this.driver.findElement(By.xpath(this.buttonPaths.play_button.xpath));
-      } catch {}
+      } catch { /* empty */ }
 
       if (!button) {
         for (const selector of this.buttonPaths.play_button.absolute_selectors) {
           try {
             button = await this.driver.findElement(By.xpath(selector));
             break;
-          } catch {}
+          } catch { /* empty */ }
         }
       }
 
@@ -214,7 +238,7 @@ export class DailyRecommendController {
         if (!(await button.isDisplayed()) || !(await button.isEnabled())) {
           button = null;
         }
-      } catch {}
+      } catch { /* empty */ }
 
       if (!button) {
         for (const selector of this.buttonPaths.roaming_button.backup_selectors) {
@@ -227,7 +251,7 @@ export class DailyRecommendController {
               }
             }
             if (button) break;
-          } catch {}
+          } catch { /* empty */ }
         }
       }
 

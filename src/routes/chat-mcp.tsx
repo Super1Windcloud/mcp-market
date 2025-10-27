@@ -75,6 +75,12 @@ function MCPChat() {
     ...message,
     timestamp: new Date(message.timestamp),
   });
+
+  const selectAssistantMessages = (messageList: ChatMessage[]): ChatMessage[] =>
+    messageList
+      .filter((message) => message.role === "assistant")
+      .map(hydrateMessage);
+
   useEffect(() => {
     const initializeMCP = async () => {
       if (!name) return;
@@ -87,14 +93,9 @@ function MCPChat() {
 
         const history = await (window as any).mcp.getChatHistory(name) as ChatMessage[];
         if (history && history.length > 0) {
-          setMessages(history.map(hydrateMessage));
+          setMessages(selectAssistantMessages(history));
         } else {
-          setMessages([
-            createMessage(
-              "assistant",
-              `你好！欢迎使用 ${name} 服务。${desc}。我可以帮助您使用这个服务，有什么问题可以问我。`,
-            ),
-          ]);
+          setMessages([]);
         }
       } catch (error) {
         const errorMessage = createMessage(
@@ -127,46 +128,23 @@ function MCPChat() {
     const trimmed = inputValue.trim();
     if (!trimmed || isLoading || !name) return;
 
-    const tempId = `temp-${Date.now()}`;
-    const pendingMessage: ChatMessage = {
-      id: tempId,
-      role: "user",
-      content: trimmed,
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, pendingMessage]);
     setInputValue("");
     setIsLoading(true);
 
     try {
       const result = await (window as any).mcp.sendMessage(name, trimmed) as SendMessageResponse;
 
-      setMessages((prev) => {
-        const normalized = result.userMessage
-          ? prev.map((message) =>
-            message.id === tempId ? hydrateMessage(result.userMessage!) : message,
-          )
-          : prev;
+      if (!result.success) {
+        setMessages((prev) => [
+          ...prev,
+          createMessage("system", `处理消息时出错: ${result.error ?? "未知错误"}`),
+        ]);
+        return;
+      }
 
-        if (!result.success) {
-          const errorMessage = createMessage(
-            "system",
-            `处理消息时出错: ${result.error ?? "未知错误"}`,
-          );
-          return [...normalized, errorMessage];
-        }
-
-        const additions: ChatMessage[] = [];
-        if (result.toolMessages?.length) {
-          additions.push(...result.toolMessages.map(hydrateMessage));
-        }
-        if (result.assistantMessage) {
-          additions.push(hydrateMessage(result.assistantMessage));
-        }
-
-        return [...normalized, ...additions];
-      });
+      if (result.assistantMessage) {
+        setMessages((prev) => [...prev, hydrateMessage(result.assistantMessage!)]);
+      }
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -191,12 +169,7 @@ function MCPChat() {
     if (!name) return;
     try {
       await (window as any).mcp.clearChatHistory(name);
-      setMessages([
-        createMessage(
-          "assistant",
-          `你好！欢迎使用 ${name} 服务。${desc}。我可以帮助您使用这个服务，有什么问题可以问我。`,
-        ),
-      ]);
+      setMessages([]);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -209,7 +182,7 @@ function MCPChat() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-background">
+    <div className="flex flex-col h-full  bg-background">
       {/* 顶部导航栏 */}
       <div className="border-none">
         <div className="flex items-center justify-between p-4">
@@ -233,8 +206,7 @@ function MCPChat() {
         </div>
       </div>
 
-      {/* 聊天内容区域 */}
-      <div className="flex-1 overflow-hidden p-4">
+      <div className="h-2/3  overflow-hidden p-4">
         <ScrollArea className="h-full w-full rounded-md" style={{
           boxShadow: "0 1px 2px rgba(0, 0, 0, 0.05)", // shadow-sm
           backdropFilter: "blur(12px)", // backdrop-blur-md
