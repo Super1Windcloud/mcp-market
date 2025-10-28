@@ -8,24 +8,42 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
 import type { ChatMessage, MCPServerConfig, SendMessageResponse } from "@/types/mcp";
 import { openExternalUrl } from "@/helpers/window_helpers";
-import fs from "fs";
 import { isDev } from "@/utils";
 
 
-const resolveServerConfig = (displayName: string): MCPServerConfig => {
-  //A:\Webstorm\Tauri_electron_app\electron-shadcn\public\mcp_config.json
-  const path = process.cwd() + "/public/mcp_config.json";
-  if (!fs.existsSync(path)) throw new Error("path is not exist ");
-  const SERVER_CONFIGS = JSON.parse(fs.readFileSync(path, "utf-8"));
+export const resolveServerConfig = async (displayName: string, url: string): Promise<MCPServerConfig> => {
+  try {
+    const override = await window.mcp.getServerConfig(displayName);
 
-  const override = SERVER_CONFIGS[displayName] as MCPServerConfig;
-  if (override) {
-    if (isDev()) console.log("current mcp config", override);
-    return { ...override };
-  } else {
-    throw new Error("empty mcp config");
+    if (override) {
+      const resolvedConfig = {
+        ...override,
+        name: displayName,
+      } as MCPServerConfig;
+
+      if (!resolvedConfig.command || !Array.isArray(resolvedConfig.args)) {
+        console.warn(`MCP override for ${displayName} 缺少 command 或 args`);
+
+      } else {
+        if (isDev()) console.log("current mcp config", resolvedConfig);
+        return resolvedConfig;
+      }
+    }
+
+    console.error(`MCP config for "${displayName}" not found`);
+    return {
+      name: displayName,
+      command: "not found",
+      args: ["not found"],
+      env: { error: `请访问${url} 自行配置mcpServer` },
+
+    };
+  } catch (error) {
+    console.error("resolveServerConfig error:", error);
+    throw error;
   }
 };
+
 
 export const Route = createFileRoute("/chat-mcp")({
   component: MCPChat,
@@ -62,27 +80,31 @@ function MCPChat() {
     timestamp: new Date(message.timestamp),
   });
 
-  const selectAssistantMessages = (messageList: ChatMessage[]): ChatMessage[] =>
-    messageList
-      .filter((message) => message.role === "assistant")
-      .map(hydrateMessage);
+  const hydrateMessages = (messageList: ChatMessage[]): ChatMessage[] =>
+    messageList.map(hydrateMessage);
 
   useEffect(() => {
     const initializeMCP = async () => {
       if (!name) return;
       try {
-        const config = resolveServerConfig(name);
-        const result = await (window as any).mcp.startServer(config);
+        const config = await resolveServerConfig(name, url);
+
+        if (!config.command || config.command === "not found") {
+          const hint =
+            typeof config.env?.error === "string"
+              ? config.env.error
+              : `未找到 ${name} 的 MCP 配置，请访问 ${url} 进行配置`;
+          setMessages([createMessage("system", hint)]);
+          return;
+        }
+
+        const result = await window.mcp.startServer(config);
         if (!result.success) {
           throw new Error(result.error || "启动 MCP 服务器失败");
         }
 
-        const history = await (window as any).mcp.getChatHistory(name) as ChatMessage[];
-        if (history && history.length > 0) {
-          setMessages(selectAssistantMessages(history));
-        } else {
-          setMessages([]);
-        }
+        const history = await window.mcp.getChatHistory(name) as ChatMessage[];
+        setMessages(hydrateMessages(history ?? []));
       } catch (error) {
         const errorMessage = createMessage(
           "system",
@@ -97,7 +119,6 @@ function MCPChat() {
     };
   }, [name, desc]);
 
-  // 滚动到最新消息
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -110,11 +131,14 @@ function MCPChat() {
     const trimmed = inputValue.trim();
     if (!trimmed || isLoading || !name) return;
 
+    // 清空输入框、渲染用户消息
     setInputValue("");
+    setMessages((prev) => [...prev, createMessage("user", trimmed)]);
+
     setIsLoading(true);
 
     try {
-      const result = await (window as any).mcp.sendMessage(name, trimmed) as SendMessageResponse;
+      const result = await window.mcp.sendMessage(name, trimmed) as SendMessageResponse;
 
       if (!result.success) {
         setMessages((prev) => [
@@ -124,21 +148,33 @@ function MCPChat() {
         return;
       }
 
-      if (result.assistantMessage) {
-        setMessages((prev) => [...prev, hydrateMessage(result.assistantMessage!)]);
-      }
+      // 追加 tool/assistant 消息
+      setMessages((prev) => {
+        const next = [...prev];
+
+        if (Array.isArray(result.toolMessages) && result.toolMessages.length > 0) {
+          next.push(...result.toolMessages.map(hydrateMessage));
+        }
+
+        if (result.assistantMessage) {
+          next.push(hydrateMessage(result.assistantMessage));
+        }
+
+        return next;
+      });
     } catch (error) {
       setMessages((prev) => [
         ...prev,
         createMessage(
           "system",
-          `处理消息时出错: ${error instanceof Error ? error.message : `未知错误`}`,
+          `处理消息时出错: ${error instanceof Error ? error.message : "未知错误"}`,
         ),
       ]);
     } finally {
       setIsLoading(false);
     }
   };
+
 
   const handleKeyDown = async (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -150,7 +186,7 @@ function MCPChat() {
   const handleResetConversation = async () => {
     if (!name) return;
     try {
-      await (window as any).mcp.clearChatHistory(name);
+      await window.mcp.clearChatHistory(name);
       setMessages([]);
     } catch (error) {
       setMessages((prev) => [
@@ -180,7 +216,12 @@ function MCPChat() {
             </Button>
             <Button
               variant="ghost"
-              onClick={() => navigate({ to: "/", replace: true })}
+              onClick={async () => {
+                if (name) {
+                  await window.mcp.stopServer(name);
+                }
+                await navigate({ to: ".." });
+              }}
             >
               返回
             </Button>
@@ -221,7 +262,7 @@ function MCPChat() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className={`max-w-[80%] rounded-lg p-4   bg-secondary`}>
+                <div className={`max-w-[80%] rounded-lg p-4`}>
                   <div className="text-sm">正在处理您的请求...</div>
                 </div>
               </div>

@@ -18,7 +18,11 @@ const live = async () => {
     fetch("https://stream.live.vc.bbcmedia.co.uk/bbc_world_service")
       .then((r) => r.body)
       .then((res) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         res?.on("readable", () => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           connection.send(res.read());
         });
       });

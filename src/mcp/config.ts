@@ -7,7 +7,10 @@ export class Configuration {
 
   constructor() {
     this.loadEnv();
-    this.apiKey = process.env.SIliconflow_API_KEY;
+    this.apiKey =
+      process.env.SIliconflow_API_KEY ||
+      process.env.SILICONFLOW_API_KEY ||
+      process.env.SILICON_FLOW_API_KEY;
   }
 
   private loadEnv(): void {
@@ -29,7 +32,9 @@ export class Configuration {
 
   get llmApiKey(): string {
     if (!this.apiKey) {
-      throw new Error("未在环境变量中找到 LLM_API_KEY");
+      throw new Error(
+        "未在环境变量中找到 LLM_API_KEY。请在仓库根目录创建 .env 文件，并设置 SILICONFLOW_API_KEY=<你的密钥>",
+      );
     }
     return this.apiKey;
   }

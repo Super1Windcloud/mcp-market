@@ -62,27 +62,21 @@ function MCPChat() {
     timestamp: new Date(message.timestamp),
   });
 
-  const selectAssistantMessages = (messageList: ChatMessage[]): ChatMessage[] =>
-    messageList
-      .filter((message) => message.role === "assistant")
-      .map(hydrateMessage);
+  const hydrateMessages = (messageList: ChatMessage[]): ChatMessage[] =>
+    messageList.map(hydrateMessage);
 
   useEffect(() => {
     const initializeMCP = async () => {
       if (!name) return;
       try {
         const config = resolveServerConfig(name);
-        const result = await (window as any).mcp.startServer(config);
+        const result = await window.mcp.startServer(config);
         if (!result.success) {
           throw new Error(result.error || "启动 MCP 服务器失败");
         }
 
-        const history = await (window as any).mcp.getChatHistory(name) as ChatMessage[];
-        if (history && history.length > 0) {
-          setMessages(selectAssistantMessages(history));
-        } else {
-          setMessages([]);
-        }
+        const history = await window.mcp.getChatHistory(name) as ChatMessage[];
+        setMessages(hydrateMessages(history ?? []));
       } catch (error) {
         const errorMessage = createMessage(
           "system",
@@ -114,7 +108,7 @@ function MCPChat() {
     setIsLoading(true);
 
     try {
-      const result = await (window as any).mcp.sendMessage(name, trimmed) as SendMessageResponse;
+      const result = await window.mcp.sendMessage(name, trimmed) as SendMessageResponse;
 
       if (!result.success) {
         setMessages((prev) => [
@@ -124,9 +118,25 @@ function MCPChat() {
         return;
       }
 
-      if (result.assistantMessage) {
-        setMessages((prev) => [...prev, hydrateMessage(result.assistantMessage!)]);
-      }
+      setMessages((prev) => {
+        const next = [...prev];
+
+        if (result.userMessage) {
+          next.push(hydrateMessage(result.userMessage));
+        } else {
+          next.push(createMessage("user", trimmed));
+        }
+
+        if (Array.isArray(result.toolMessages) && result.toolMessages.length > 0) {
+          next.push(...result.toolMessages.map(hydrateMessage));
+        }
+
+        if (result.assistantMessage) {
+          next.push(hydrateMessage(result.assistantMessage));
+        }
+
+        return next;
+      });
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -150,7 +160,7 @@ function MCPChat() {
   const handleResetConversation = async () => {
     if (!name) return;
     try {
-      await (window as any).mcp.clearChatHistory(name);
+      await window.mcp.clearChatHistory(name);
       setMessages([]);
     } catch (error) {
       setMessages((prev) => [
@@ -221,7 +231,7 @@ function MCPChat() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className={`max-w-[80%] rounded-lg p-4   bg-secondary`}>
+                <div className={`max-w-[80%] rounded-lg p-4 `}>
                   <div className="text-sm">正在处理您的请求...</div>
                 </div>
               </div>

@@ -10,7 +10,7 @@ import type {
   ToolDefinition,
 } from "@/types/mcp";
 
-const { contextBridge, ipcRenderer } = window.require("electron");
+const { ipcRenderer } = window.require("electron");
 
 export const mcpContext = {
   startServer: (config: MCPServerConfig) =>
@@ -33,4 +33,14 @@ export const mcpContext = {
 
   clearChatHistory: (serverName: string) =>
     ipcRenderer.invoke(MCP_CHANNELS.CLEAR_CHAT_HISTORY, serverName) as Promise<StopServerResponse>,
+
+  getServerConfig: (serverName: string) =>
+    ipcRenderer.invoke(MCP_CHANNELS.GET_SERVER_CONFIG, serverName) as Promise<MCPServerConfig | null>,
+
+  overrideServerConfig: (serverName: string, config: Partial<MCPServerConfig>) =>
+    ipcRenderer.invoke(
+      MCP_CHANNELS.UPSERT_SERVER_CONFIG,
+      serverName,
+      config,
+    ) as Promise<{ success: boolean; config?: MCPServerConfig; error?: string }>,
 };

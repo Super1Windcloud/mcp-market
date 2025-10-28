@@ -5,9 +5,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
 import psList from "ps-list";
-import { Builder, By, WebElement } from "selenium-webdriver";
-import chrome from "selenium-webdriver/chrome.js";
 import type { NeteaseConfig } from "../types/config.js";
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { Builder, By, WebElement, WebDriver } from "selenium-webdriver";
+import { Options as ChromeOptions, ServiceBuilder as ChromeServiceBuilder } from "selenium-webdriver/chrome.js";
+
 
 export const SELENIUM_AVAILABLE = true;
 
@@ -31,7 +35,7 @@ interface ButtonPaths {
 const WINDOW_KEYWORDS = ["cloudmusic", "netease", "网易云音乐"];
 
 export class DailyRecommendController {
-  private driver: import("selenium-webdriver").WebDriver | null = null;
+  private driver: WebDriver | null = null;
   private readonly config: NeteaseConfig;
   readonly buttonPaths: ButtonPaths;
 
@@ -40,7 +44,7 @@ export class DailyRecommendController {
     this.buttonPaths = {
       daily_wrapper: {
         xpath: "//*[@id='dailyRecommendCard']/div[1]",
-        selector: "//div[contains(@class, 'DailyRecommendWrapper_')]"
+        selector: "//div[contains(@class, 'DailyRecommendWrapper_')]",
       },
       play_button: {
         xpath: "//*[@id='dailyRecommendCard']/div[1]/div[3]/div[2]/div[1]/button[1]",
@@ -48,8 +52,8 @@ export class DailyRecommendController {
           "//div[contains(@class, 'DailyRecommendWrapper_')]//button",
           "//div[contains(@class, 'DailyRecommendWrapper_')]/button",
           "//*[@id='dailyRecommendCard']//button[@title='播放']",
-          "//*[@id='dailyRecommendCard']//button[contains(@class, 'cmd-button')]"
-        ]
+          "//*[@id='dailyRecommendCard']//button[contains(@class, 'cmd-button')]",
+        ],
       },
       roaming_button: {
         xpath: "//*[@id=\"page_pc_mini_bar\"]/div[1]/div[2]/div[1]/div[1]/button[3]",
@@ -58,9 +62,9 @@ export class DailyRecommendController {
         backup_selectors: [
           "//button[contains(@title, '私人漫游')]",
           "//button[contains(@class, 'ButtonWrapper_') and contains(@title, '漫游')]",
-          "//*[@id='page_pc_mini_bar']//button[contains(@title, '漫游')]"
-        ]
-      }
+          "//*[@id='page_pc_mini_bar']//button[contains(@title, '漫游')]",
+        ],
+      },
     };
   }
 
@@ -74,9 +78,11 @@ export class DailyRecommendController {
       await delay(1000);
 
       const chromedriverPath = this.resolveChromedriverPath();
-      const service = new chrome.ServiceBuilder(chromedriverPath);
-      const options = new chrome.Options();
+      const service = new ChromeServiceBuilder(chromedriverPath);
+      const options = new ChromeOptions();
       const debugPort = this.config.debug_port ?? 9222;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       options.options_["debuggerAddress"] = `localhost:${debugPort}`;
 
       this.driver = await new Builder()
@@ -179,7 +185,7 @@ export class DailyRecommendController {
 
     try {
       const dailyTab = await this.driver.findElement(
-        By.xpath("//div[contains(@data-log, 'cell_pc_main_tab_entrance')]")
+        By.xpath("//div[contains(@data-log, 'cell_pc_main_tab_entrance')]"),
       );
       await dailyTab.click();
       await delay(500);
@@ -188,21 +194,23 @@ export class DailyRecommendController {
 
       try {
         button = await this.driver.findElement(By.xpath(this.buttonPaths.play_button.xpath));
-      } catch { /* empty */ }
+      } catch { /* empty */
+      }
 
       if (!button) {
         for (const selector of this.buttonPaths.play_button.absolute_selectors) {
           try {
             button = await this.driver.findElement(By.xpath(selector));
             break;
-          } catch { /* empty */ }
+          } catch { /* empty */
+          }
         }
       }
 
       if (!button) {
         try {
           const wrapper = await this.driver.findElement(By.xpath(this.buttonPaths.daily_wrapper.selector));
-          button = await wrapper.findElement(By.tagName("button"));
+          button = await wrapper.findElement(By.css("button"));
         } catch (error) {
           console.error("[DailyController] Failed to locate play button:", error);
           return false;
@@ -235,10 +243,11 @@ export class DailyRecommendController {
 
       try {
         button = await this.driver.findElement(By.xpath(this.buttonPaths.roaming_button.xpath));
-        if (!(await button.isDisplayed()) || !(await button.isEnabled())) {
+        if (!(await button?.isDisplayed()) || !(await button?.isEnabled())) {
           button = null;
         }
-      } catch { /* empty */ }
+      } catch { /* empty */
+      }
 
       if (!button) {
         for (const selector of this.buttonPaths.roaming_button.backup_selectors) {
@@ -251,7 +260,8 @@ export class DailyRecommendController {
               }
             }
             if (button) break;
-          } catch { /* empty */ }
+          } catch { /* empty */
+          }
         }
       }
 
@@ -297,7 +307,7 @@ export class DailyRecommendController {
           continue;
         }
         const container = await button.findElement(By.xpath(".."));
-        return await container.findElements(By.tagName("button"));
+        return await container.findElements(By.css("button"));
       }
 
       return [];
@@ -325,7 +335,7 @@ export class DailyRecommendController {
       spawn(neteasePath, [`--remote-debugging-port=${debugPort}`], {
         detached: true,
         stdio: "ignore",
-        windowsHide: true
+        windowsHide: true,
       }).unref();
     } catch (error) {
       console.error("[DailyController] Failed to start NetEase:", error);

@@ -4,6 +4,16 @@
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
 
+import type {
+  ChatMessage,
+  ExecuteToolResponse,
+  MCPServerConfig,
+  SendMessageResponse,
+  StartServerResponse,
+  StopServerResponse,
+  ToolDefinition,
+} from "@/types/mcp";
+
 // Preload types
 interface ThemeModeContext {
   toggle: () => Promise<boolean>;
@@ -24,8 +34,32 @@ interface ElectronAPI {
   joinPath: (...args: string[]) => Promise<string>;
 }
 
-declare interface Window {
-  themeMode: ThemeModeContext;
-  electronWindow: ElectronWindow;
-  electronAPI: ElectronAPI;
+interface MCPContext {
+  startServer: (config: MCPServerConfig) => Promise<StartServerResponse>;
+  stopServer: (name: string) => Promise<StopServerResponse>;
+  listTools: (serverName: string) => Promise<ToolDefinition[]>;
+  executeTool: (
+    serverName: string,
+    toolName: string,
+    args: Record<string, unknown>,
+  ) => Promise<ExecuteToolResponse>;
+  sendMessage: (serverName: string, message: string) => Promise<SendMessageResponse>;
+  getChatHistory: (serverName: string) => Promise<ChatMessage[]>;
+  clearChatHistory: (serverName: string) => Promise<StopServerResponse>;
+  getServerConfig: (serverName: string) => Promise<MCPServerConfig | null>;
+  overrideServerConfig: (
+    serverName: string,
+    config: Partial<MCPServerConfig>,
+  ) => Promise<{ success: boolean; config?: MCPServerConfig; error?: string }>;
 }
+
+declare global {
+  interface Window {
+    themeMode: ThemeModeContext;
+    electronWindow: ElectronWindow;
+    electronAPI: ElectronAPI;
+    mcp: MCPContext;
+  }
+}
+
+export {};

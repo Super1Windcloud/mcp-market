@@ -11,6 +11,7 @@
     "composite": true,
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
     "allowJs": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

@@ -12,7 +12,10 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "noImplicitAny": true,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "paths": {
+      "selenium-webdriver/chrome": ["./node_modules/selenium-webdriver/lib/chrome"]
+    }
   },
   "include": [
     "src"

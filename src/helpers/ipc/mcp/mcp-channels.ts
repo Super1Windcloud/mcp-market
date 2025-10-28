@@ -7,4 +7,6 @@ export const MCP_CHANNELS = {
   SEND_MESSAGE: 'mcp-send-message',
   GET_CHAT_HISTORY: 'mcp-get-chat-history',
   CLEAR_CHAT_HISTORY: 'mcp-clear-chat-history',
+  GET_SERVER_CONFIG: 'mcp-get-server-config',
+  UPSERT_SERVER_CONFIG: 'mcp-upsert-server-config',
 } as const;

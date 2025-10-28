@@ -7,6 +7,7 @@ import { RouterProvider } from "@tanstack/react-router";
 import { router } from "./utils/routes";
 import "./localization/i18n";
 import { useAsync } from "react-use";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function App() {
   const { i18n } = useTranslation();
@@ -23,5 +24,6 @@ const root = createRoot(document.getElementById("app")!);
 root.render(
   <React.StrictMode>
     <App />
+    <Toaster theme={"dark"} position={"top-center"} richColors={true} duration={3000} />
   </React.StrictMode>,
 );

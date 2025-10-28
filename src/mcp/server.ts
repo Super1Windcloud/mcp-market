@@ -108,7 +108,10 @@ export class Server extends EventEmitter {
         };
 
         const initReq = new Promise<Record<string, unknown> | void>((resolveInit, rejectInit) => {
+
           this.pendingRequests.set(initId, {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             resolve: resolveInit,
             reject: rejectInit,
           });
@@ -240,7 +243,7 @@ export class Server extends EventEmitter {
       },
     };
 
-    const req = new Promise<any>((resolve, reject) => {
+    const req = new Promise<unknown>((resolve, reject) => {
       this.pendingRequests.set(id, { resolve, reject });
     });
 

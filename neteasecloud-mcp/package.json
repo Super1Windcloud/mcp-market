@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts --max-warnings 0"
   },
   "dependencies": {
+    "@types/selenium-webdriver": "^4.35.2",
     "fastmcp": "^3.22.0",
     "ps-list": "^9.0.0",
     "selenium-webdriver": "^4.38.0",
