@@ -11,6 +11,7 @@ import type {
   ExecuteToolResponse,
   MCPServerConfig,
   MCPServerDisplayConfig,
+  MCPConfigCatalog,
   SendMessageResponse,
   StartServerResponse,
   StopServerResponse,
@@ -55,6 +56,9 @@ interface MCPContext {
     config: Partial<MCPServerConfig>,
   ) => Promise<{ success: boolean; config?: MCPServerConfig; error?: string }>;
   listCustomServers: () => Promise<MCPServerDisplayConfig[]>;
+  saveCustomServers: (
+    payload: MCPServerDisplayConfig[] | Record<string, MCPServerDisplayConfig> | MCPConfigCatalog,
+  ) => Promise<{ success: boolean; count?: number; error?: string }>;
 }
 
 declare global {

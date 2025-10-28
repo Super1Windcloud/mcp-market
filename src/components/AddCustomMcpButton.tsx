@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { PlusCircle, X, Save, Wand2 } from "lucide-react";
 import { GlassEffectCard } from "@/components/GlassEffectCard";
 import { Button } from "@/components/ui/button";
-import { MCPServerDisplayConfig } from "@/types/mcp.ts";
+import { MCPServerDisplayConfig, MCPConfigCatalog } from "@/types/mcp.ts";
 import { toast } from "sonner";
 
-export function AddCustomMcpButton() {
+interface AddCustomMcpButtonProps {
+  onSave?: () => Promise<void>;
+}
+
+export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
   const [showEditor, setShowEditor] = useState(false);
   const [jsonText, setJsonText] = useState(`{
   "name": "custom-mcp",
@@ -23,15 +27,46 @@ export function AddCustomMcpButton() {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
-  // 🔹 保存 MCP 配置
+
   const handleSave = async () => {
     try {
-      const config = JSON.parse(jsonText) as MCPServerDisplayConfig;
-      await window.mcp.overrideServerConfig(config.name, config);
+      const parsed = JSON.parse(jsonText) as unknown;
+
+      // Handle different input formats
+      let payload: MCPServerDisplayConfig[] | Record<string, MCPServerDisplayConfig> | MCPConfigCatalog;
+
+      if (Array.isArray(parsed)) {
+        // If it's an array, pass it directly
+        payload = parsed as MCPServerDisplayConfig[];
+      } else if (parsed && typeof parsed === "object" && "mcpServers" in parsed) {
+        // If it already has mcpServers, use as-is
+        payload = parsed as MCPConfigCatalog;
+      } else if (parsed && typeof parsed === "object" && "name" in parsed && "command" in parsed) {
+        // If it's a single config object, wrap it with the name as key
+        const config = parsed as MCPServerDisplayConfig;
+        const key = config.name || "custom-mcp";
+        payload = {
+          mcpServers: {
+            [key]: config,
+          },
+        };
+      } else if (parsed && typeof parsed === "object") {
+        // If it's a Record of configs, pass it directly
+        payload = parsed as Record<string, MCPServerDisplayConfig>;
+      } else {
+        throw new Error("配置格式无效：必须是对象或数组");
+      }
+
+      await window.mcp.saveCustomServers(payload);
       toast.success("✅ MCP 配置已保存！");
       setShowEditor(false);
+
+      // 保存后刷新列表
+      if (onSave) {
+        await onSave();
+      }
     } catch (err) {
-      toast.error("❌ JSON 格式错误: " + err);
+      toast.error("❌ 保存失败: " + (err instanceof Error ? err.message : String(err)));
     }
   };
 

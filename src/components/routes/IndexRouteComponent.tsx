@@ -12,33 +12,36 @@ const IndexRouteComponent: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const loadMyMcps = async () => {
+    try {
+      const servers = await window.mcp.listCustomServers();
+      const items: McpSourceType[] = (servers ?? [])
+        .filter((server) => server?.name)
+        .map((server) => ({
+          name: server.name,
+          desc: server.desc ?? "",
+          url: server.url ?? "",
+        }));
+      setMcps(items);
+      setErrorMessage(null);
+    } catch (error) {
+      console.error("加载 my_mcp_config.json 失败:", error);
+      setErrorMessage(error instanceof Error ? error.message : String(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     let cancelled = false;
 
-    const loadMyMcps = async () => {
-      try {
-        const servers = await window.mcp.listCustomServers();
-        if (cancelled) return;
-        const items: McpSourceType[] = (servers ?? [])
-          .filter((server) => server?.name)
-          .map((server) => ({
-            name: server.name,
-            desc: server.desc ?? "",
-            url: server.url ?? "",
-          }));
-        setMcps(items);
-      } catch (error) {
-        if (cancelled) return;
-        console.error("加载 my_mcp_config.json 失败:", error);
-        setErrorMessage(error instanceof Error ? error.message : String(error));
-      } finally {
-        if (!cancelled) {
-          setIsLoading(false);
-        }
+    const loadData = async () => {
+      if (!cancelled) {
+        await loadMyMcps();
       }
     };
 
-    void loadMyMcps();
+    void loadData();
 
     return () => {
       cancelled = true;
@@ -113,17 +116,17 @@ const IndexRouteComponent: React.FC = () => {
         })
 
       }
-      <AddCustomMcpButton />
+      <AddCustomMcpButton onSave={loadMyMcps} />
     </div>
   );
 };
 
 export function AddCustomMcp() {
-  const openMcpConfigDialog =()=>{
+  const openMcpConfigDialog = () => {
 
-  }
+  };
   return (
-    <div  onClick={openMcpConfigDialog} className="relative group cursor-pointer rounded-2xl overflow-hidden">
+    <div onClick={openMcpConfigDialog} className="relative group cursor-pointer rounded-2xl overflow-hidden">
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <div
           className="absolute inset-[-2px] rounded-2xl bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 animate-border-shine blur-md"></div>

@@ -5,6 +5,7 @@ import type {
   ExecuteToolResponse,
   MCPServerConfig,
   MCPServerDisplayConfig,
+  MCPConfigCatalog,
   SendMessageResponse,
   StartServerResponse,
   StopServerResponse,
@@ -47,4 +48,13 @@ export const mcpContext = {
 
   listCustomServers: () =>
     ipcRenderer.invoke(MCP_CHANNELS.LIST_CUSTOM_SERVERS) as Promise<MCPServerDisplayConfig[]>,
+
+  saveCustomServers: (
+    payload: MCPServerDisplayConfig[] | Record<string, MCPServerDisplayConfig> | MCPConfigCatalog,
+  ) =>
+    ipcRenderer.invoke(MCP_CHANNELS.SAVE_CUSTOM_SERVERS, payload) as Promise<{
+      success: boolean;
+      count?: number;
+      error?: string;
+    }>,
 };
