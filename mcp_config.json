@@ -6,17 +6,6 @@
         "tsx",
         "neteasecloud-mcp/src/server.ts"
       ]
-    },
-    "web-search": {
-      "command": "npx",
-      "args": [
-        "open-websearch@latest"
-      ],
-      "env": {
-        "MODE": "stdio",
-        "DEFAULT_SEARCH_ENGINE": "duckduckgo",
-        "ALLOWED_SEARCH_ENGINES": "duckduckgo,bing,exa"
-      }
     }
   }
 }

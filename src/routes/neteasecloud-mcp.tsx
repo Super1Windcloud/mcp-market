@@ -8,26 +8,26 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
 import type { ChatMessage, MCPServerConfig, SendMessageResponse } from "@/types/mcp";
 import { openExternalUrl } from "@/helpers/window_helpers";
-import fs from "fs";
-import { isDev } from "@/utils";
 
+
+const SERVER_CONFIGS: Record<string, MCPServerConfig> = {
+  "NeteaseCloud MCP": {
+    name: "NeteaseCloud MCP",
+    command: "npx",
+    args: ["tsx", "neteasecloud-mcp/src/server.ts"],
+  },
+};
 
 const resolveServerConfig = (displayName: string): MCPServerConfig => {
-  //A:\Webstorm\Tauri_electron_app\electron-shadcn\public\mcp_config.json
-  const path = process.cwd() + "/public/mcp_config.json";
-  if (!fs.existsSync(path)) throw new Error("path is not exist ");
-  const SERVER_CONFIGS = JSON.parse(fs.readFileSync(path, "utf-8"));
-
-  const override = SERVER_CONFIGS[displayName] as MCPServerConfig;
+  const override = SERVER_CONFIGS[displayName];
   if (override) {
-    if (isDev()) console.log("current mcp config", override);
     return { ...override };
   } else {
     throw new Error("empty mcp config");
   }
 };
 
-export const Route = createFileRoute("/chat-mcp")({
+export const Route = createFileRoute("/neteasecloud-mcp")({
   component: MCPChat,
   validateSearch: (search: Record<string, unknown>): {
     name: string;

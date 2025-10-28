@@ -218,7 +218,13 @@ async function main() {
   }
 }
 
-main().catch((e) => {
-  console.error('运行出错：', e);
-  process.exit(1);
-});
+
+function  fixMcpName(){
+   const content =  fs.readFileSync('../public/mcp_config.json', 'utf-8');
+   const json = JSON.parse(content);
+   const urls =
+}
+// main().catch((e) => {
+//   console.error('运行出错：', e);
+//   process.exit(1);
+// });

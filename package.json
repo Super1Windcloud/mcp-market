@@ -33,6 +33,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@deepgram/sdk": "^4.11.2",
     "@electron-forge/cli": "^7.10.2",
     "@electron-forge/maker-deb": "^7.10.2",
     "@electron-forge/maker-dmg": "^7.10.2",
@@ -61,6 +62,7 @@
     "@vitejs/plugin-react": "^5.1.0",
     "babel-plugin-react-compiler": "1.0.0",
     "code-inspector-plugin": "^1.2.10",
+    "cross-fetch": "^4.1.0",
     "electron": "^38.4.0",
     "electron-builder": "^26.0.12",
     "electron-playwright-helpers": "^1.8.2",

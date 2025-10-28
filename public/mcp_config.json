@@ -1,0 +1,6095 @@
+{
+  "0": {
+    "name": "jira",
+    "command": "node",
+    "args": [
+      "/absolute/path/to/mcp-jira-server/dist/index.js"
+    ],
+    "env": {
+      "JIRA_HOST": "https://your-company.atlassian.net",
+      "JIRA_EMAIL": "your-email@company.com",
+      "JIRA_API_TOKEN": "your-api-token",
+      "JIRA_DEFAULT_PROJECT": "PROJ"
+    }
+  },
+  "1mcp": {
+    "url": "http://127.0.0.1:3050/mcp?app=cursor"
+  },
+  "mcpjungle": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "http://localhost:8080/mcp",
+      "--allow-http"
+    ]
+  },
+  "mcpmcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote@latest",
+      "https://mcpmcp.io/mcp"
+    ]
+  },
+  "imagen3": {
+    "command": "C:\\bin\\imagen3-mcp.exe",
+    "env": {
+      "GEMINI_API_KEY": "<GEMINI_API_KEY>"
+    }
+  },
+  "MetaMCP": {
+    "url": "http://localhost:12008/metamcp/<YOUR_ENDPOINT_NAME>/sse"
+  },
+  "openai-gpt-image-mcp": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/dist/index.js"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "sk-..."
+    }
+  },
+  "pluggedin": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@pluggedin/pluggedin-mcp-proxy@latest"
+    ],
+    "env": {
+      "PLUGGEDIN_API_KEY": "YOUR_API_KEY"
+    }
+  },
+  "personalhub": {
+    "command": "/path/to/your/conda/envs/personalhub/bin/python",
+    "args": [
+      "/absolute/path/to/your/project/server.py"
+    ],
+    "env": {
+      "STEAM_API_KEY": "your_steam_api_key",
+      "STEAM_USER_ID": "your_steam_user_id",
+      "YOUTUBE_API_KEY": "your_youtube_api_key",
+      "BILIBILI_SESSDATA": "your_bilibili_sessdata",
+      "BILIBILI_BILI_JCT": "your_bilibili_bili_jct",
+      "BILIBILI_BUVID3": "your_bilibili_buvid3",
+      "REDDIT_CLIENT_ID": "your_reddit_client_id",
+      "REDDIT_CLIENT_SECRET": "your_reddit_client_secret"
+    }
+  },
+  "astrodynamics": {
+    "command": "/path/to/Server.Stdio",
+    "args": [
+      "-k",
+      "/path/to/kernels"
+    ]
+  },
+  "tmdb": {
+    "command": "npx",
+    "args": [
+      "wizzy-mcp-tmdb"
+    ],
+    "env": {
+      "TMDB_AUTH_TOKEN": "YOUR_TNL_PROXY_BEARER_TOKEN"
+    },
+    "alwaysAllow": [
+      "get_watch_providers",
+      "discover_tv",
+      "discover_by_provider"
+    ]
+  },
+  "manim-server": {
+    "command": "/absolute/path/to/python",
+    "args": [
+      "/absolute/path/to/manim-mcp-server/src/manim_server.py"
+    ],
+    "env": {
+      "MANIM_EXECUTABLE": "/Users/[Your_username]/anaconda3/envs/manim2/Scripts/manim.exe"
+    }
+  },
+  "blender": {
+    "command": "uvx",
+    "args": [
+      "blender-mcp"
+    ]
+  },
+  "video-editor-mcp": {
+    "command": "uvx",
+    "args": [
+      "video-editor-mcp",
+      "YOURAPIKEY"
+    ]
+  },
+  "Bazi": {
+    "command": "npx",
+    "args": [
+      "bazi-mcp"
+    ]
+  },
+  "discogs": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "discogs-mcp-server"
+    ],
+    "env": {
+      "DISCOGS_PERSONAL_ACCESS_TOKEN": "<YOUR_TOKEN>"
+    }
+  },
+  "aseprite": {
+    "command": "/opt/homebrew/bin/uv",
+    "args": [
+      "--directory",
+      "/path/to/repo",
+      "run",
+      "-m",
+      "aseprite_mcp"
+    ]
+  },
+  "quran-api": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "--init",
+      "-e",
+      "API_KEY=your_api_key_if_needed",
+      "-e",
+      "VERBOSE_MODE=true",
+      "quran-mcp-server"
+    ],
+    "disabled": false,
+    "autoApprove": []
+  },
+  "fal-ai": {
+    "command": "curl",
+    "args": [
+      "-N",
+      "http://localhost:8080/sse"
+    ]
+  },
+  "isaac-sim": {
+    "command": "uv run /home/ubuntu/Documents/isaac-sim-mcp/isaac_mcp/server.py"
+  },
+  "MayaMCP": {
+    "command": "[FULL PATH TO MayaMCP PROJECT]/.venv/Scripts/python.exe",
+    "args": [
+      "[FULL PATH TO MayaMCP PROJECT]/src/maya_mcp_server.py"
+    ]
+  },
+  "oorlogsbronnen-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "oorlogsbronnen-mcp"
+    ]
+  },
+  "rijksmuseum-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-server-rijksmuseum"
+    ],
+    "env": {
+      "RIJKSMUSEUM_API_KEY": "your_api_key_here"
+    }
+  },
+  "davinci-resolve": {
+    "name": "DaVinci Resolve MCP",
+    "command": "/path/to/your/venv/bin/python",
+    "args": [
+      "/path/to/your/davinci-resolve-mcp/src/main.py"
+    ]
+  },
+  "anilist": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "anilist-mcp"
+    ],
+    "env": {
+      "ANILIST_TOKEN": "your_api_token"
+    }
+  },
+  "biomcp": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--with",
+      "biomcp-python",
+      "biomcp",
+      "run"
+    ]
+  },
+  "gget-mcp": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "gget-mcp@latest",
+      "stdio"
+    ]
+  },
+  "opengenes-mcp": {
+    "command": "uvx",
+    "args": [
+      "opengenes-mcp"
+    ],
+    "env": {
+      "MCP_TRANSPORT": "stdio"
+    }
+  },
+  "uv-mcp-server": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--frozen",
+      "--directory",
+      "<your-project-path>",
+      "start"
+    ],
+    "env": {
+      "PATH": "<uv-bin-folder-path>"
+    }
+  },
+  "fhir": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "http://localhost:8000/mcp"
+    ]
+  },
+  "medical-mcp": {
+    "command": "node",
+    "args": [
+      "/path/to/medical-mcp/build/index.js"
+    ],
+    "cwd": "/path/to/medical-mcp"
+  },
+  "omop_mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "<path-to-local-repo>",
+      "run",
+      "omop_mcp"
+    ]
+  },
+  "bilibili-search": {
+    "command": "npx",
+    "args": [
+      "bilibili-mcp"
+    ],
+    "description": "B站视频搜索 MCP 服务，可以在AI应用中搜索B站视频内容。"
+  },
+  "playwright": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@automatalabs/mcp-server-playwright"
+    ]
+  },
+  "playwright-server": {
+    "command": "uvx",
+    "args": [
+      "playwright-server"
+    ]
+  },
+  "browserbase": {
+    "url": "your-smithery-url.com"
+  },
+  "browser-use-mcp-server": {
+    "url": "http://localhost:8000/sse"
+  },
+  "browser-control": {
+    "command": "node",
+    "args": [
+      "/path/to/repo/mcp-server/dist/server.js"
+    ],
+    "env": {
+      "EXTENSION_SECRET": "<secret_on_firefox_extension_options_page>",
+      "EXTENSION_PORT": "8089"
+    }
+  },
+  "firefox-devtools": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "firefox-devtools-mcp@latest",
+      "--headless",
+      "--viewport",
+      "1280x720"
+    ],
+    "env": {
+      "START_URL": "about:home"
+    }
+  },
+  "apple-reminders": {
+    "command": "mcp-server-apple-reminders",
+    "args": []
+  },
+  "ashra": {
+    "command": "node",
+    "args": [
+      "<path/to/ashra-mcp>/build/index.js"
+    ],
+    "env": {
+      "ASHRA_API_KEY": "<YOUR-API-KEY>"
+    }
+  },
+  "youtube-transcript": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@kimtaeyoon83/mcp-server-youtube-transcript"
+    ]
+  },
+  "lightpanda": {
+    "command": "/path/to/gomcp",
+    "args": [
+      "stdio"
+    ]
+  },
+  "browser-kit": {
+    "command": "npx",
+    "args": [
+      "@mcp-browser-kit/server@latest"
+    ]
+  },
+  "web-search": {
+    "command": "node",
+    "args": [
+      "/path/to/web-search/build/index.js"
+    ]
+  },
+  "selenium": {
+    "command": "python",
+    "args": [
+      "-m",
+      "mcp_server_selenium",
+      "--port",
+      "9222",
+      "--user_data_dir",
+      "/tmp/chrome-debug-claude"
+    ],
+    "env": {}
+  },
+  "apple-shortcuts": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-server-apple-shortcuts"
+    ]
+  },
+  "browserAgent": {
+    "command": "node",
+    "args": [
+      "ABSOLUTE_PATH_TO_DIRECTORY/mcp-browser-agent/dist/index.js",
+      "--browser",
+      "chrome"
+    ]
+  },
+  "4ever-mcpserver": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@4everland/hosting-mcp@latest",
+      "serve"
+    ],
+    "env": {
+      "TOKEN": "your-hosting-auth-token"
+    }
+  },
+  "aws-sso": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@aashari/mcp-server-aws-sso"
+    ],
+    "env": {
+      "AWS_SSO_START_URL": "https://your-company.awsapps.com/start",
+      "AWS_REGION": "us-east-1"
+    }
+  },
+  "ipfs": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-ipfs"
+    ],
+    "env": {
+      "W3_LOGIN_EMAIL": "your-email@example.com"
+    }
+  },
+  "aws-mcp-server": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-v",
+      "/Users/YOUR_USER_NAME/.aws:/home/appuser/.aws:ro",
+      "ghcr.io/alexei-led/aws-mcp-server:latest"
+    ]
+  },
+  "kubernetes": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-v",
+      "/Users/YOUR_USER_NAME/.kube:/home/appuser/.kube:ro",
+      "ghcr.io/alexei-led/k8s-mcp-server:latest"
+    ]
+  },
+  "alibaba-cloud-ops-mcp-server": {
+    "timeout": 600,
+    "command": "uvx",
+    "args": [
+      "alibaba-cloud-ops-mcp-server@latest"
+    ],
+    "env": {
+      "ALIBABA_CLOUD_ACCESS_KEY_ID": "Your Access Key ID",
+      "ALIBABA_CLOUD_ACCESS_KEY_SECRET": "Your Access Key SECRET"
+    }
+  },
+  "awslabs.core-mcp-server": {
+    "command": "uvx",
+    "args": [
+      "awslabs.core-mcp-server@latest"
+    ],
+    "env": {
+      "FASTMCP_LOG_LEVEL": "ERROR"
+    }
+  },
+  "cloudflare-observability": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://observability.mcp.cloudflare.com/mcp"
+    ]
+  },
+  "cloudflare-bindings": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://bindings.mcp.cloudflare.com/mcp"
+    ]
+  },
+  "mcp-cyclops": {
+    "command": "mcp-cyclops"
+  },
+  "adls2": {
+    "command": "adls2-mcp-server",
+    "env": {
+      "LOG_LEVEL": "DEBUG",
+      "UPLOAD_ROOT": "/path/to/store/uploads",
+      "DOWNLOAD_ROOT": "/path/to/store/downloads",
+      "AZURE_STORAGE_ACCOUNT_NAME": "your-azure-adls2-storage-account-name",
+      "READ_ONLY_MODE": "false"
+    }
+  },
+  "ESP-RainMaker-MCP": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--with",
+      "esp-rainmaker-cli",
+      "--with",
+      "mcp[cli]",
+      "mcp",
+      "run",
+      "<absolute_path_to_repo>/server.py"
+    ]
+  },
+  "azure-resource-graph-mcp-server": {
+    "command": "node",
+    "args": [
+      "C:\\YOUR_WORKSPACE\\azure-resource-graph-mcp-server\\build\\index.js"
+    ],
+    "env": {
+      "SUBSCRIPTION_ID": "xxxxxx-xx-xx-xx-xxxxxx"
+    }
+  },
+  "netskope-npa": {
+    "command": "node",
+    "args": [
+      "/path/to/ns-private-access-mcp/build/index.js"
+    ],
+    "env": {
+      "NETSKOPE_BASE_URL": "https://your-tenant.goskope.com",
+      "NETSKOPE_TOKEN": "your-api-token"
+    }
+  },
+  "kestra": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "--pull",
+      "always",
+      "-e",
+      "KESTRA_BASE_URL",
+      "-e",
+      "KESTRA_TENANT_ID",
+      "-e",
+      "KESTRA_MCP_DISABLED_TOOLS",
+      "-e",
+      "KESTRA_MCP_LOG_LEVEL",
+      "-e",
+      "KESTRA_USERNAME",
+      "-e",
+      "KESTRA_PASSWORD",
+      "ghcr.io/kestra-io/mcp-server-python:latest"
+    ],
+    "env": {
+      "KESTRA_BASE_URL": "http://host.docker.internal:8080/api/v1",
+      "KESTRA_TENANT_ID": "main",
+      "KESTRA_MCP_DISABLED_TOOLS": "ee",
+      "KESTRA_MCP_LOG_LEVEL": "ERROR",
+      "KESTRA_USERNAME": "admin@kestra.io",
+      "KESTRA_PASSWORD": "your_password"
+    }
+  },
+  "liveblocks-mcp-server": {
+    "command": "node",
+    "args": [
+      "/full/path/to/the/repo/liveblocks-mcp-server/build/index.js"
+    ],
+    "env": {
+      "LIVEBLOCKS_SECRET_KEY": "sk_dev_Ns35f5G..."
+    }
+  },
+  "nebula": {
+    "command": "~/path/to/uv",
+    "args": [
+      "--directory",
+      "~/path/to/nebulablock_mcp",
+      "run",
+      "-m",
+      "src.main",
+      "--api-key=YOUR_API_KEY"
+    ]
+  },
+  "tfmcp": {
+    "command": "/path/to/your/tfmcp",
+    "args": [
+      "mcp"
+    ],
+    "env": {
+      "HOME": "/Users/yourusername",
+      "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+      "TERRAFORM_DIR": "/path/to/your/terraform/project"
+    }
+  },
+  "openstack-mcp-server": {
+    "command": "/path/to/your/python",
+    "args": [
+      "python-openstackmcp-server"
+    ],
+    "env": {
+      "OS_CLIENT_CONFIG_FILE": "/path/to/your/clouds.yaml"
+    }
+  },
+  "cert-manager-mcp-server": {
+    "command": "sh",
+    "args": [
+      "-c",
+      "docker run -i --rm -v ~/.kube:/home/app/.kube:ro -v ~/.config/gcloud:/home/app/.config/gcloud piblokto/cert-manager-mcp-server:v0.0.5"
+    ]
+  },
+  "portainer": {
+    "command": "/path/to/portainer-mcp",
+    "args": [
+      "-server",
+      "[IP]:[PORT]",
+      "-token",
+      "[TOKEN]",
+      "-tools",
+      "/tmp/tools.yaml"
+    ]
+  },
+  "pythonanywhere-mcp-server": {
+    "type": "stdio",
+    "command": "uvx",
+    "args": [
+      "pythonanywhere-mcp-server"
+    ],
+    "env": {
+      "API_TOKEN": "yourpythonanywhereapitoken",
+      "LOGNAME": "yourpythonanywhereusername"
+    }
+  },
+  "qiniu": {
+    "command": "uvx",
+    "args": [
+      "qiniu-mcp-server"
+    ],
+    "env": {
+      "QINIU_ACCESS_KEY": "YOUR_ACCESS_KEY",
+      "QINIU_SECRET_KEY": "YOUR_SECRET_KEY",
+      "QINIU_REGION_NAME": "YOUR_REGION_NAME",
+      "QINIU_ENDPOINT_URL": "YOUR_ENDPOINT_URL",
+      "QINIU_BUCKETS": "YOUR_BUCKET_A,YOUR_BUCKET_B"
+    },
+    "disabled": false
+  },
+  "mcp-redis-cloud": {
+    "command": "node",
+    "args": [
+      "--experimental-fetch",
+      "<absolute_path_to_project_root>/dist/index.js"
+    ],
+    "env": {
+      "API_KEY": "<redis_cloud_api_key>",
+      "SECRET_KEY": "<redis_cloud_api_secret_key>"
+    }
+  },
+  "k8s-mcp-server": {
+    "command": "k8s-mcp-server",
+    "args": [
+      "--mode",
+      "stdio"
+    ],
+    "env": {
+      "KUBECONFIG": "${env:HOME}/.kube/config"
+    }
+  },
+  "mcp-k8s": {
+    "url": "http://localhost:8080/sse",
+    "args": []
+  },
+  "mcp_k8s": {
+    "command": "mcp-k8s",
+    "args": []
+  },
+  "nutanix": {
+    "command": "/path/to/mcp-nutanix"
+  },
+  "books-mcp-server": {
+    "name": "books-mcp",
+    "type": "stdio",
+    "description": "",
+    "isActive": true,
+    "registryUrl": "",
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/Enter your local project directory/books-mcp-server",
+      "run",
+      "main.py"
+    ]
+  },
+  "kom": {
+    "type": "sse",
+    "url": "http://IP:9096/sse"
+  },
+  "k8s eye": {
+    "command": "YOUR mcp-k8s-eye PATH",
+    "env": {
+      "HOME": "USER HOME DIR"
+    }
+  },
+  "js-sandbox": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-v",
+      "/var/run/docker.sock:/var/run/docker.sock",
+      "-v",
+      "$HOME/Desktop/sandbox-output:/root",
+      "-e",
+      "FILES_DIR=$HOME/Desktop/sandbox-output",
+      "-e",
+      "SANDBOX_MEMORY_LIMIT=512m",
+      "-e",
+      "SANDBOX_CPU_LIMIT=0.75",
+      "mcp/node-code-sandbox"
+    ]
+  },
+  "outsource-mcp": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/gwbischof/outsource-mcp.git",
+      "outsource-mcp"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "your-openai-key",
+      "ANTHROPIC_API_KEY": "your-anthropic-key",
+      "GOOGLE_API_KEY": "your-google-key",
+      "GROQ_API_KEY": "your-groq-key",
+      "DEEPSEEK_API_KEY": "your-deepseek-key",
+      "XAI_API_KEY": "your-xai-key",
+      "PERPLEXITY_API_KEY": "your-perplexity-key",
+      "COHERE_API_KEY": "your-cohere-key",
+      "FIREWORKS_API_KEY": "your-fireworks-key",
+      "HUGGINGFACE_API_KEY": "your-huggingface-key",
+      "MISTRAL_API_KEY": "your-mistral-key",
+      "NVIDIA_API_KEY": "your-nvidia-key",
+      "OLLAMA_HOST": "http://localhost:11434",
+      "OPENROUTER_API_KEY": "your-openrouter-key",
+      "TOGETHER_API_KEY": "your-together-key",
+      "CEREBRAS_API_KEY": "your-cerebras-key",
+      "DEEPINFRA_API_KEY": "your-deepinfra-key",
+      "SAMBANOVA_API_KEY": "your-sambanova-key"
+    }
+  },
+  "petstore": {
+    "command": "openapi-to-mcp",
+    "args": [
+      "https://petstore3.swagger.io/api/v3/openapi.json"
+    ]
+  },
+  "js": {
+    "command": "/usr/local/bin/mcp-v8 --s3-bucket my-bucket-name"
+  },
+  "yepcode-mcp-server": {
+    "url": "https://cloud.yepcode.io/mcp/sk-c2E....RD/sse"
+  },
+  "leetcode": {
+    "command": "mcp-server-leetcode"
+  },
+  "winx": {
+    "command": "/path/to/winx-code-agent",
+    "args": [],
+    "env": {
+      "RUST_LOG": "info",
+      "DASHSCOPE_API_KEY": "your-dashscope-api-key",
+      "DASHSCOPE_MODEL": "qwen3-coder-plus",
+      "NVIDIA_API_KEY": "your-nvidia-api-key",
+      "NVIDIA_DEFAULT_MODEL": "qwen/qwen3-235b-a22b",
+      "GEMINI_API_KEY": "your-gemini-api-key",
+      "GEMINI_MODEL": "gemini-1.5-pro"
+    }
+  },
+  "vscode-mcp-server": {
+    "command": "npx",
+    "args": [
+      "mcp-remote@next",
+      "http://localhost:3000/mcp"
+    ]
+  },
+  "code-to-tree": {
+    "command": "C:\\path\\to\\code-to-tree.exe"
+  },
+  "serena": {
+    "command": "/abs/path/to/uv",
+    "args": [
+      "run",
+      "--directory",
+      "/abs/path/to/serena",
+      "serena",
+      "start-mcp-server"
+    ]
+  },
+  "agent-mcp": {
+    "command": "uv",
+    "args": [
+      "run",
+      "-m",
+      "agent_mcp.cli",
+      "--port",
+      "8080"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "your-openai-api-key"
+    }
+  },
+  "code-assistant": {
+    "command": "/path/to/code-assistant/target/release/code-assistant",
+    "args": [
+      "server"
+    ],
+    "env": {
+      "PERPLEXITY_API_KEY": "pplx-...",
+      "SHELL": "/bin/zsh"
+    }
+  },
+  "rubber-duck": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/mcp-rubber-duck/dist/index.js"
+    ],
+    "env": {
+      "MCP_SERVER": "true",
+      "OPENAI_API_KEY": "your-openai-api-key-here",
+      "OPENAI_DEFAULT_MODEL": "gpt-4o-mini",
+      "GEMINI_API_KEY": "your-gemini-api-key-here",
+      "GEMINI_DEFAULT_MODEL": "gemini-2.5-flash",
+      "DEFAULT_PROVIDER": "openai",
+      "LOG_LEVEL": "info"
+    }
+  },
+  "developer": {
+    "command": "/path/to/your/developer/target/release/developer",
+    "args": []
+  },
+  "iterm-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "iterm-mcp"
+    ]
+  },
+  "mcp-server-commands": {
+    "command": "npx",
+    "args": [
+      "mcp-server-commands"
+    ]
+  },
+  "safe-local-python-executor": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/mcp_local_python_executor/",
+      "run",
+      "mcp_server.py"
+    ]
+  },
+  "kill-process-mcp": {
+    "command": "uvx",
+    "args": [
+      "kill-process-mcp@latest"
+    ]
+  },
+  "cli-mcp-server": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "<path/to/the/repo>/cli-mcp-server",
+      "run",
+      "cli-mcp-server"
+    ],
+    "env": {
+      "ALLOWED_DIR": "</your/desired/dir>",
+      "ALLOWED_COMMANDS": "ls,cat,pwd,echo",
+      "ALLOWED_FLAGS": "-l,-a,--help,--version",
+      "MAX_COMMAND_LENGTH": "1024",
+      "COMMAND_TIMEOUT": "30",
+      "ALLOW_SHELL_OPERATORS": "false"
+    }
+  },
+  "shell": {
+    "command": "docker",
+    "args": [
+      "run",
+      "--rm",
+      "-i",
+      "mcp-shell:latest"
+    ],
+    "env": {
+      "MCP_SHELL_SECURITY_ENABLED": "true",
+      "MCP_SHELL_LOG_LEVEL": "info"
+    }
+  },
+  "ssh-mcp": {
+    "command": "npx",
+    "args": [
+      "ssh-mcp",
+      "-y",
+      "--",
+      "--host=1.2.3.4",
+      "--port=22",
+      "--user=root",
+      "--password=pass",
+      "--key=path/to/key",
+      "--timeout=30000",
+      "--maxChars=none"
+    ]
+  },
+  "desktop-commander": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@wonderwhy-er/desktop-commander@latest"
+    ]
+  },
+  "google-tasks": {
+    "command": "node",
+    "args": [
+      "/path/to/google-tasks-mcp/build/index.js"
+    ],
+    "env": {
+      "GOOGLE_CLIENT_ID": "your_client_id_here",
+      "GOOGLE_CLIENT_SECRET": "your_client_secret_here",
+      "GOOGLE_REDIRECT_URI": "http://localhost:3000/oauth2callback"
+    }
+  },
+  "NotificationServer": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/your/mcp_server_notify project",
+      "run",
+      "mcp-server-notify"
+    ]
+  },
+  "Carbon Voice": {
+    "url": "https://mcp.carbonvoice.app"
+  },
+  "messages": {
+    "command": "uvx",
+    "args": [
+      "mac-messages-mcp"
+    ]
+  },
+  "telegram": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@chaindead/telegram-mcp"
+    ],
+    "env": {
+      "TG_APP_ID": "<your-api-id>",
+      "TG_API_HASH": "<your-api-hash>"
+    }
+  },
+  "telegram-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/full/path/to/telegram-mcp",
+      "run",
+      "main.py"
+    ]
+  },
+  "callcenter.js": {
+    "command": "npx",
+    "args": [
+      "github:gerkensm/callcenter.js-mcp",
+      "--mcp"
+    ],
+    "env": {
+      "SIP_USERNAME": "your_extension",
+      "SIP_PASSWORD": "your_password",
+      "SIP_SERVER_IP": "192.168.1.1",
+      "OPENAI_API_KEY": "sk-your-key-here",
+      "USER_NAME": "Your Name"
+    }
+  },
+  "imessage-query": {
+    "command": "/full/path/to/imessage-query-server.py"
+  },
+  "acp-local": {
+    "command": "uvx",
+    "args": [
+      "acp-mcp",
+      "http://localhost:8000"
+    ]
+  },
+  "infobip-sms": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://mcp.infobip.com/sms",
+      "--header",
+      "Authorization: App ${INFOBIP_API_KEY}"
+    ],
+    "env": {
+      "INFOBIP_API_KEY": "<Your Infobip API Key here>"
+    }
+  },
+  "product-hunt": {
+    "command": "product-hunt-mcp",
+    "env": {
+      "PRODUCT_HUNT_TOKEN": "your_token_here"
+    }
+  },
+  "localServer": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "package@0.1.0"
+    ]
+  },
+  "remoteServer": {
+    "url": "http://mcp.example.com",
+    "auth": "oauth"
+  },
+  "bluesky": {
+    "command": "/Users/your-username/.bun/bin/bun",
+    "args": [
+      "/path/to/bluesky-context-server/packages/server/bin/index.ts"
+    ],
+    "env": {
+      "BLUESKY_APP_KEY": "your-app-password-here",
+      "BLUESKY_IDENTIFIER": "your-handle.bsky.social"
+    }
+  },
+  "telephony": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "--init",
+      "-e",
+      "DOCKER_CONTAINER=true",
+      "telephony-mcp-server"
+    ]
+  },
+  "whatsapp": {
+    "command": "{{PATH_TO_UV}}",
+    "args": [
+      "--directory",
+      "{{PATH_TO_SRC}}/whatsapp-mcp/whatsapp-mcp-server",
+      "run",
+      "main.py"
+    ]
+  },
+  "line-bot": {
+    "command": "npx",
+    "args": [
+      "@line/line-bot-mcp-server"
+    ],
+    "env": {
+      "CHANNEL_ACCESS_TOKEN": "FILL_HERE",
+      "DESTINATION_USER_ID": "FILL_HERE"
+    }
+  },
+  "imessage": {
+    "command": "deno",
+    "args": [
+      "run",
+      "--allow-read",
+      "--allow-env",
+      "--allow-sys",
+      "--allow-ffi",
+      "jsr:@wyattjoh/imessage-mcp"
+    ]
+  },
+  "vrchat-mcp": {
+    "command": "npx",
+    "args": [
+      "vrchat-mcp"
+    ],
+    "env": {
+      "VRCHAT_USERNAME": "your-username",
+      "VRCHAT_AUTH_TOKEN": "your-auth-token"
+    }
+  },
+  "ms365": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@softeria/ms-365-mcp-server",
+      "--org-mode"
+    ]
+  },
+  "mcp-server": {
+    "command": "docker",
+    "args": [
+      "run",
+      "--rm",
+      "-i",
+      "-e",
+      "DISCORD_TOKEN=<YOUR_DISCORD_BOT_TOKEN>",
+      "-e",
+      "DISCORD_GUILD_ID=<OPTIONAL_DEFAULT_SERVER_ID>",
+      "saseq/discord-mcp:latest"
+    ]
+  },
+  "didlogic": {
+    "command": "uvx",
+    "args": [
+      "didlogic_mcp"
+    ],
+    "env": {
+      "DIDLOGIC_API_KEY": "YOUR_DIDLOGIC_KEY"
+    }
+  },
+  "ycloud-whatsapp": {
+    "command": "node",
+    "args": [
+      "path/to/ycloud-whatsapp-mcp-server/build/index.js"
+    ],
+    "env": {
+      "API_BASE_URL": "https://api.ycloud.com/v2",
+      "API_HEADERS": "X-API-Key:your-api-key-here"
+    }
+  },
+  "gtasks": {
+    "command": "/opt/homebrew/bin/node",
+    "args": [
+      "{ABSOLUTE PATH TO FILE HERE}/dist/index.js"
+    ]
+  },
+  "feishu": {
+    "url": "http://localhost:8788/sse"
+  },
+  "mcp-server-chart": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@antv/mcp-server-chart"
+    ]
+  },
+  "mcp-echarts": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-echarts"
+    ]
+  },
+  "mcp-mermaid": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-mermaid"
+    ]
+  },
+  "unomi-server": {
+    "command": "npx",
+    "args": [
+      "@inoyu/mcp-unomi-server"
+    ],
+    "env": {
+      "UNOMI_BASE_URL": "http://your-unomi-server:8181",
+      "UNOMI_VERSION": "3",
+      "UNOMI_USERNAME": "your-username",
+      "UNOMI_PASSWORD": "your-password",
+      "UNOMI_PROFILE_ID": "your-profile-id",
+      "UNOMI_KEY": "your-unomi-key",
+      "UNOMI_EMAIL": "your-email@example.com",
+      "UNOMI_SOURCE_ID": "claude-desktop",
+      "UNOMI_TENANT_ID": "your-tenant-id",
+      "UNOMI_PUBLIC_KEY": "your-public-key",
+      "UNOMI_PRIVATE_KEY": "your-private-key"
+    }
+  },
+  "mcp-aiven": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "$REPOSITORY_DIRECTORY",
+      "run",
+      "--with-editable",
+      "$REPOSITORY_DIRECTORY",
+      "--python",
+      "3.13",
+      "mcp-aiven"
+    ],
+    "env": {
+      "AIVEN_BASE_URL": "https://api.aiven.io",
+      "AIVEN_TOKEN": "$AIVEN_TOKEN"
+    }
+  },
+  "supabase": {
+    "command": "/Users/username/.local/bin/supabase-mcp-server",
+    "env": {
+      "QUERY_API_KEY": "your-api-key",
+      "SUPABASE_PROJECT_REF": "your-project-ref",
+      "SUPABASE_DB_PASSWORD": "your-db-password",
+      "SUPABASE_REGION": "us-east-1",
+      "SUPABASE_ACCESS_TOKEN": "your-access-token",
+      "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key"
+    }
+  },
+  "cockroach": {
+    "command": "<full_path_uv_command>",
+    "args": [
+      "--directory",
+      "<your_mcp_server_directory>",
+      "run",
+      "src/main.py"
+    ],
+    "env": {
+      "CRDB_HOST": "<your_cockroachdb_hostname>",
+      "CRDB_PORT": "<your_cockroachdb_port>",
+      "CRDB_DATABASE": "<your_cockroach_database>",
+      "CRDB_USERNAME": "<your_cockroachdb_user>",
+      "CRDB_PWD": "<your_cockroachdb_password>",
+      "CRDB_SSL_MODE": "disable|allow|prefer|require|verify-ca|verify-full",
+      "CRDB_SSL_CA_PATH": "<your_cockroachdb_ca_path>",
+      "CRDB_SSL_KEYFILE": "<your_cockroachdb_keyfile_path>",
+      "CRDB_SSL_CERTFILE": "<your_cockroachdb_certificate_path>"
+    }
+  },
+  "mcp_server_mysql": {
+    "command": "/path/to/node",
+    "args": [
+      "/full/path/to/mcp-server-mysql/dist/index.js"
+    ],
+    "env": {
+      "MYSQL_HOST": "127.0.0.1",
+      "MYSQL_PORT": "3306",
+      "MYSQL_USER": "root",
+      "MYSQL_PASS": "your_password",
+      "MYSQL_DB": "your_database",
+      "ALLOW_INSERT_OPERATION": "false",
+      "ALLOW_UPDATE_OPERATION": "false",
+      "ALLOW_DELETE_OPERATION": "false",
+      "PATH": "/Users/atlasborla/Library/Application Support/Herd/config/nvm/versions/node/v22.9.0/bin:/usr/bin:/bin",
+      "NODE_PATH": "/Users/atlasborla/Library/Application Support/Herd/config/nvm/versions/node/v22.9.0/lib/node_modules"
+    }
+  },
+  "tidb": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/mcp-server-tidb",
+      "run",
+      "src/main.py"
+    ]
+  },
+  "gateway": {
+    "command": "PATH_TO_GATEWAY_BINARY",
+    "args": [
+      "start",
+      "--config",
+      "PATH_TO_GATEWAY_YAML_CONFIG",
+      "mcp-stdio"
+    ]
+  },
+  "dicom": {
+    "command": "uv",
+    "args": [
+      "tool",
+      "dicom-mcp",
+      "/path/to/your_config.yaml"
+    ]
+  },
+  "mcp-clickhouse": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--with",
+      "mcp-clickhouse",
+      "--python",
+      "3.10",
+      "mcp-clickhouse"
+    ],
+    "env": {
+      "CLICKHOUSE_HOST": "<clickhouse-host>",
+      "CLICKHOUSE_PORT": "<clickhouse-port>",
+      "CLICKHOUSE_USER": "<clickhouse-user>",
+      "CLICKHOUSE_PASSWORD": "<clickhouse-password>",
+      "CLICKHOUSE_SECURE": "true",
+      "CLICKHOUSE_VERIFY": "true",
+      "CLICKHOUSE_CONNECT_TIMEOUT": "30",
+      "CLICKHOUSE_SEND_RECEIVE_TIMEOUT": "30"
+    }
+  },
+  "confluent": {
+    "command": "node",
+    "args": [
+      "/path/to/confluent-mcp-server/dist/index.js",
+      "--env-file",
+      "/path/to/confluent-mcp-server/.env"
+    ]
+  },
+  "couchbase": {
+    "command": "uvx",
+    "args": [
+      "couchbase-mcp-server"
+    ],
+    "env": {
+      "CB_CONNECTION_STRING": "couchbases://connection-string",
+      "CB_USERNAME": "username",
+      "CB_PASSWORD": "password"
+    }
+  },
+  "elasticsearch-mcp-server": {
+    "command": "uvx",
+    "args": [
+      "elasticsearch-mcp-server"
+    ],
+    "env": {
+      "ELASTICSEARCH_HOSTS": "https://localhost:9200",
+      "ELASTICSEARCH_USERNAME": "elastic",
+      "ELASTICSEARCH_PASSWORD": "test123"
+    }
+  },
+  "postgres": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "DATABASE_URI",
+      "crystaldba/postgres-mcp",
+      "--access-mode=unrestricted"
+    ],
+    "env": {
+      "DATABASE_URI": "postgresql://username:password@localhost:5432/dbname"
+    }
+  },
+  "trino": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "<path_to_mcp_server_trino>",
+      "run",
+      "mcp_server_trino"
+    ],
+    "env": {
+      "TRINO_HOST": "<host>",
+      "TRINO_PORT": "<port>",
+      "TRINO_USER": "<user>",
+      "TRINO_PASSWORD": "<password>",
+      "TRINO_CATALOG": "<catalog>",
+      "TRINO_SCHEMA": "<schema>"
+    }
+  },
+  "mysql": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@davewind/mysql-mcp-server",
+      "mysql://user:password@localhost:port/database"
+    ]
+  },
+  "airtable": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "airtable-mcp-server"
+    ],
+    "env": {
+      "AIRTABLE_API_KEY": "pat123.abc123"
+    }
+  },
+  "nocodb": {
+    "command": "node",
+    "args": [
+      "{working_folder}/dist/start.js"
+    ],
+    "env": {
+      "NOCODB_URL": "https://your-nocodb-instance.com",
+      "NOCODB_BASE_ID": "your_base_id_here",
+      "NOCODB_API_TOKEN": "your_api_token_here"
+    }
+  },
+  "bigquery": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@ergut/mcp-bigquery-server",
+      "--project-id",
+      "your-project-id",
+      "--location",
+      "us-central1"
+    ]
+  },
+  "memvid": {
+    "type": "streamable-http",
+    "url": "http://localhost:3000"
+  },
+  "fireproof": {
+    "command": "/path/to/fireproof-mcp/build/index.js"
+  },
+  "mcp-gsheets": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-gsheets@latest"
+    ],
+    "env": {
+      "GOOGLE_PROJECT_ID": "your-project-id",
+      "GOOGLE_APPLICATION_CREDENTIALS": "/absolute/path/to/service-account-key.json"
+    }
+  },
+  "stdio-db-mcp-server": {
+    "command": "/path/to/db-mcp-server/server",
+    "args": [
+      "-t",
+      "stdio",
+      "-c",
+      "/path/to/config.json"
+    ]
+  },
+  "mongodb-lens": {
+    "command": "/path/to/npx",
+    "args": [
+      "-y",
+      "mongodb-lens@latest",
+      "mongodb://your-connection-string"
+    ]
+  },
+  "greptimedb": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/greptimedb-mcp-server",
+      "run",
+      "-m",
+      "greptimedb_mcp_server.server"
+    ],
+    "env": {
+      "GREPTIMEDB_HOST": "localhost",
+      "GREPTIMEDB_PORT": "4002",
+      "GREPTIMEDB_USER": "root",
+      "GREPTIMEDB_PASSWORD": "",
+      "GREPTIMEDB_DATABASE": "public",
+      "GREPTIMEDB_TIMEZONE": ""
+    }
+  },
+  "google-sheets-mcp": {
+    "command": "uvx",
+    "args": [
+      "google-sheets-mcp@latest"
+    ],
+    "env": {
+      "project_id": "your-project-id",
+      "private_key_id": "your-private-key-id",
+      "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
+      "client_email": "your-service@your-project.iam.gserviceaccount.com",
+      "client_id": "your-client-id",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/your-service%40your-project.iam.gserviceaccount.com"
+    }
+  },
+  "mcp-hydrolix": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--with",
+      "mcp-hydrolix",
+      "--python",
+      "3.13",
+      "mcp-hydrolix"
+    ],
+    "env": {
+      "HYDROLIX_HOST": "<hydrolix-host>",
+      "HYDROLIX_USER": "<hydrolix-user>",
+      "HYDROLIX_PASSWORD": "<hydrolix-password>"
+    }
+  },
+  "influxdb": {
+    "command": "npx",
+    "args": [
+      "influxdb-mcp-server"
+    ],
+    "env": {
+      "INFLUXDB_TOKEN": "your_token",
+      "INFLUXDB_URL": "http://localhost:8086",
+      "INFLUXDB_ORG": "your_org"
+    }
+  },
+  "snowflake_pip": {
+    "command": "uvx",
+    "args": [
+      "--python=3.12",
+      "mcp_snowflake_server",
+      "--account",
+      "your_account",
+      "--warehouse",
+      "your_warehouse",
+      "--user",
+      "your_user",
+      "--password",
+      "your_password",
+      "--role",
+      "your_role",
+      "--database",
+      "your_database",
+      "--schema",
+      "your_schema"
+    ]
+  },
+  "druid-mcp-server": {
+    "command": "docker",
+    "args": [
+      "run",
+      "--rm",
+      "-i",
+      "-e",
+      "DRUID_ROUTER_URL",
+      "-e",
+      "DRUID_COORDINATOR_URL",
+      "-e",
+      "DRUID_AUTH_USERNAME",
+      "-e",
+      "DRUID_AUTH_PASSWORD",
+      "-e",
+      "DRUID_SSL_ENABLED",
+      "-e",
+      "DRUID_SSL_SKIP_VERIFICATION",
+      "-e",
+      "DRUID_MCP_READONLY_ENABLED",
+      "iunera/druid-mcp-server:1.5.1"
+    ],
+    "env": {
+      "DRUID_ROUTER_URL": "http://host.docker.internal:8888",
+      "DRUID_COORDINATOR_URL": "http://host.docker.internal:8081",
+      "DRUID_AUTH_USERNAME": "",
+      "DRUID_AUTH_PASSWORD": "",
+      "DRUID_SSL_ENABLED": "false",
+      "DRUID_SSL_SKIP_VERIFICATION": "true",
+      "DRUID_MCP_READONLY_ENABLED": "false"
+    }
+  },
+  "simple_snowflake_mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      ".",
+      "run",
+      "simple_snowflake_mcp"
+    ]
+  },
+  "mcp-timeplus": {
+    "command": "uvx",
+    "args": [
+      "mcp-timeplus"
+    ],
+    "env": {
+      "TIMEPLUS_HOST": "<timeplus-host>",
+      "TIMEPLUS_PORT": "<timeplus-port>",
+      "TIMEPLUS_USER": "<timeplus-user>",
+      "TIMEPLUS_PASSWORD": "<timeplus-password>",
+      "TIMEPLUS_SECURE": "false",
+      "TIMEPLUS_VERIFY": "true",
+      "TIMEPLUS_CONNECT_TIMEOUT": "30",
+      "TIMEPLUS_SEND_RECEIVE_TIMEOUT": "30",
+      "TIMEPLUS_READ_ONLY": "false",
+      "TIMEPLUS_KAFKA_CONFIG": "{\"bootstrap.servers\":\"a.aivencloud.com:28864\", \"sasl.mechanism\":\"SCRAM-SHA-256\",\"sasl.username\":\"avnadmin\", \"sasl.password\":\"thePassword\",\"security.protocol\":\"SASL_SSL\",\"enable.ssl.certificate.verification\":\"false\"}"
+    }
+  },
+  "MCP SQLite Server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-sqlite",
+      "<path-to-your-sqlite-database.db>"
+    ]
+  },
+  "mcp-server-vikingdb": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "dir to mcp-server-vikingdb",
+      "run",
+      "mcp-server-vikingdb",
+      "--vikingdb-host",
+      "your host",
+      "--vikingdb-region",
+      "your region",
+      "--vikingdb-ak",
+      "your access key",
+      "--vikingdb-sk",
+      "your secret key",
+      "--collection-name",
+      "your collection name",
+      "--index-name",
+      "your index name"
+    ]
+  },
+  "mongodb-env": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-mongo-server"
+    ],
+    "env": {
+      "MCP_MONGODB_URI": "mongodb://muhammed:kilic@localhost:27017/database",
+      "MCP_MONGODB_READONLY": "true"
+    }
+  },
+  "duckdb": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-duckdb",
+      "--db-path",
+      "~/mcp-server-duckdb/data/data.db"
+    ]
+  },
+  "Neon": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "https://mcp.neon.tech/mcp"
+    ]
+  },
+  "nile-database": {
+    "command": "node",
+    "args": [
+      "/path/to/your/nile-mcp-server/dist/index.js"
+    ],
+    "env": {
+      "NILE_API_KEY": "your_api_key_here",
+      "NILE_WORKSPACE_SLUG": "your_workspace_slug"
+    }
+  },
+  "my_database": {
+    "command": "java",
+    "args": [
+      "-jar",
+      "/path/to/mcp-jdbc-server/MCPServer-1.0.0-runner.jar"
+    ],
+    "env": {
+      "jdbc.url": "jdbc:virtuoso://localhost:1111",
+      "jdbc.user": "username",
+      "jdbc.password": "password",
+      "jdbc.api_key": "sk-xxx"
+    }
+  },
+  "ODBC": {
+    "command": "/path/to/.nvm/versions/node/v21.1.0/bin/node",
+    "args": [
+      "/path/to/mcp-odbc-server/node_modules/.bin/tsx",
+      "/path/to/mcp-odbc-server/src/main.ts"
+    ],
+    "env": {
+      "ODBCINI": "/Library/ODBC/odbc.ini",
+      "NODE_VERSION": "v21.1.0",
+      "PATH": "~/.nvm/versions/node/v21.1.0/bin:${PATH}"
+    },
+    "disabled": false,
+    "autoApprove": []
+  },
+  "adx": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "<full path to adx-mcp-server directory>",
+      "run",
+      "src/adx_mcp_server/main.py"
+    ],
+    "env": {
+      "ADX_CLUSTER_URL": "https://yourcluster.region.kusto.windows.net",
+      "ADX_DATABASE": "your_database"
+    }
+  },
+  "prometheus": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "PROMETHEUS_URL",
+      "ghcr.io/pab1it0/prometheus-mcp-server:latest"
+    ],
+    "env": {
+      "PROMETHEUS_URL": "<your-prometheus-url>"
+    }
+  },
+  "Prisma-Remote": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "https://mcp.prisma.io/mcp"
+    ]
+  },
+  "mongodb": {
+    "command": "npx",
+    "args": [
+      "mongo-mcp",
+      "mongodb://<username>:<password>@<host>:<port>/<database>?authSource=admin"
+    ]
+  },
+  "airtable-typescript": {
+    "command": "npx",
+    "args": [
+      "@rashidazarang/airtable-mcp",
+      "--token",
+      "YOUR_AIRTABLE_TOKEN",
+      "--base",
+      "YOUR_BASE_ID"
+    ],
+    "env": {
+      "NODE_ENV": "production",
+      "LOG_LEVEL": "INFO"
+    }
+  },
+  "redis": {
+    "command": "docker",
+    "args": [
+      "run",
+      "--rm",
+      "--name",
+      "redis-mcp-server",
+      "-i",
+      "-e",
+      "REDIS_HOST=<redis_hostname>",
+      "-e",
+      "REDIS_PORT=<redis_port>",
+      "-e",
+      "REDIS_USERNAME=<redis_username>",
+      "-e",
+      "REDIS_PWD=<redis_password>",
+      "mcp-redis"
+    ]
+  },
+  "my_sqlite_db": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "mcp-alchemy==2025.8.15.91819",
+      "--refresh-package",
+      "mcp-alchemy",
+      "mcp-alchemy"
+    ],
+    "env": {
+      "DB_URL": "sqlite:////absolute/path/to/database.db"
+    }
+  },
+  "mcp-pinecone": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "{project_dir}",
+      "run",
+      "mcp-pinecone"
+    ]
+  },
+  "mcp-server-snowflake": {
+    "command": "uvx",
+    "args": [
+      "snowflake-labs-mcp",
+      "--service-config-file",
+      "<path_to_file>/tools_config.yaml",
+      "--connection-name",
+      "default"
+    ]
+  },
+  "pgmcp": {
+    "transport": {
+      "type": "http",
+      "url": "http://localhost:8080/mcp"
+    }
+  },
+  "database-mcp": {
+    "command": "uvx",
+    "args": [
+      "database-mcp"
+    ],
+    "env": {
+      "DB_TYPE": "pg",
+      "DB_CONFIG": "{\"host\":\"localhost\",\"port\":5432,\"user\":\"user\",\"password\":\"pw\",\"dbname\":\"dbname\"}"
+    },
+    "disabled": true,
+    "autoApprove": []
+  },
+  "victorialogs": {
+    "command": "/path/to/mcp-victorialogs",
+    "env": {
+      "VL_INSTANCE_ENTRYPOINT": "<YOUR_VL_INSTANCE>",
+      "VL_INSTANCE_BEARER_TOKEN": "<YOUR_VL_BEARER_TOKEN>",
+      "VL_INSTANCE_HEADERS": "<HEADER>=<HEADER_VALUE>,<HEADER>=<HEADER_VALUE>"
+    }
+  },
+  "mcp-libsql": {
+    "command": "mcp-libsql",
+    "args": [
+      "--url",
+      "file:///Users/username/database.db"
+    ]
+  },
+  "xiyan-mcp-server": {
+    "command": "/xxx/python",
+    "args": [
+      "-m",
+      "xiyan_mcp_server"
+    ],
+    "env": {
+      "YML": "PATH/TO/YML"
+    }
+  },
+  "google-sheets": {
+    "command": "uvx",
+    "args": [
+      "mcp-google-sheets@latest"
+    ],
+    "env": {
+      "SERVICE_ACCOUNT_PATH": "/full/path/to/your/service-account-key.json",
+      "DRIVE_FOLDER_ID": "your_shared_folder_id_here"
+    }
+  },
+  "ydb": {
+    "command": "uvx",
+    "args": [
+      "ydb-mcp",
+      "--ydb-endpoint",
+      "grpc://localhost:2136",
+      "--ydb-database",
+      "/local"
+    ]
+  },
+  "victoriametrics": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@yincongcyincong/victoriametrics-mcp-server"
+    ],
+    "env": {
+      "VM_URL": "",
+      "VM_SELECT_URL": "",
+      "VM_INSERT_URL": ""
+    }
+  },
+  "milvus-sse": {
+    "url": "http://your_sse_host:port/sse",
+    "disabled": false,
+    "autoApprove": []
+  },
+  "qlik": {
+    "command": "/path/to/deno",
+    "args": [
+      "run",
+      "--allow-all",
+      "--env-file=.env",
+      "src/index.ts"
+    ],
+    "cwd": "/path/to/qlik-mcp"
+  },
+  "keboola": {
+    "command": "uvx",
+    "args": [
+      "keboola_mcp_server",
+      "--api-url",
+      "https://connection.YOUR_REGION.keboola.com"
+    ],
+    "env": {
+      "KBC_STORAGE_TOKEN": "your_keboola_storage_token",
+      "KBC_WORKSPACE_SCHEMA": "your_workspace_schema"
+    }
+  },
+  "DBT Docs MCP": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--with",
+      "networkx,mcp[cli],rapidfuzz,dbt-core,python-decouple,sqlglot,tqdm",
+      "mcp",
+      "run",
+      "/Users/mattijs/repos/dbt-docs-mcp/src/mcp_server.py"
+    ],
+    "env": {
+      "MANIFEST_PATH": "/Users/mattijs/repos/dbt-docs-mcp/inputs/manifest.json",
+      "SCHEMA_MAPPING_PATH": "/Users/mattijs/repos/dbt-docs-mcp/outputs/schema_mapping.json",
+      "MANIFEST_CL_PATH": "/Users/mattijs/repos/dbt-docs-mcp/outputs/manifest_column_lineage.json"
+    }
+  },
+  "@21st-dev/magic": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@21st-dev/magic@latest",
+      "API_KEY=\"your-api-key\""
+    ]
+  },
+  "bitbucket": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@aashari/mcp-server-atlassian-bitbucket"
+    ],
+    "env": {
+      "ATLASSIAN_USER_EMAIL": "your.email@company.com",
+      "ATLASSIAN_API_TOKEN": "your_scoped_api_token"
+    }
+  },
+  "confluence": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@aashari/mcp-server-atlassian-confluence"
+    ],
+    "env": {
+      "ATLASSIAN_SITE_NAME": "your-company",
+      "ATLASSIAN_USER_EMAIL": "your.email@company.com",
+      "ATLASSIAN_API_TOKEN": "your_api_token"
+    }
+  },
+  "jira": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@aashari/mcp-server-atlassian-jira"
+    ],
+    "env": {
+      "ATLASSIAN_SITE_NAME": "your-company",
+      "ATLASSIAN_USER_EMAIL": "your.email@company.com",
+      "ATLASSIAN_API_TOKEN": "your_api_token"
+    }
+  },
+  "mindpilot": {
+    "command": "npx",
+    "args": [
+      "@mindpilot/mcp@latest"
+    ]
+  },
+  "FileScopeMCP": {
+    "command": "node",
+    "args": [
+      "<build script sets this>/mcp-server.js",
+      "--base-dir=C:/Users/admica/my/project/base"
+    ],
+    "transport": "stdio",
+    "disabled": false,
+    "alwaysAllow": []
+  },
+  "webhook-tester-mcp": {
+    "command": "fastmcp",
+    "args": [
+      "run",
+      "{{fullPath}}\\Webhook-test_mcp\\server.py"
+    ]
+  },
+  "simctl-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "simctl-mcp"
+    ]
+  },
+  "apisix-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "apisix-mcp"
+    ],
+    "env": {
+      "APISIX_SERVER_HOST": "your-apisix-server-host",
+      "APISIX_SERVER_PORT": "your-apisix-server-port",
+      "APISIX_ADMIN_API_PORT": "your-apisix-admin-api-port",
+      "APISIX_ADMIN_API_PREFIX": "your-apisix-admin-api-prefix",
+      "APISIX_ADMIN_KEY": "your-apisix-api-key"
+    }
+  },
+  "fastmcp-sonarqube-metrics": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/ABSOLUTE/PATH/TO/PARENT/FOLDER/fastmcp-sonarqube-metrics",
+      "run",
+      "server.py"
+    ]
+  },
+  "package-registry": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "package-registry-mcp"
+    ]
+  },
+  "jsr": {
+    "command": "deno",
+    "args": [
+      "run",
+      "--allow-net",
+      "--allow-env",
+      "jsr:@wyattjoh/jsr-mcp"
+    ],
+    "env": {
+      "JSR_API_TOKEN": "your-api-token-here"
+    }
+  },
+  "augments": {
+    "transport": "http",
+    "url": "https://mcp.augments.dev/mcp"
+  },
+  "@service-name": {
+    "url": "http://localhost:8080/sse?s=[OpenAPI-Spec-URL]&u=[API-Base-URL]&h=[Auth-Header]:[Value-Prefix]"
+  },
+  "buildable": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@bldbl/mcp"
+    ],
+    "env": {
+      "BUILDABLE_API_KEY": "bp_your_api_key_here",
+      "BUILDABLE_PROJECT_ID": "your-project-id",
+      "BUILDABLE_AI_ASSISTANT_ID": "claude-desktop"
+    }
+  },
+  "circleci-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@circleci/mcp-server-circleci@latest"
+    ],
+    "env": {
+      "CIRCLECI_TOKEN": "your-circleci-token",
+      "CIRCLECI_BASE_URL": "https://circleci.com"
+    }
+  },
+  "shrimp-task-manager": {
+    "command": "node",
+    "args": [
+      "/path/to/mcp-shrimp-task-manager/dist/index.js"
+    ],
+    "env": {
+      "DATA_DIR": "/path/to/your/shrimp_data",
+      "TEMPLATES_USE": "en",
+      "ENABLE_GUI": "false"
+    }
+  },
+  "mcp-server-docker": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-docker"
+    ]
+  },
+  "codelogic-mcp-server": {
+    "type": "stdio",
+    "command": "<PATH_TO_UV>/uv",
+    "args": [
+      "--directory",
+      "<PATH_TO_THIS_REPO>/codelogic-mcp-server-main",
+      "run",
+      "codelogic-mcp-server"
+    ],
+    "env": {
+      "CODELOGIC_SERVER_HOST": "<url to the server e.g. https://myco.app.codelogic.com>",
+      "CODELOGIC_USERNAME": "<my username>",
+      "CODELOGIC_PASSWORD": "<my password>",
+      "CODELOGIC_WORKSPACE_NAME": "<my workspace>",
+      "CODELOGIC_DEBUG_MODE": "true"
+    }
+  },
+  "opik": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "opik-mcp",
+      "--apiKey",
+      "YOUR_API_KEY"
+    ]
+  },
+  "ConfigCat": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@configcat/mcp-server"
+    ],
+    "env": {
+      "CONFIGCAT_API_USER": "YOUR_API_USER",
+      "CONFIGCAT_API_PASS": "YOUR_API_PASSWORD"
+    }
+  },
+  "currents": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@currents/mcp"
+    ],
+    "env": {
+      "CURRENTS_API_KEY": "your-api-key"
+    }
+  },
+  "time-node-mcp": {
+    "command": "node",
+    "args": [
+      "/path/to/time-node-mcp/dist/index.js"
+    ]
+  },
+  "pox": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "parent_of_servers_repo/servers/src/mcp_server_pox",
+      "run",
+      "server.py"
+    ],
+    "env": {
+      "POX_SERVER_URL": "http://localhost:8000"
+    }
+  },
+  "postman": {
+    "command": "node",
+    "args": [
+      "/path/to/postman-api-server/build/index.js"
+    ],
+    "env": {
+      "POSTMAN_API_KEY": "CHANGEME"
+    }
+  },
+  "deploy-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "deploy-mcp"
+    ],
+    "env": {
+      "VERCEL_TOKEN": "your-vercel-token",
+      "NETLIFY_TOKEN": "your-netlify-token",
+      "CLOUDFLARE_TOKEN": "accountId:globalApiKey"
+    }
+  },
+  "docker-hub": {
+    "command": "node",
+    "args": [
+      "/FULL/PATH/TO/YOUR/docker-hub-mcp-server/dist/index.js",
+      "--transport=stdio"
+    ]
+  },
+  "Framelink MCP for Figma": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "figma-developer-mcp",
+      "--figma-api-key=YOUR-KEY",
+      "--stdio"
+    ]
+  },
+  "firefly": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@fireflyai/firefly-mcp"
+    ],
+    "env": {
+      "FIREFLY_ACCESS_KEY": "your_access_key",
+      "FIREFLY_SECRET_KEY": "your_secret_key"
+    }
+  },
+  "unified-diff-mcp": {
+    "command": "bun",
+    "args": [
+      "run",
+      "/path/to/unified-diff-mcp/src/index.ts"
+    ],
+    "env": {
+      "GITHUB_TOKEN": "your_github_token_here",
+      "DEFAULT_AUTO_OPEN": "true",
+      "DEFAULT_OUTPUT_MODE": "html"
+    }
+  },
+  "rust-docs-reqwest": {
+    "command": "/path/to/your/rustdocs_mcp_server",
+    "args": [
+      "reqwest@0.12"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "YOUR_OPENAI_API_KEY_HERE"
+    },
+    "disabled": false,
+    "alwaysAllow": []
+  },
+  "rust-docs-async-stripe": {
+    "command": "rustdocs_mcp_server",
+    "args": [
+      "async-stripe@0.40",
+      "-F",
+      " runtime-tokio-hyper-rustls"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "YOUR_OPENAI_API_KEY_HERE"
+    },
+    "disabled": false,
+    "alwaysAllow": []
+  },
+  "rust-crate-local": {
+    "command": "cratedocs",
+    "args": [
+      "stdio"
+    ]
+  },
+  "gitlab-jira-mcp": {
+    "command": "mcp-gitlab-jira",
+    "env": {
+      "GITLAB_URL": "https://your-gitlab-instance.com",
+      "GITLAB_ACCESS_TOKEN": "your-personal-access-token",
+      "ATLASSIAN_SITE_NAME": "your-atlassian-site-name",
+      "ATLASSIAN_USER_EMAIL": "your-email@example.com",
+      "ATLASSIAN_API_TOKEN": "your-jira-api-token"
+    }
+  },
+  "excel": {
+    "command": "uvx",
+    "args": [
+      "excel-mcp-server",
+      "stdio"
+    ]
+  },
+  "postmancer": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "postmancer"
+    ],
+    "env": {
+      "LOG_LEVEL": "info"
+    }
+  },
+  "mcp-gopls": {
+    "command": "mcp-gopls"
+  },
+  "bruno-runner": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "bruno-mcp"
+    ]
+  },
+  "droidmind": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/hyperb1iss/droidmind",
+      "droidmind",
+      "--transport",
+      "stdio"
+    ]
+  },
+  "qasphere": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "qasphere-mcp"
+    ],
+    "env": {
+      "QASPHERE_TENANT_URL": "your-company.region.qasphere.com",
+      "QASPHERE_API_KEY": "your-api-key"
+    }
+  },
+  "gitmcp": {
+    "url": "https://gitmcp.io/{owner}/{repo}"
+  },
+  "gradle-mcp-server": {
+    "command": "java",
+    "args": [
+      "-jar",
+      "<absolute_path_to_home>/mcp-servers/gradle-mcp-server/gradle-mcp-server-all.jar"
+    ],
+    "env": {},
+    "disabled": false,
+    "autoApprove": []
+  },
+  "just-mcp": {
+    "command": "/path/to/just-mcp",
+    "args": [
+      "--stdio"
+    ]
+  },
+  "ios-simulator": {
+    "command": "node",
+    "args": [
+      "/path/to/mcp-server-simulator-ios-idb/dist/index.js"
+    ],
+    "env": {}
+  },
+  "Image compression": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@inhiblab-core/mcp-image-compression"
+    ],
+    "env": {
+      "IMAGE_COMPRESSION_DOWNLOAD_DIR": "<YOUR_DIR>"
+    },
+    "disabled": false,
+    "autoApprove": []
+  },
+  "insforge": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@insforge/mcp@latest"
+    ],
+    "env": {
+      "API_KEY": "your_api_key",
+      "API_BASE_URL": "http://localhost:7130"
+    }
+  },
+  "language-server": {
+    "command": "/full/path/to/your/clone/mcp-language-server/mcp-language-server",
+    "args": [
+      "--workspace",
+      "/path/to/workspace",
+      "--lsp",
+      "language-server-executable"
+    ],
+    "env": {
+      "LOG_LEVEL": "DEBUG"
+    }
+  },
+  "vercel-ai-docs": {
+    "command": "node",
+    "args": [
+      "ABSOLUTE_PATH_TO_PROJECT/dist/main.js"
+    ],
+    "env": {
+      "GOOGLE_GENERATIVE_AI_API_KEY": "your-google-api-key-here"
+    }
+  },
+  "sql-analyzer": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/j4c0bs/mcp-server-sql-analyzer.git",
+      "mcp-server-sql-analyzer"
+    ]
+  },
+  "debug": {
+    "command": "node",
+    "args": [
+      "/path/to/mcp-debug.js"
+    ]
+  },
+  "jetbrains": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@jetbrains/mcp-proxy"
+    ]
+  },
+  "serveMyAPI": {
+    "command": "node",
+    "args": [
+      "/ABSOLUTE/PATH/TO/servemyapi/dist/index.js"
+    ]
+  },
+  "my-mcp": {
+    "command": "npx",
+    "args": [
+      "restcsv-mcp-server"
+    ],
+    "env": {
+      "RESTCSV_API_KEY": "<REPLACE>"
+    }
+  },
+  "app-store-connect": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "appstore-connect-mcp-server"
+    ],
+    "env": {
+      "APP_STORE_CONNECT_KEY_ID": "YOUR_KEY_ID",
+      "APP_STORE_CONNECT_ISSUER_ID": "YOUR_ISSUER_ID",
+      "APP_STORE_CONNECT_P8_PATH": "/path/to/your/auth-key.p8",
+      "APP_STORE_CONNECT_VENDOR_NUMBER": "YOUR_VENDOR_NUMBER_OPTIONAL"
+    }
+  },
+  "simulator": {
+    "command": "npx",
+    "args": [
+      "y",
+      "@joshuarileydev/simulator-mcp-server"
+    ]
+  },
+  "globalping": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://mcp.globalping.dev/mcp"
+    ]
+  },
+  "My API Spec (npx)": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-openapi-schema-explorer@latest",
+      "<path-or-url-to-spec>",
+      "--output-format",
+      "yaml"
+    ],
+    "env": {}
+  },
+  "job-multiverse": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@lamemind/mcp-server-multiverse@latest",
+      "/path/to/your/job-multiverse.json"
+    ]
+  },
+  "side-project-multiverse": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@lamemind/mcp-server-multiverse@latest",
+      "/path/to/your/side-project-multiverse.json"
+    ]
+  },
+  "langfuse": {
+    "command": "node",
+    "args": [
+      "<absolute-path>/build/index.js"
+    ],
+    "env": {
+      "LANGFUSE_PUBLIC_KEY": "your-public-key",
+      "LANGFUSE_SECRET_KEY": "your-secret-key",
+      "LANGFUSE_BASEURL": "https://cloud.langfuse.com"
+    }
+  },
+  "unitree-go2-mcp-server": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/ABSOLUTE/PATH/TO/PARENT/FOLDER/unitree-go2-mcp-server",
+      "run",
+      "server.py"
+    ]
+  },
+  "memcord": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "</path/to/memcord>",
+      "run",
+      "memcord"
+    ],
+    "env": {
+      "PYTHONPATH": "</path/to/memcord>/src"
+    }
+  },
+  "swarmia": {
+    "command": "/path/to/swarmia-mcp/venv/bin/python3",
+    "args": [
+      "/path/to/swarmia-mcp/swarmia_mcp_server.py"
+    ],
+    "env": {
+      "SWARMIA_API_TOKEN": "your_api_token_here"
+    }
+  },
+  "mobile-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mobilenext/mobile-mcp@latest"
+    ]
+  },
+  "github.com/mrexodia/user-feedback-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "c:\\MCP\\user-feedback-mcp",
+      "run",
+      "server.py"
+    ],
+    "timeout": 600,
+    "autoApprove": [
+      "user_feedback"
+    ]
+  },
+  "smalltalk-interop": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/your-path/to/pharo-smalltalk-interop-mcp-server",
+      "run",
+      "pharo-smalltalk-interop-mcp-server"
+    ],
+    "env": {
+      "PHARO_SIS_PORT": "8086"
+    }
+  },
+  "gitingestmcp": {
+    "command": "uvx",
+    "args": [
+      "gitingestmcp@latest"
+    ]
+  },
+  "octomind-mcp": {
+    "name": "Octomind MCP Server",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@octomind/octomind-mcp@latest"
+    ],
+    "env": {
+      "APIKEY": "your-api-key-here"
+    }
+  },
+  "octocode": {
+    "command": "npx",
+    "args": [
+      "octocode-mcp@latest"
+    ]
+  },
+  "opslevel": {
+    "command": "opslevel-mcp",
+    "env": {
+      "OPSLEVEL_API_TOKEN": "XXXXXXX"
+    }
+  },
+  "pica": {
+    "command": "npx",
+    "args": [
+      "@picahq/mcp"
+    ],
+    "env": {
+      "PICA_SECRET": "your-pica-secret-key"
+    }
+  },
+  "website-downloader": {
+    "command": "node",
+    "args": [
+      "/path/to/website-downloader/build/index.js"
+    ]
+  },
+  "jmeter": {
+    "command": "/path/to/uv",
+    "args": [
+      "--directory",
+      "/path/to/jmeter-mcp-server",
+      "run",
+      "jmeter_server.py"
+    ]
+  },
+  "k6": {
+    "command": "/path/to/bin/uv",
+    "args": [
+      "--directory",
+      "/path/to/k6-mcp-server",
+      "run",
+      "k6_server.py"
+    ]
+  },
+  "locust": {
+    "command": "/Users/naveenkumar/.local/bin/uv",
+    "args": [
+      "--directory",
+      "/Users/naveenkumar/Gits/locust-mcp-server",
+      "run",
+      "locust_server.py"
+    ]
+  },
+  "docker-mcp": {
+    "command": "uvx",
+    "args": [
+      "docker-mcp"
+    ]
+  },
+  "xcode": {
+    "command": "node",
+    "args": [
+      "/path/to/xcode-mcp-server/dist/index.js"
+    ]
+  },
+  "@reapi/mcp-openapi": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@reapi/mcp-openapi@latest",
+      "--dir",
+      "./specs"
+    ],
+    "env": {}
+  },
+  "rootly": {
+    "command": "uv",
+    "args": [
+      "tool",
+      "run",
+      "--from",
+      "rootly-mcp-server",
+      "rootly-mcp-server"
+    ],
+    "env": {
+      "ROOTLY_API_TOKEN": "<YOUR_ROOTLY_API_TOKEN>"
+    }
+  },
+  "github-repo-mcp": {
+    "command": "wsl",
+    "args": [
+      "bash",
+      "-c",
+      "cmd /c npx -y github-repo-mcp"
+    ],
+    "enabled": true
+  },
+  "package-version": {
+    "command": "/Users/sammcj/go/bin/mcp-package-version"
+  },
+  "sonarqube": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "sonarqube-mcp-server@latest"
+    ],
+    "env": {
+      "SONARQUBE_URL": "https://sonarcloud.io",
+      "SONARQUBE_TOKEN": "your-token-here",
+      "SONARQUBE_ORGANIZATION": "your-org (for SonarCloud)"
+    }
+  },
+  "sequa": {
+    "url": "https://mcp.sequa.ai/v1/setup-code-assistant"
+  },
+  "sourcerer": {
+    "command": "sourcerer",
+    "env": {
+      "OPENAI_API_KEY": "your-openai-api-key",
+      "SOURCERER_WORKSPACE_ROOT": "/path/to/your/project"
+    }
+  },
+  "lldb-mcp": {
+    "command": "python3",
+    "args": [
+      "/path/to/lldb-mcp/lldb_mcp.py"
+    ],
+    "disabled": false
+  },
+  "edgeone-pages-mcp-server": {
+    "url": "https://mcp-on-edge.edgeone.site/mcp-server"
+  },
+  "bugsnag": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "bugsnag-mcp-server"
+    ],
+    "env": {
+      "BUGSNAG_API_KEY": "your-bugsnag-api-key"
+    },
+    "disabled": false,
+    "alwaysAllow": []
+  },
+  "awesome-ionic-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "awesome-ionic-mcp@latest"
+    ]
+  },
+  "tip-md-demo": {
+    "command": "node",
+    "args": [
+      "dist/mcp-server/src/index.js"
+    ],
+    "cwd": "/path/to/tip-md-x402-mcp-server",
+    "env": {
+      "NODE_ENV": "demo"
+    }
+  },
+  "text-editor": {
+    "command": "uvx",
+    "args": [
+      "mcp-text-editor"
+    ]
+  },
+  "nixos": {
+    "command": "uvx",
+    "args": [
+      "mcp-nixos"
+    ]
+  },
+  "mcp-pandoc": {
+    "command": "uvx",
+    "args": [
+      "mcp-pandoc"
+    ]
+  },
+  "Bifrost": {
+    "command": "cmd",
+    "args": [
+      "/c",
+      "npx",
+      "-y",
+      "supergateway",
+      "--sse",
+      "http://localhost:8008/sse"
+    ],
+    "disabled": false,
+    "autoApprove": [],
+    "timeout": 600
+  },
+  "mcpxcodebuild": {
+    "command": "uvx",
+    "args": [
+      "mcpxcodebuild"
+    ]
+  },
+  "jvm-mcp-server": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/jvm-mcp-server",
+      "run",
+      "--env-file",
+      "/path/to/jvm-mcp-server/.env",
+      "jvm-mcp-server"
+    ]
+  },
+  "mcp-server-apache-airflow": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-apache-airflow"
+    ],
+    "env": {
+      "AIRFLOW_HOST": "https://your-airflow-host",
+      "AIRFLOW_USERNAME": "your-username",
+      "AIRFLOW_PASSWORD": "your-password"
+    }
+  },
+  "piloty": {
+    "command": "piloty"
+  },
+  "mindmap": {
+    "command": "uvx",
+    "args": [
+      "mindmap-mcp-server",
+      "--return-type",
+      "html"
+    ]
+  },
+  "multi-model-advisor": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/multi-ai-advisor-mcp/build/index.js"
+    ]
+  },
+  "ros-general": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/ABSOLUTE/PATH/TO/PARENT/FOLDER/ros-mcp",
+      "run",
+      "bash",
+      "-c",
+      "export ROS_LOG_DIR=/tmp && export ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-YOUR_ROS_DOMAIN_ID} && source /opt/ros/humble/setup.bash && python3 /ABSOLUTE/PATH/TO/PARENT/FOLDER/ros-general.py"
+    ]
+  },
+  "typescribe": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-typescribe@latest",
+      "run-server",
+      "<PATH_TO_API_DOT_JSON>"
+    ],
+    "env": {}
+  },
+  "swagger-converter": {
+    "command": "mss",
+    "args": [
+      "--openapi",
+      "https://petstore.swagger.io/v2/swagger.json",
+      "--transport",
+      "stdio"
+    ]
+  },
+  "secured-api": {
+    "command": "mss",
+    "args": [
+      "--openapi",
+      "https://api.example.com/openapi.json",
+      "--transport",
+      "stdio",
+      "--auth-type",
+      "bearer",
+      "--bearer-env",
+      "API_TOKEN"
+    ],
+    "env": {
+      "API_TOKEN": "your-bearer-token-here"
+    }
+  },
+  "fetch": {
+    "command": "npx",
+    "args": [
+      "mcp-fetch-server"
+    ],
+    "env": {
+      "DEFAULT_LIMIT": "50000"
+    }
+  },
+  "zenml": {
+    "command": "/usr/local/bin/uv",
+    "args": [
+      "run",
+      "path/to/server/zenml_server.py"
+    ],
+    "env": {
+      "LOGLEVEL": "WARNING",
+      "NO_COLOR": "1",
+      "ZENML_LOGGING_COLORS_DISABLED": "true",
+      "ZENML_LOGGING_VERBOSITY": "WARN",
+      "ZENML_ENABLE_RICH_TRACEBACK": "false",
+      "PYTHONUNBUFFERED": "1",
+      "PYTHONIOENCODING": "UTF-8",
+      "ZENML_STORE_URL": "https://your-zenml-server-goes-here.com",
+      "ZENML_STORE_API_KEY": "your-api-key-here"
+    }
+  },
+  "kaggle-mcp": {
+    "command": "kaggle-mcp",
+    "cwd": "<path-to-their-cloned-repo>/kaggle-mcp"
+  },
+  "chronulus-agents": {
+    "command": "python",
+    "args": [
+      "-m",
+      "chronulus_mcp"
+    ],
+    "env": {
+      "CHRONULUS_API_KEY": "<YOUR_CHRONULUS_API_KEY>"
+    }
+  },
+  "jupyter": {
+    "command": "uvx",
+    "args": [
+      "jupyter-mcp-server@latest"
+    ],
+    "env": {
+      "JUPYTER_URL": "http://localhost:8888",
+      "JUPYTER_TOKEN": "MY_TOKEN",
+      "ALLOW_IMG_OUTPUT": "true"
+    }
+  },
+  "label-studio": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/HumanSignal/label-studio-mcp-server",
+      "mcp-label-studio"
+    ],
+    "env": {
+      "LABEL_STUDIO_API_KEY": "your_actual_api_key_here",
+      "LABEL_STUDIO_URL": "http://localhost:8080"
+    }
+  },
+  "Optuna": {
+    "command": "uvx",
+    "args": [
+      "optuna-mcp"
+    ]
+  },
+  "mcpr": {
+    "command": "R",
+    "args": [
+      "--quiet",
+      "--slave",
+      "-e",
+      "MCPR::mcpr_server()"
+    ]
+  },
+  "mcp-server-ds": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/Users/username/src/mcp-server-ds",
+      "run",
+      "mcp-server-ds"
+    ]
+  },
+  "bundler-mcp": {
+    "command": "/Users/mike/my_project/bin/bundler_mcp"
+  },
+  "networkx": {
+    "command": "python",
+    "args": [
+      "-m",
+      "networkx_mcp"
+    ]
+  },
+  "markdownify": {
+    "command": "node",
+    "args": [
+      "{ABSOLUTE PATH TO FILE HERE}/dist/index.js"
+    ],
+    "env": {
+      "UV_PATH": "/path/to/uv"
+    }
+  },
+  "esp-run": {
+    "command": "<path_to_uv_or_python_executable>",
+    "args": [
+      "--directory",
+      "<path_to_cloned_esp-mcp_repository>",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "IDF_PATH": "<path_to_your_esp-idf_directory>"
+    }
+  },
+  "Modbus MCP Server": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/modbus-mcp",
+      "run",
+      "modbus-mcp"
+    ],
+    "env": {
+      "MODBUS_TYPE": "tcp",
+      "MODBUS_HOST": "127.0.0.1",
+      "MODBUS_PORT": 502
+    }
+  },
+  "opcua-mcp": {
+    "command": "python",
+    "args": [
+      "path/to/opcua_mcp/main.py"
+    ],
+    "env": {
+      "OPCUA_SERVER_URL": "your-opc-ua-server-url"
+    }
+  },
+  "gr-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/gr-mcp",
+      "run",
+      "main.py"
+    ]
+  },
+  "llm-context": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "llm-context",
+      "lc-mcp"
+    ]
+  },
+  "file-merger": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@exoticknight/mcp-file-merger",
+      "/path/to/allowed/dir"
+    ]
+  },
+  "box": {
+    "command": "npx",
+    "args": [
+      "box-mcp-server"
+    ],
+    "env": {
+      "BOX_JWT_BASE64": "YOUR_BASE64_ENCODED_JWT",
+      "BOX_USER_ID": "123456"
+    }
+  },
+  "gdrive": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@isaacphi/mcp-gdrive"
+    ],
+    "env": {
+      "CLIENT_ID": "<CLIENT_ID>",
+      "CLIENT_SECRET": "<CLIENT_SECRET>",
+      "GDRIVE_CREDS_DIR": "/path/to/config/directory"
+    }
+  },
+  "homebrew-mcp": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--directory",
+      "/path/to/your/project/",
+      "homebrew_mcp.py"
+    ],
+    "type": "stdio"
+  },
+  "everything-search": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-everything-search"
+    ],
+    "env": {
+      "EVERYTHING_SDK_PATH": "path/to/Everything-SDK/dll/Everything64.dll"
+    }
+  },
+  "filesystem": {
+    "command": "mcp-filesystem-server",
+    "args": [
+      "/path/to/allowed/directory",
+      "/another/allowed/directory"
+    ]
+  },
+  "opendal": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-opendal"
+    ],
+    "env": {
+      "YOUR_ENV_VAR": "YOUR_ENV_VALUE"
+    }
+  },
+  "pix-mcp": {
+    "command": "npx",
+    "args": [
+      "pix-mcp"
+    ],
+    "env": {
+      "MCP_MODE": "stdio"
+    }
+  },
+  "web3-research-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "web3-research-mcp@latest"
+    ]
+  },
+  "nwc": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@getalby/mcp"
+    ],
+    "env": {
+      "NWC_CONNECTION_STRING": "YOUR NWC CONNECTION STRING HERE"
+    }
+  },
+  "alchemy": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@alchemy/mcp-server"
+    ],
+    "env": {
+      "ALCHEMY_API_KEY": "YOUR_API_KEY"
+    }
+  },
+  "coinmarket_service": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/coinmarket_service",
+      "run",
+      "coinmarket_service"
+    ],
+    "env": {
+      "COINMARKET_API_KEY": "<insert api key>"
+    }
+  },
+  "jupiter-mcp": {
+    "command": "npx",
+    "args": [
+      "envmcp",
+      "--env-file",
+      "/path/to/your/.env",
+      "uvx",
+      "--from",
+      "git+https://github.com/araa47/jupiter-mcp",
+      "jupiter-mcp"
+    ]
+  },
+  "metatrader": {
+    "command": "metatrader-mcp-server",
+    "args": [
+      "--login",
+      "YOUR_MT5_LOGIN",
+      "--password",
+      "YOUR_MT5_PASSWORD",
+      "--server",
+      "YOUR_MT5_SERVER"
+    ]
+  },
+  "armor-crypto-mcp": {
+    "command": "uvx",
+    "args": [
+      "armor-crypto-mcp@latest",
+      "--version"
+    ],
+    "env": {
+      "ARMOR_API_KEY": "<PUT-YOUR-KEY-HERE>"
+    }
+  },
+  "base-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "base-mcp@latest"
+    ],
+    "env": {
+      "COINBASE_API_KEY_NAME": "your_api_key_name",
+      "COINBASE_API_PRIVATE_KEY": "your_private_key",
+      "SEED_PHRASE": "your seed phrase here",
+      "COINBASE_PROJECT_ID": "your_project_id",
+      "ALCHEMY_API_KEY": "your_alchemy_api_key",
+      "PINATA_JWT": "your_pinata_jwt",
+      "OPENROUTER_API_KEY": "your_openrouter_api_key",
+      "CHAIN_ID": "optional_for_base_sepolia_testnet"
+    },
+    "disabled": false,
+    "autoApprove": []
+  },
+  "alphavantage": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "-e",
+      "ALPHA_VANTAGE_API_KEY",
+      "mcp/alpha-vantage"
+    ],
+    "env": {
+      "ALPHA_VANTAGE_API_KEY": "REPLACE_API_KEY"
+    }
+  },
+  "bitte-ai": {
+    "url": "https://mcp.bitte.ai/sse"
+  },
+  "monarch-money": {
+    "command": "python",
+    "args": [
+      "/path/to/monarch-mcp-server/run_server.py"
+    ],
+    "env": {
+      "MONARCH_EMAIL": "your-email@example.com",
+      "MONARCH_PASSWORD": "your-password",
+      "MONARCH_MFA_SECRET": "your-mfa-secret"
+    }
+  },
+  "codex-data": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@codex-data/codex-mcp"
+    ],
+    "env": {
+      "CODEX_API_KEY": "<your-codex-api-key>"
+    }
+  },
+  "dexpaprika": {
+    "command": "npx",
+    "args": [
+      "dexpaprika-mcp"
+    ]
+  },
+  "ccxt": {
+    "command": "mcp-server-ccxt"
+  },
+  "investor": {
+    "command": "uvx",
+    "args": [
+      "investor-agent"
+    ]
+  },
+  "tastytrade": {
+    "command": "uvx",
+    "args": [
+      "tasty-agent"
+    ],
+    "env": {
+      "TASTYTRADE_CLIENT_SECRET": "your_client_secret",
+      "TASTYTRADE_REFRESH_TOKEN": "your_refresh_token",
+      "TASTYTRADE_ACCOUNT_ID": "your_account_id"
+    }
+  },
+  "wsb-analyst": {
+    "command": "uvx",
+    "args": [
+      "run",
+      "wsb-analyst"
+    ],
+    "env": {
+      "REDDIT_CLIENT_ID": "your_client_id_here",
+      "REDDIT_CLIENT_SECRET": "your_client_secret_here"
+    }
+  },
+  "heurist-mesh-agent": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/heurist-mesh-mcp-server/mesh_mcp_server",
+      "run",
+      "mesh-tool-server"
+    ],
+    "env": {
+      "HEURIST_API_KEY": "your-api-key-here"
+    }
+  },
+  "beeper": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/beeper-mcp",
+      "run",
+      "src/beeper_mcp/server.py"
+    ],
+    "env": {
+      "BEEPER_ACCOUNT": "your account, 0x...",
+      "BEEPER_SECRET_KEY": "your private key or in .env",
+      "BEEPER_TARGET_TOKEN": "default token address",
+      "BEEPER_CHAIN": "chain type <bsc/bsc-testnet>"
+    }
+  },
+  "dexscreener": {
+    "command": "node",
+    "args": [
+      "/ABSOLUTE/PATH/TO/PARENT/FOLDER/index.js"
+    ]
+  },
+  "korea-stock-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "korea-stock-mcp@latest"
+    ],
+    "env": {
+      "DART_API_KEY": "<YOUR_DART_API_KEY>",
+      "KRX_API_KEY": "<YOUR_KRX_API_KEY>"
+    }
+  },
+  "binance-alpha-mcp": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/binance-alpha-mcp/index.js"
+    ],
+    "env": {
+      "WS_ENDPOINT": "your_ws_endpoint_url",
+      "RPC_ENDPOINT": "your_rpc_endpoint_url"
+    }
+  },
+  "bridge-rates": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/bridge-rates-mcp/index.js"
+    ]
+  },
+  "chainlink-feeds-mcp": {
+    "command": "node",
+    "args": [
+      "path/to/chainlink-feeds-mcp/index.js"
+    ],
+    "env": {
+      "INFURA_API_KEY": "your_api_key_here"
+    }
+  },
+  "Chainlist MCP": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/chainlist-mcp",
+      "run",
+      "main.py"
+    ]
+  },
+  "crypto-feargreed-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/your/path/to/crypto-feargreed-mcp",
+      "run",
+      "main.py"
+    ]
+  },
+  "crypto-indicators-mcp": {
+    "command": "node",
+    "args": [
+      "path/to/crypto-indicators-mcp/index.js"
+    ],
+    "env": {
+      "EXCHANGE_NAME": "binance"
+    }
+  },
+  "crypto-liquidations": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/crypto-liquidations-mcp",
+      "run",
+      "main.py"
+    ]
+  },
+  "Crypto News": {
+    "command": "python",
+    "args": [
+      "path/to/crypto-news-mcp/main.py"
+    ],
+    "env": {
+      "NEWS_API_KEY": "your_newsdata_api_key_here"
+    }
+  },
+  "crypto-orderbook-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/absolute/path/to/crypto-orderbook-mcp",
+      "run",
+      "main.py"
+    ]
+  },
+  "crypto-portfolio-mcp": {
+    "command": "python",
+    "args": [
+      "path/to/crypto-portfolio-mcp/main.py"
+    ]
+  },
+  "Crypto RSS Reader": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/crypto-rss-mcp",
+      "run",
+      "crypto-rss-mcp"
+    ]
+  },
+  "crypto-sentiment-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/crypto-sentiment-mcp",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "SANTIMENT_API_KEY": "your_api_key_here"
+    }
+  },
+  "crypto-trending": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/absolute/path/to/crypto-trending-mcp",
+      "run",
+      "main.py"
+    ]
+  },
+  "cryptopanic-mcp-server": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/your/path/to/cryptopanic-mcp-server",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "CRYPTOPANIC_API_PLAN": "your_api_plan",
+      "CRYPTOPANIC_API_KEY": "your_api_key"
+    }
+  },
+  "DAO Proposals": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/dao-proposals-mcp",
+      "run",
+      "main.py"
+    ]
+  },
+  "defi-yields-mcp": {
+    "command": "uvx",
+    "args": [
+      "defi-yields-mcp"
+    ]
+  },
+  "etf-flow-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/absolute/path/to/etf-flow-mcp",
+      "run",
+      "etf-flow-mcp"
+    ],
+    "env": {
+      "COINGLASS_API_KEY": "your_coinglass_api_key_here"
+    }
+  },
+  "freqtrade-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/your/path/to/freqtrade-mcp",
+      "run",
+      "__main__.py"
+    ],
+    "env": {
+      "FREQTRADE_API_URL": "http://127.0.0.1:8080",
+      "FREQTRADE_USERNAME": "your_username",
+      "FREQTRADE_PASSWORD": "your_password"
+    }
+  },
+  "funding-rates-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/absolute/path/to/funding-rates-mcp",
+      "run",
+      "funding-rates-mcp"
+    ]
+  },
+  "hyperliquid-whalealert": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/hyperliquid-whalealert-mcp",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "COINGLASS_API_KEY": "your_api_key"
+    }
+  },
+  "Jupiter-MCP": {
+    "command": "node",
+    "args": [
+      "path/to/jupiter-mcp/server/index.js"
+    ],
+    "env": {
+      "SOLANA_RPC_URL": "solana rpc url you can access",
+      "PRIVATE_KEY": "your private key"
+    }
+  },
+  "PancakeSwap-PoolSpy": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/pancakeswap-poolspy-mcp",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "THEGRAPH_API_KEY": "your api key from The Graph"
+    }
+  },
+  "raydium-launchlab": {
+    "command": "node",
+    "args": [
+      "/path/to/raydium-launchlab-mcp/index.js"
+    ],
+    "env": {
+      "RPC_URL": "your-solana-rpc-url",
+      "PRIVATE_KEY": "your-private-key-as-integer-array",
+      "PINATA_JWT": "your-pinata-jwt",
+      "PINATA_GATEWAY": "your-pinata-gateway"
+    }
+  },
+  "rug-check-mcp": {
+    "command": "python",
+    "args": [
+      "path/to/rug-check-mcp/main.py"
+    ],
+    "env": {
+      "SOLSNIFFER_API_KEY": "your_solsniffer_api_key_here"
+    }
+  },
+  "sui-trader": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/sui-trader-mcp/index.js"
+    ],
+    "env": {
+      "PRIVATE_KEY": "your_private_key"
+    }
+  },
+  "thegraph-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/thegraph-mcp",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "THEGRAPH_API_KEY": "your_api_key_here"
+    }
+  },
+  "Token-Minter-MCP": {
+    "command": "node",
+    "args": [
+      "path/to/token-minter-mcp/server/index.js"
+    ],
+    "env": {
+      "INFURA_KEY": "your infura key",
+      "PRIVATE_KEY": "your private key"
+    }
+  },
+  "token-revoke-mcp": {
+    "command": "node",
+    "args": [
+      "path/to/token-revoke-mcp/index.js"
+    ],
+    "env": {
+      "MORALIS_API_KEY": "your moralis api key",
+      "PRIVATE_KEY": "your wallet private key"
+    }
+  },
+  "twitter-username-changes": {
+    "command": "python",
+    "args": [
+      "/absolute/path/to/twitter-username-changes-mcp/main.py"
+    ]
+  },
+  "Uniswap-PoolSpy": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/uniswap-poolspy-mcp",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "THEGRAPH_API_KEY": "your api key from The Graph"
+    }
+  },
+  "Uniswap Price": {
+    "command": "node",
+    "args": [
+      "path/to/uniswap-price-mcp/index.js"
+    ],
+    "env": {
+      "INFURA_PROJECT_ID": "your_infura_project_id"
+    }
+  },
+  "Uniswap-Trader-MCP": {
+    "command": "node",
+    "args": [
+      "path/to/uniswap-trader-mcp/server/index.js"
+    ],
+    "env": {
+      "INFURA_KEY": "your infura key",
+      "WALLET_PRIVATE_KEY": "your private key"
+    }
+  },
+  "Wallet Inspector": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/wallet-inspector-mcp",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "DUNE_SIM_API_KEY": "your_dune_sim_api_key_here"
+    }
+  },
+  "alpaca": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/ABSOLUTE/PATH/TO/PARENT/FOLDER/alpaca-mcp-server",
+      "run",
+      "src/server.py"
+    ]
+  },
+  "evm-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mcpdotdirect/evm-mcp-server"
+    ]
+  },
+  "evm-mcp-http": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mcpdotdirect/evm-mcp-server",
+      "--http"
+    ]
+  },
+  "starknet-mcp-server": {
+    "command": "npx",
+    "args": [
+      "@mcpdotdirect/starknet-mcp-server"
+    ]
+  },
+  "starknet-mcp-http": {
+    "command": "npx",
+    "args": [
+      "@mcpdotdirect/starknet-mcp-server",
+      "http"
+    ]
+  },
+  "ledger": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--env-file",
+      "/path/to/your/.env",
+      "--with",
+      "mcp[cli]",
+      "mcp",
+      "run",
+      "<repo_path>/main.py"
+    ]
+  },
+  "yfmcp": {
+    "command": "uvx",
+    "args": [
+      "yfmcp@latest"
+    ]
+  },
+  "octagon-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "octagon-mcp@latest"
+    ],
+    "env": {
+      "OCTAGON_API_KEY": "YOUR_API_KEY_HERE"
+    }
+  },
+  "polygon": {
+    "command": "<path_to_your_uvx_install>/uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/polygon-io/mcp_polygon@v0.5.1",
+      "mcp_polygon"
+    ],
+    "env": {
+      "POLYGON_API_KEY": "<your_api_key_here>",
+      "HOME": "<your_home_directory>"
+    }
+  },
+  "coin-mcp": {
+    "command": "deno",
+    "args": [
+      "run",
+      "--allow-net",
+      "--allow-read",
+      "--allow-env",
+      "https://deno.land/x/coin_mcp_server/main.ts"
+    ]
+  },
+  "quantconnect": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "QUANTCONNECT_USER_ID",
+      "-e",
+      "QUANTCONNECT_API_TOKEN",
+      "-e",
+      "AGENT_NAME",
+      "--platform",
+      "<your_platform>",
+      "quantconnect/mcp-server"
+    ],
+    "env": {
+      "QUANTCONNECT_USER_ID": "<your_user_id>",
+      "QUANTCONNECT_API_TOKEN": "<your_api_token>",
+      "AGENT_NAME": "MCP Server"
+    }
+  },
+  "tatumio": {
+    "command": "npx",
+    "args": [
+      "@tatumio/blockchain-mcp"
+    ],
+    "env": {
+      "TATUM_API_KEY": "YOUR_API_KEY"
+    }
+  },
+  "substrate-mcp-rs": {
+    "command": "$PROJECT_ROOT_ABSOLUTE_PATH/target/release/substrate-mcp-rs",
+    "args": []
+  },
+  "twelvedata": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-twelve-data@latest",
+      "-k",
+      "YOUR_TWELVE_DATA_API_KEY",
+      "-u",
+      "YOUR_OPEN_AI_APIKEY"
+    ]
+  },
+  "solscan-mcp": {
+    "command": "/Users/$username/.cargo/bin/solscan-mcp",
+    "args": [],
+    "env": {
+      "SOLSCAN_API_KEY": "your_solscan_api_key"
+    }
+  },
+  "CRIC物业AI": {
+    "transportType": "sse",
+    "url": "https://mcp.wuye-ai.cricbigdata.com/sse/mcp",
+    "headers": {
+      "Authorization": "Bearer {{您的 CRIC物业AI Access Token}}"
+    }
+  },
+  "xero": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@xeroapi/xero-mcp-server@latest"
+    ],
+    "env": {
+      "XERO_CLIENT_ID": "your_client_id_here",
+      "XERO_CLIENT_SECRET": "your_client_secret_here"
+    }
+  },
+  "finData": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/ABSOLUTE/PATH/TO/PARENT/FOLDER/finData-mcp-server/src/findata",
+      "run",
+      "server.py"
+    ],
+    "env": {
+      "DATA_API_TOKEN": "",
+      "PROVIDER": "tushare"
+    }
+  },
+  "newsmcp": {
+    "command": "node",
+    "args": [
+      "C:\\Path\\To\\Your\\project\\NewsMCP\\build\\index.js"
+    ],
+    "env": {
+      "MARKETAUX_API_KEY": "Your-API-TOKEN"
+    }
+  },
+  "bitcoin-mcp": {
+    "command": "npx",
+    "args": [
+      "@jamesanz/bitcoin-mcp"
+    ]
+  },
+  "hive": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-hive"
+    ]
+  },
+  "mcp-unity": {
+    "command": "node",
+    "args": [
+      "ABSOLUTE/PATH/TO/mcp-unity/Server~/build/index.js"
+    ]
+  },
+  "godot": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/godot-mcp/build/index.js"
+    ],
+    "env": {
+      "DEBUG": "true"
+    },
+    "disabled": false,
+    "autoApprove": [
+      "launch_editor",
+      "run_project",
+      "get_debug_output",
+      "stop_project",
+      "get_godot_version",
+      "list_projects",
+      "get_project_info",
+      "create_scene",
+      "add_node",
+      "load_sprite",
+      "export_mesh_library",
+      "save_scene",
+      "get_uid",
+      "update_project_uids"
+    ]
+  },
+  "gamebrain": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "https://api.gamebrain.co/v1/mcp?api-key=YOUR_KEY"
+    ]
+  },
+  "Unity-MCP": {
+    "url": "http://localhost:8080"
+  },
+  "chess": {
+    "command": "uvx",
+    "args": [
+      "mcp-chess"
+    ]
+  },
+  "opgg-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "supergateway",
+      "--streamableHttp",
+      "https://mcp-api.op.gg/mcp"
+    ]
+  },
+  "mcp-server-runescape": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-server-runescape"
+    ]
+  },
+  "tic-tac-toe": {
+    "command": "/full/path/to/mcp-tic-tac-toe/bin/server",
+    "args": [
+      "-transport=stdio"
+    ],
+    "env": {}
+  },
+  "content-summarizer": {
+    "command": "node",
+    "args": [
+      "{ABSOLUTE PATH TO FILE HERE}/dist/index.js"
+    ]
+  },
+  "aperag-mcp": {
+    "url": "https://rag.apecloud.com/mcp/",
+    "headers": {
+      "Authorization": "Bearer your-api-key-here"
+    }
+  },
+  "mcp-server-chatsum": {
+    "command": "path-to/bin/node",
+    "args": [
+      "path-to/mcp-server-chatsum/build/index.js"
+    ],
+    "env": {
+      "CHAT_DB_PATH": "path-to/mcp-server-chatsum/chatbot/data/chat.db"
+    }
+  },
+  "memorymesh": {
+    "command": "node",
+    "args": [
+      "/ABSOLUTE/PATH/TO/YOUR/PROJECT/memorymesh/dist/index.js"
+    ]
+  },
+  "zettelkasten": {
+    "command": "/absolute/path/to/zettelkasten-mcp/.venv/bin/python",
+    "args": [
+      "-m",
+      "zettelkasten_mcp.main"
+    ],
+    "env": {
+      "ZETTELKASTEN_NOTES_DIR": "/absolute/path/to/zettelkasten-mcp/data/notes",
+      "ZETTELKASTEN_DATABASE_PATH": "/absolute/path/to/zettelkasten-mcp/data/db/zettelkasten.db",
+      "ZETTELKASTEN_LOG_LEVEL": "INFO"
+    }
+  },
+  "gistpad": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "gistpad-mcp"
+    ],
+    "env": {
+      "GITHUB_TOKEN": "<YOUR_PAT>"
+    }
+  },
+  "graphlit-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "graphlit-mcp-server"
+    ],
+    "env": {
+      "GRAPHLIT_ORGANIZATION_ID": "your-organization-id",
+      "GRAPHLIT_ENVIRONMENT_ID": "your-environment-id",
+      "GRAPHLIT_JWT_SECRET": "your-jwt-secret"
+    }
+  },
+  "rag-docs": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@hannesrudolph/mcp-ragdocs"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "",
+      "QDRANT_URL": "",
+      "QDRANT_API_KEY": ""
+    }
+  },
+  "markmap": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@jinzcdev/markmap-mcp-server"
+    ],
+    "env": {
+      "MARKMAP_DIR": "/path/to/output/directory"
+    }
+  },
+  "in-memoria": {
+    "command": "npx",
+    "args": [
+      "in-memoria",
+      "server"
+    ]
+  },
+  "pinecone-assistant": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "PINECONE_API_KEY",
+      "-e",
+      "PINECONE_ASSISTANT_HOST",
+      "pinecone/assistant-mcp"
+    ],
+    "env": {
+      "PINECONE_API_KEY": "<YOUR_PINECONE_API_KEY_HERE>",
+      "PINECONE_ASSISTANT_HOST": "<YOUR_PINECONE_ASSISTANT_HOST_HERE>"
+    }
+  },
+  "ragie": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@ragieai/mcp-server",
+      "--partition",
+      "optional_partition_id"
+    ],
+    "env": {
+      "RAGIE_API_KEY": "your_api_key"
+    }
+  },
+  "biel-ai": {
+    "description": "Query your product's documentation, APIs, and knowledge base.",
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://mcp.biel.ai/sse?project_slug=YOUR_PROJECT_SLUG&domain=https://your-docs-domain.com"
+    ]
+  },
+  "membase": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/membase-mcp",
+      "run",
+      "src/membase_mcp/server.py"
+    ],
+    "env": {
+      "MEMBASE_ACCOUNT": "your account, 0x...",
+      "MEMBASE_CONVERSATION_ID": "your conversation id, should be unique",
+      "MEMBASE_ID": "your sub account, any string"
+    }
+  },
+  "context7": {
+    "url": "https://mcp.context7.com/mcp",
+    "headers": {
+      "CONTEXT7_API_KEY": "YOUR_API_KEY"
+    }
+  },
+  "trinv-server": {
+    "command": "/usr/bin/node",
+    "args": [
+      ".../dist/index.js"
+    ]
+  },
+  "ip2locationio": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/ip2locationio/src",
+      "run",
+      "server.py"
+    ],
+    "env": {
+      "IP2LOCATION_API_KEY": "<YOUR API key HERE>"
+    }
+  },
+  "weather": {
+    "command": "python",
+    "args": [
+      "-m",
+      "mcp_weather_server"
+    ],
+    "disabled": false,
+    "autoApprove": []
+  },
+  "ipfind": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@ipfind/ipfind-mcp-server"
+    ],
+    "env": {
+      "IPFIND_API_KEY": "<API KEY GOES HERE>"
+    }
+  },
+  "aiwen-iplocation": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "aiwen-mcp-server-geoip"
+    ],
+    "env": {
+      "AIWEN_API_KEY": "xxxxxx",
+      "IPV4_ACCURACY": "city",
+      "IPV6_ACCURACY": "city"
+    }
+  },
+  "iplocate": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@iplocate/mcp-server"
+    ],
+    "env": {
+      "IPLOCATE_API_KEY": "your_api_key_here"
+    }
+  },
+  "osm-mcp-server": {
+    "command": "uvx",
+    "args": [
+      "osm-mcp-server"
+    ]
+  },
+  "nearby-search": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/nearby-search-mcp",
+      "run",
+      "main.py"
+    ],
+    "env": {
+      "GOOGLE_API_KEY": "your google api key"
+    }
+  },
+  "geoserver-mcp": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "GEOSERVER_URL=http://localhost:8080/geoserver",
+      "-e",
+      "GEOSERVER_USER=admin",
+      "-e",
+      "GEOSERVER_PASSWORD=geoserver",
+      "-p",
+      "8080:8080",
+      "mahdin75/geoserver-mcp"
+    ]
+  },
+  "gis-mcp": {
+    "command": "C:\\Users\\YourUsername\\.venv\\Scripts\\gis-mcp",
+    "args": []
+  },
+  "qgis": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/ABSOLUTE/PATH/TO/PARENT/REPO/FOLDER/qgis_mcp/src/qgis_mcp",
+      "run",
+      "qgis_mcp_server.py"
+    ]
+  },
+  "MCP-timeserver": {
+    "command": "uvx",
+    "args": [
+      "MCP-timeserver"
+    ]
+  },
+  "trackmage": {
+    "transport": {
+      "type": "http",
+      "host": "localhost",
+      "port": 3000
+    }
+  },
+  "fb-ads-mcp-server": {
+    "command": "python",
+    "args": [
+      "/path/to/your/fb-ads-mcp-server/server.py",
+      "--fb-token",
+      "YOUR_META_ACCESS_TOKEN"
+    ]
+  },
+  "google-ads": {
+    "command": "/full/path/to/your/project/.venv/bin/python",
+    "args": [
+      "/full/path/to/your/project/server.py"
+    ]
+  },
+  "marketplaceadpros": {
+    "command": "npx",
+    "args": [
+      "@marketplaceadpros/amazon-ads-mcp-server"
+    ],
+    "env": {
+      "BEARER_TOKEN": "abcdefghijklmnop"
+    }
+  },
+  "osp_marketing_tools": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/open-strategy-partners/osp_marketing_tools@main",
+      "osp_marketing_tools"
+    ]
+  },
+  "meta-ads-remote": {
+    "url": "https://mcp.pipeboard.co/meta-ads-mcp"
+  },
+  "stape-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "https://mcp.stape.ai/mcp",
+      "--header",
+      "Authorization: ${your_stape_api_key}"
+    ]
+  },
+  "gtm-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "https://gtm-mcp.stape.ai/mcp"
+    ]
+  },
+  "edgedelta": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e ED_ORG_ID",
+      "-e ED_API_TOKEN",
+      "ghcr.io/edgedelta/edgedelta-mcp-server:latest"
+    ],
+    "env": {
+      "ED_API_TOKEN": "<YOUR_TOKEN>",
+      "ED_ORG_ID": "<YOUR_ORG_ID>"
+    }
+  },
+  "grafana": {
+    "command": "mcp-grafana",
+    "args": [],
+    "env": {
+      "GRAFANA_URL": "http://localhost:3000",
+      "GRAFANA_USERNAME": "<your username>",
+      "GRAFANA_PASSWORD": "<your password>",
+      "GRAFANA_ORG_ID": "2"
+    }
+  },
+  "mcp-internet-speed-test": {
+    "command": "mcp-internet-speed-test"
+  },
+  "last9": {
+    "command": "/opt/homebrew/bin/last9-mcp",
+    "env": {
+      "LAST9_BASE_URL": "<last9_otlp_host>",
+      "LAST9_AUTH_TOKEN": "<last9_otlp_auth_token>",
+      "LAST9_REFRESH_TOKEN": "<last9_write_refresh_token>",
+      "OTEL_EXPORTER_OTLP_ENDPOINT": "<otel_endpoint_url>",
+      "OTEL_EXPORTER_OTLP_HEADERS": "<otel_headers>"
+    }
+  },
+  "metoro-mcp-server": {
+    "command": "<your path to Metoro MCP server go executable>/metoro-mcp-server",
+    "args": [],
+    "env": {
+      "METORO_AUTH_TOKEN": "<your auth token>",
+      "METORO_API_URL": "https://us-east.metoro.io"
+    }
+  },
+  "Raygun": {
+    "url": "https://api.raygun.com/v3/mcp",
+    "headers": {
+      "Authorization": "Bearer YOUR_PAT_TOKEN"
+    }
+  },
+  "logfire": {
+    "command": "uvx",
+    "args": [
+      "logfire-mcp@latest",
+      "--read-token=YOUR-TOKEN"
+    ]
+  },
+  "loki": {
+    "command": "uvx",
+    "args": [
+      "grafana-loki-mcp",
+      "-u",
+      "GRAFANA_URL",
+      "-k",
+      "GRAFANA_API_KEY"
+    ]
+  },
+  "statusObserver": {
+    "command": "node",
+    "args": [
+      "ABSOLUTE_PATH_TO_DIRECTORY/mcp-status-observer/build/index.js"
+    ]
+  },
+  "zapcap": {
+    "command": "uvx",
+    "args": [
+      "zapcap-mcp-server"
+    ],
+    "env": {
+      "ZAPCAP_API_KEY": "your_api_key_here"
+    }
+  },
+  "exif-mcp": {
+    "command": "node",
+    "args": [
+      "/path/to/exif-mcp/dist/server.js"
+    ]
+  },
+  "sonos-ts-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "sonos-ts-mcp@latest"
+    ]
+  },
+  "imagesorcery-mcp": {
+    "command": "imagesorcery-mcp",
+    "transportType": "stdio",
+    "autoApprove": [
+      "blur",
+      "change_color",
+      "config",
+      "crop",
+      "detect",
+      "draw_arrows",
+      "draw_circles",
+      "draw_lines",
+      "draw_rectangles",
+      "draw_texts",
+      "fill",
+      "find",
+      "get_metainfo",
+      "ocr",
+      "overlay",
+      "resize",
+      "rotate"
+    ],
+    "timeout": 100
+  },
+  "job-search": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "job-searchoor"
+    ]
+  },
+  "kagi-server": {
+    "command": "/path/to/kagi-server/build/index.js",
+    "env": {
+      "KAGI_API_KEY": "your_api_key_here"
+    }
+  },
+  "nexus": {
+    "command": "npx",
+    "args": [
+      "nexus-mcp"
+    ],
+    "env": {
+      "OPENROUTER_API_KEY": "your-api-key-here"
+    }
+  },
+  "simple-arxiv": {
+    "command": "python",
+    "args": [
+      "-m",
+      "mcp_simple_arxiv"
+    ]
+  },
+  "simple-pubmed": {
+    "command": "python",
+    "args": [
+      "-m",
+      "mcp_simple_pubmed"
+    ],
+    "env": {
+      "PUBMED_EMAIL": "your-email@example.com",
+      "PUBMED_API_KEY": "your-api-key"
+    }
+  },
+  "nyt": {
+    "command": "node",
+    "args": [
+      "path/to/your/build/index.js"
+    ],
+    "env": {
+      "NYTIMES_API_KEY": "your_api_key_here"
+    }
+  },
+  "rag-web-browser": {
+    "command": "npx",
+    "args": [
+      "@apify/mcp-server-rag-web-browser"
+    ],
+    "env": {
+      "APIFY_TOKEN": "your-apify-api-token"
+    }
+  },
+  "clojars-deps-server": {
+    "command": "node",
+    "args": [
+      "/path/to/clojars-deps-server/build/index.js"
+    ]
+  },
+  "arxiv-mcp-server": {
+    "command": "uv",
+    "args": [
+      "tool",
+      "run",
+      "arxiv-mcp-server",
+      "--storage-path",
+      "/path/to/paper/storage"
+    ]
+  },
+  "gopher": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/gopher-mcp",
+      "run",
+      "task",
+      "serve"
+    ],
+    "env": {
+      "MAX_RESPONSE_SIZE": "1048576",
+      "TIMEOUT_SECONDS": "30"
+    }
+  },
+  "dappier": {
+    "command": "uvx",
+    "args": [
+      "dappier-mcp"
+    ],
+    "env": {
+      "DAPPIER_API_KEY": "YOUR_API_KEY_HERE"
+    }
+  },
+  "dealx": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@dealx/mcp-server"
+    ],
+    "env": {
+      "DEALX_API_URL": "https://dealx.com.ua"
+    },
+    "disabled": false,
+    "autoApprove": []
+  },
+  "dumplingai": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-server-dumplingai"
+    ],
+    "env": {
+      "DUMPLING_API_KEY": "<your-api-key>"
+    }
+  },
+  "melrōse": {
+    "command": "<YOUR DIRECTORY TO THE BINARY>/melrose-mcp",
+    "args": []
+  },
+  "mcp-hn": {
+    "command": "uvx",
+    "args": [
+      "mcp-hn"
+    ]
+  },
+  "exa": {
+    "type": "http",
+    "url": "https://mcp.exa.ai/mcp",
+    "headers": {
+      "Remove-Me": "Disable web_search_exa tool if you're just coding. To 100% call exa-code, say 'use exa-code'."
+    }
+  },
+  "search1api": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "search1api-mcp"
+    ],
+    "env": {
+      "SEARCH1API_KEY": "YOUR_SEARCH1API_KEY"
+    }
+  },
+  "youtube": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "http://localhost:7001/sse",
+      "--header",
+      "Authorization:YOUR-TOKEN",
+      "--allow-http"
+    ],
+    "disabled": false
+  },
+  "unsplash": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--with",
+      "fastmcp",
+      "fastmcp",
+      "run",
+      "./server.py"
+    ],
+    "env": {
+      "UNSPLASH_ACCESS_KEY": "${YOUR_ACCESS_KEY}"
+    }
+  },
+  "himalayas": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://mcp.himalayas.app/sse"
+    ]
+  },
+  "searxng": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-searxng"
+    ],
+    "env": {
+      "SEARXNG_URL": "YOUR_SEARXNG_INSTANCE_URL"
+    }
+  },
+  "naver-search": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@isnow890/naver-search-mcp"
+    ],
+    "env": {
+      "NAVER_CLIENT_ID": "your_client_id",
+      "NAVER_CLIENT_SECRET": "your_client_secret"
+    }
+  },
+  "fetcher": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "fetcher-mcp"
+    ]
+  },
+  "g-search": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "g-search-mcp"
+    ]
+  },
+  "stocky": {
+    "command": "python",
+    "args": [
+      "/path/to/stocky_mcp.py"
+    ],
+    "env": {
+      "PEXELS_API_KEY": "your_pexels_key",
+      "UNSPLASH_ACCESS_KEY": "your_unsplash_key"
+    }
+  },
+  "read-website-fast": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@just-every/mcp-read-website-fast"
+    ]
+  },
+  "screenshot-website-fast": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@just-every/mcp-screenshot-website-fast"
+    ]
+  },
+  "kagi": {
+    "command": "uvx",
+    "args": [
+      "kagimcp"
+    ],
+    "env": {
+      "KAGI_API_KEY": "YOUR_API_KEY_HERE",
+      "KAGI_SUMMARIZER_ENGINE": "YOUR_ENGINE_CHOICE_HERE"
+    }
+  },
+  "json-mcp-filter": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "json-mcp-filter@latest"
+    ]
+  },
+  "bing-search": {
+    "command": "uvx",
+    "args": [
+      "/path/to/your/bing-search-mcp"
+    ],
+    "env": {
+      "BING_API_KEY": "your-bing-api-key"
+    }
+  },
+  "content-core": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "content-core",
+      "content-core-mcp"
+    ]
+  },
+  "Bright Data": {
+    "command": "npx",
+    "args": [
+      "@brightdata/mcp"
+    ],
+    "env": {
+      "API_TOKEN": "<your-api-token-here>"
+    }
+  },
+  "brave-search": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "BRAVE_API_KEY",
+      "docker.io/mcp/brave-search"
+    ],
+    "env": {
+      "BRAVE_API_KEY": "YOUR_API_KEY_HERE"
+    }
+  },
+  "webresearch": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mzxrai/mcp-webresearch@latest"
+    ]
+  },
+  "ddg-search": {
+    "command": "uvx",
+    "args": [
+      "duckduckgo-mcp-server"
+    ]
+  },
+  "mcp-local-rag": {
+    "command": "uvx",
+    "args": [
+      "--python=3.10",
+      "--from",
+      "git+https://github.com/nkapila6/mcp-local-rag",
+      "mcp-local-rag"
+    ]
+  },
+  "nyxdocs": {
+    "command": "uv",
+    "args": [
+      "run",
+      "python",
+      "-m",
+      "nyxdocs.server"
+    ]
+  },
+  "octagon-deep-research-mcp": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "octagon-deep-research-mcp@latest"
+    ],
+    "env": {
+      "OCTAGON_API_KEY": "YOUR_API_KEY_HERE"
+    }
+  },
+  "Parallel Search MCP": {
+    "url": "https://search-mcp.parallel.ai/mcp"
+  },
+  "Parallel Task MCP": {
+    "url": "https://task-mcp.parallel.ai/mcp"
+  },
+  "opentk": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@r-huijts/opentk-mcp"
+    ]
+  },
+  "mcp-server-deep-research": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/Users/username/repos/mcp-server-application/mcp-server-deep-research",
+      "run",
+      "mcp-server-deep-research"
+    ]
+  },
+  "WolframAlphaServer": {
+    "command": "python3",
+    "args": [
+      "/path/to/src/core/server.py"
+    ]
+  },
+  "Scrapeless MCP Server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "scrapeless-mcp-server"
+    ],
+    "env": {
+      "SCRAPELESS_KEY": "YOUR_SCRAPELESS_KEY"
+    }
+  },
+  "searchcraft": {
+    "command": "node",
+    "args": [
+      "/path/to/searchcraft-mcp-server/dist/stdio-server.js"
+    ]
+  },
+  "driflyte": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@driflyte/mcp-server"
+    ]
+  },
+  "shopsavvy": {
+    "command": "npx",
+    "args": [
+      "@shopsavvy/mcp-server"
+    ],
+    "env": {
+      "SHOPSAVVY_API_KEY": "your_api_key_here"
+    }
+  },
+  "arxiv-latex-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/ABSOLUTE/PATH/TO/arxiv-latex-mcp",
+      "run",
+      "server/main.py"
+    ]
+  },
+  "geeknews-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@smithery/cli@latest",
+      "run",
+      "@the0807/geeknews-mcp-server",
+      "--key",
+      "smithery에서 발급 받은 키"
+    ]
+  },
+  "enrichr-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "enrichr-mcp-server"
+    ]
+  },
+  "tavily-search": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "C:\\your_path\\mcp-server-tavily",
+      "run",
+      "tavily-search"
+    ],
+    "env": {
+      "TAVILY_API_KEY": "YOUR_TAVILY_API_KEY",
+      "PYTHONIOENCODING": "utf-8"
+    }
+  },
+  "ncbi-literature": {
+    "command": "poetry",
+    "args": [
+      "run",
+      "python",
+      "src/ncbi_mcp_server/server.py"
+    ],
+    "cwd": "/FULL/PATH/TO/YOUR/ncbi-mcp-server"
+  },
+  "web-analyzer": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/web-analyzer-mcp",
+      "run",
+      "mcp-webanalyzer"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "your_openai_api_key_here",
+      "OPENAI_MODEL": "gpt-4"
+    }
+  },
+  "mcp-server-webscraping-ai": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "webscraping-ai-mcp"
+    ],
+    "env": {
+      "WEBSCRAPING_AI_API_KEY": "YOUR_API_KEY_HERE",
+      "WEBSCRAPING_AI_CONCURRENCY_LIMIT": "5"
+    }
+  },
+  "baseline-mcp-server": {
+    "command": "deno",
+    "args": [
+      "run",
+      "--allow-net=api.webstatus.dev",
+      "jsr:@yamanoku/baseline-mcp-server"
+    ]
+  },
+  "zoomeye": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-zoomeye"
+    ],
+    "env": {
+      "ZOOMEYE_API_KEY": "your_api_key_here"
+    }
+  },
+  "mcp-domain-availability": {
+    "command": "uvx",
+    "args": [
+      "--python=3.10",
+      "--from",
+      "git+https://github.com/imprvhub/mcp-domain-availability",
+      "mcp-domain-availability"
+    ]
+  },
+  "hackerNews": {
+    "command": "node",
+    "args": [
+      "ABSOLUTE_PATH_TO_DIRECTORY/mcp-claude-hackernews/build/index.js"
+    ]
+  },
+  "rssAggregator": {
+    "command": "node",
+    "args": [
+      "ABSOLUTE_PATH_TO_DIRECTORY/mcp-rss-aggregator/build/index.js"
+    ],
+    "feedsPath": "ABSOLUTE_PATH_TO_YOUR_FEEDS_FILE.opml"
+  },
+  "ghidra": {
+    "command": "python",
+    "args": [
+      "PATH-TO-REPO/GhidraMCP/ghidra_server.py"
+    ]
+  },
+  "dnstwist": {
+    "command": "mcp-dnstwist"
+  },
+  "maigret": {
+    "command": "mcp-maigret",
+    "env": {
+      "MAIGRET_REPORTS_DIR": "/path/to/reports/directory"
+    }
+  },
+  "shodan": {
+    "command": "mcp-shodan",
+    "env": {
+      "SHODAN_API_KEY": "your-shodan-api-key"
+    }
+  },
+  "virustotal": {
+    "command": "mcp-virustotal",
+    "env": {
+      "VIRUSTOTAL_API_KEY": "your-virustotal-api-key"
+    }
+  },
+  "Authenticator App MCP": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "authenticator-mcp",
+      "--access-token=YOUR-KEY"
+    ]
+  },
+  "binary_ninja_mcp": {
+    "command": "/ABSOLUTE/PATH/TO/Binary Ninja/plugins/repositories/community/plugins/fosdickio_binary_ninja_mcp/.venv/bin/python",
+    "args": [
+      "/ABSOLUTE/PATH/TO/Binary Ninja/plugins/repositories/community/plugins/fosdickio_binary_ninja_mcp/bridge/binja_mcp_bridge.py"
+    ]
+  },
+  "orkl": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/MyMCP/mcptest/orkl",
+      "run",
+      "orkl"
+    ]
+  },
+  "vol": {
+    "command": "python",
+    "args": [
+      "/ABSOLUTE_PATH_TO_MCP-SERVER/vol_mcp_server.py",
+      "-i",
+      "/ABSOLUTE_PATH_TO_MEMORY_IMAGE/<memory_image>"
+    ]
+  },
+  "cortex": {
+    "command": "/opt/mcp-servers/mcp-server-cortex",
+    "args": [],
+    "env": {
+      "CORTEX_ENDPOINT": "http://your-cortex-instance:9000/api",
+      "CORTEX_API_KEY": "your_cortex_api_key_here"
+    }
+  },
+  "thehive": {
+    "command": "/path/to/mcp-server-thehive",
+    "env": {
+      "THEHIVE_URL": "https://your-thehive-instance.com:9000/api",
+      "THEHIVE_API_TOKEN": "your-api-token-here"
+    }
+  },
+  "wazuh": {
+    "command": "/path/to/mcp-server-wazuh",
+    "args": [],
+    "env": {
+      "WAZUH_API_HOST": "your_wazuh_manager_api_host",
+      "WAZUH_API_PORT": "55000",
+      "WAZUH_API_USERNAME": "your_wazuh_api_user",
+      "WAZUH_API_PASSWORD": "your_wazuh_api_password",
+      "WAZUH_INDEXER_HOST": "your_wazuh_indexer_host",
+      "WAZUH_INDEXER_PORT": "9200",
+      "WAZUH_INDEXER_USERNAME": "your_wazuh_indexer_user",
+      "WAZUH_INDEXER_PASSWORD": "your_wazuh_indexer_password",
+      "WAZUH_VERIFY_SSL": "false",
+      "WAZUH_TEST_PROTOCOL": "https",
+      "RUST_LOG": "info"
+    }
+  },
+  "intruder": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "path/to/intruder-mcp/intruder_mcp",
+      "run",
+      "server.py"
+    ],
+    "env": {
+      "INTRUDER_API_KEY": "your-api-key"
+    }
+  },
+  "vms": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "X:\\path\\to\\mcp-vms",
+      "run",
+      "mcp_vms.py"
+    ]
+  },
+  "github.com/mrexodia/ida-pro-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "c:\\MCP\\ida-pro-mcp",
+      "run",
+      "server.py",
+      "--install-plugin"
+    ],
+    "timeout": 1800,
+    "disabled": false
+  },
+  "mcp-panther": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "-e",
+      "PANTHER_INSTANCE_URL",
+      "-e",
+      "PANTHER_API_TOKEN",
+      "--rm",
+      "ghcr.io/panther-labs/mcp-panther"
+    ],
+    "env": {
+      "PANTHER_INSTANCE_URL": "https://YOUR-PANTHER-INSTANCE.domain",
+      "PANTHER_API_TOKEN": "YOUR-API-KEY"
+    }
+  },
+  "mobsf": {
+    "command": "npx",
+    "args": [
+      "tsx",
+      "/absolute/path/to/server.ts"
+    ]
+  },
+  "mcp-security-audit": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-security-audit"
+    ]
+  },
+  "rad-security": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@rad-security/mcp-server"
+    ],
+    "env": {
+      "RAD_SECURITY_ACCESS_KEY_ID": "<your-access-key-id>",
+      "RAD_SECURITY_SECRET_KEY": "<your-secret-key>",
+      "RAD_SECURITY_ACCOUNT_ID": "<your-account-id>"
+    }
+  },
+  "ciphertrust": {
+    "command": "Path to your project folder/ciphertrust-manager-mcp-server/.venv/bin/ciphertrust-mcp-server",
+    "args": [],
+    "env": {
+      "CIPHERTRUST_URL": "https://your-ciphertrust.example.com",
+      "CIPHERTRUST_USER": "admin",
+      "CIPHERTRUST_PASSWORD": "your-password-here"
+    }
+  },
+  "database-tde": {
+    "command": "uv",
+    "args": [
+      "run",
+      "python",
+      "-m",
+      "database_tde_server"
+    ],
+    "cwd": "/path/to/cakm-mcp-server-sql-oracle",
+    "env": {
+      "DB_TDE_SERVER_NAME": "database-tde-mcp",
+      "DB_TDE_LOG_LEVEL": "INFO",
+      "DB_TDE_DATABASE_CONNECTIONS": "[{\"name\":\"prod_sql\",\"db_type\":\"sqlserver\",\"host\":\"sql-prod.company.com\",\"port\":1433,\"username\":\"tde_admin\",\"password\":\"secure_password\"},{\"name\":\"oracle_cdb1\",\"db_type\":\"oracle\",\"host\":\"oracle-prod.company.com\",\"port\":1521,\"username\":\"sys\",\"password\":\"oracle_password\",\"oracle_config\":{\"oracle_home\":\"/u01/app/oracle/product/21.0.0/dbhome_1\",\"oracle_sid\":\"cdb1\",\"service_name\":\"orcl\",\"mode\":\"SYSDBA\",\"wallet_root\":\"/opt/oracle/wallet\"},\"ssh_config\":{\"host\":\"oracle-prod.company.com\",\"username\":\"oracle\",\"private_key_path\":\"/path/to/private-key.pem\",\"port\":22,\"timeout\":30}}]"
+    }
+  },
+  "crdp": {
+    "command": "node",
+    "args": [
+      "/path/to/your/crdp-mcp-server/dist/crdp-mcp-server.js"
+    ],
+    "env": {
+      "CRDP_SERVICE_URL": "http://your-crdp-server:8090",
+      "CRDP_PROBES_URL": "http://your-crdp-server:8080",
+      "MCP_TRANSPORT": "stdio"
+    }
+  },
+  "semgrep": {
+    "command": "uvx",
+    "args": [
+      "semgrep-mcp"
+    ],
+    "env": {
+      "SEMGREP_APP_TOKEN": "<token>"
+    }
+  },
+  "CyberChef API MCP Server": {
+    "command": "uv",
+    "args": [
+      "run",
+      "--with",
+      "mcp[cli]",
+      "--directory",
+      "cyberchef-api-mcp-server/cyberchef_api_mcp_server/",
+      "mcp",
+      "run",
+      "server.py"
+    ],
+    "env": {
+      "CYBERCHEF_API_URL": "your-cyberchef-api-url"
+    }
+  },
+  "opnsense": {
+    "command": "npx",
+    "args": [
+      "opnsense-mcp-server"
+    ],
+    "env": {
+      "OPNSENSE_HOST": "https://your-opnsense:port",
+      "OPNSENSE_API_KEY": "your-key",
+      "OPNSENSE_API_SECRET": "your-secret",
+      "OPNSENSE_VERIFY_SSL": "false"
+    }
+  },
+  "solvitor-mcp": {
+    "command": "/Users/$username/.cargo/bin/solvitor-mcp",
+    "args": [],
+    "env": {
+      "SOLVITOR_API_KEY": "your_solvitor_api_key"
+    }
+  },
+  "apktool-mcp-server": {
+    "command": "/<path>/<to>/uv",
+    "args": [
+      "--directory",
+      "</PATH/TO/>apktool-mcp-server/",
+      "run",
+      "apktool_mcp_server.py"
+    ]
+  },
+  "youtube-uploader-mcp": {
+    "command": "/absolute/path/to/youtube-uploader-mcp-<os>-<arch>",
+    "args": [
+      "-client_secret_file",
+      "/absolute/path/to/client_secret.json(See Below)"
+    ]
+  },
+  "bluesky-social": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/gwbischof/bluesky-social-mcp@v0.1",
+      "bluesky-social-mcp"
+    ],
+    "env": {
+      "BLUESKY_IDENTIFIER": "your-handle.bsky.social",
+      "BLUESKY_APP_PASSWORD": "your-app-password"
+    }
+  },
+  "reddit": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "reddit-mcp-buddy"
+    ]
+  },
+  "twitter-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "Path\\src\\",
+      "run",
+      "--with",
+      "twikit",
+      "--with",
+      "mcp",
+      "tweet_service.py"
+    ],
+    "env": {
+      "COOKIES_PATH": "Path\\cookies.json",
+      "ENV_FILE": ".env"
+    }
+  },
+  "macrocosmos": {
+    "command": "uvx",
+    "args": [
+      "macrocosmos-mcp"
+    ],
+    "env": {
+      "MC_API": "<insert-your-api-key-here>"
+    }
+  },
+  "firstcycling": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/path/to/server/directory",
+      "run",
+      "firstcycling.py"
+    ]
+  },
+  "strava-mcp-local": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/your/strava-mcp/dist/server.js"
+    ]
+  },
+  "mcp-afl-server": {
+    "command": "dotnet",
+    "args": [
+      "run",
+      "--project",
+      "C:\\path\\to\\mcp-afl-server\\src",
+      "--no-build"
+    ]
+  },
+  "yandex-tracker": {
+    "command": "uvx",
+    "args": [
+      "yandex-tracker-mcp@latest"
+    ],
+    "env": {
+      "TRACKER_TOKEN": "your_tracker_token_here",
+      "TRACKER_CLOUD_ORG_ID": "your_cloud_org_id_here",
+      "TRACKER_ORG_ID": "your_org_id_here"
+    }
+  },
+  "freshdesk-mcp": {
+    "command": "uvx",
+    "args": [
+      "freshdesk-mcp"
+    ],
+    "env": {
+      "FRESHDESK_API_KEY": "<YOUR_FRESHDESK_API_KEY>",
+      "FRESHDESK_DOMAIN": "<YOUR_FRESHDESK_DOMAIN>"
+    }
+  },
+  "mcp-atlassian": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "CONFLUENCE_URL",
+      "-e",
+      "CONFLUENCE_USERNAME",
+      "-e",
+      "CONFLUENCE_API_TOKEN",
+      "-e",
+      "JIRA_URL",
+      "-e",
+      "JIRA_USERNAME",
+      "-e",
+      "JIRA_API_TOKEN",
+      "ghcr.io/sooperset/mcp-atlassian:latest"
+    ],
+    "env": {
+      "CONFLUENCE_URL": "https://your-company.atlassian.net/wiki",
+      "CONFLUENCE_USERNAME": "your.email@company.com",
+      "CONFLUENCE_API_TOKEN": "your_confluence_api_token",
+      "JIRA_URL": "https://your-company.atlassian.net",
+      "JIRA_USERNAME": "your.email@company.com",
+      "JIRA_API_TOKEN": "your_jira_api_token"
+    }
+  },
+  "weblate": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mmntm/weblate-mcp"
+    ],
+    "env": {
+      "WEBLATE_API_URL": "https://your-weblate-instance.com/api",
+      "WEBLATE_API_TOKEN": "your-weblate-api-token"
+    }
+  },
+  "lara": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://mcp.laratranslate.com/v1",
+      "--header",
+      "x-lara-access-key-id: ${X_LARA_ACCESS_KEY_ID}",
+      "--header",
+      "x-lara-access-key-secret: ${X_LARA_ACCESS_KEY_SECRET}"
+    ],
+    "env": {
+      "X_LARA_ACCESS_KEY_ID": "<YOUR_ACCESS_KEY_ID>",
+      "X_LARA_ACCESS_KEY_SECRET": "<YOUR_ACCESS_KEY_SECRET>"
+    }
+  },
+  "daisys-mcp": {
+    "command": "uvx",
+    "args": [
+      "daisys-mcp"
+    ],
+    "env": {
+      "DAISYS_EMAIL": "{Your Daisys Email}",
+      "DAISYS_PASSWORD": "{Your Daisys Password}",
+      "DAISYS_BASE_STORAGE_PATH": "{Path where you want to store your audio files}"
+    }
+  },
+  "campground-search-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "campertunity-mcp-server@latest"
+    ],
+    "env": {
+      "CAMPERTUNITY_API_KEY": "your_api_key_here"
+    }
+  },
+  "teslamate-remote": {
+    "url": "http://your-server:8888/mcp",
+    "transport": "streamable_http",
+    "headers": {
+      "Authorization": "Bearer your-secret-bearer-token-here"
+    }
+  },
+  "nationalparks": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-server-nationalparks"
+    ],
+    "env": {
+      "NPS_API_KEY": "YOUR_NPS_API_KEY"
+    }
+  },
+  "mcp-national-rail": {
+    "command": "node",
+    "args": [
+      "/path/to/mcp-national-rail/dist/index.js"
+    ],
+    "env": {
+      "RTT_API_USERNAME": "your_rtt_api_username",
+      "RTT_API_PASSWORD": "your_rtt_api_password"
+    }
+  },
+  "airbnb": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@openbnb/mcp-server-airbnb"
+    ]
+  },
+  "tripadvisor": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "<full path to tripadvisor-mcp directory>",
+      "run",
+      "src/tripadvisor_mcp/main.py"
+    ],
+    "env": {
+      "TRIPADVISOR_API_KEY": "your_api_key_here"
+    }
+  },
+  "Aviationstack MCP": {
+    "command": "uvx",
+    "args": [
+      "aviationstack-mcp"
+    ],
+    "env": {
+      "AVIATION_STACK_API_KEY": "<your-api-key>"
+    }
+  },
+  "ns-server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "ns-mcp-server"
+    ],
+    "env": {
+      "NS_API_KEY": "your_api_key_here"
+    }
+  },
+  "TripGo": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://tripgo-mcp-server.skedgo-account.workers.dev/sse"
+    ]
+  },
+  "alltrails_mcp_server": {
+    "command": "/path/to/your/alltrails_mcp/alltrails_mcp_venv/bin/python3",
+    "args": [
+      "/path/to/your/alltrails_mcp/server.py"
+    ]
+  },
+  "mcp-git-ingest": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/adhikasp/mcp-git-ingest",
+      "mcp-git-ingest"
+    ]
+  },
+  "github-enterprise": {
+    "url": "http://localhost:3000/sse"
+  },
+  "command": "node",
+  "args": [
+    "/home/user/work/mcp-server-atomgit/dist/index.js"
+  ],
+  "env": {
+    "ATOMGIT_PERSONAL_ACCESS_TOKEN": "<your-atomgit-api-key-here>"
+  },
+  "gitlab-mr-mcp": {
+    "command": "node",
+    "args": [
+      "/path/to/gitlab-mr-mcp/index.js"
+    ],
+    "env": {
+      "MR_MCP_GITLAB_TOKEN": "your_gitlab_token",
+      "MR_MCP_GITLAB_HOST": "your_gitlab_host"
+    }
+  },
+  "azureDevOps": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@tiberriver256/mcp-server-azure-devops"
+    ],
+    "env": {
+      "AZURE_DEVOPS_ORG_URL": "https://dev.azure.com/your-organization",
+      "AZURE_DEVOPS_AUTH_METHOD": "azure-identity",
+      "AZURE_DEVOPS_DEFAULT_PROJECT": "your-project-name"
+    }
+  },
+  "kanboard-mcp-server": {
+    "command": "/path/to/your/kanboard-mcp",
+    "args": [],
+    "env": {
+      "KANBOARD_API_ENDPOINT": "https://your-kanboard-url/jsonrpc.php",
+      "KANBOARD_API_KEY": "your-kanboard-api-key",
+      "KANBOARD_USERNAME": "your-kanboard-username",
+      "KANBOARD_PASSWORD": "your-kanboard-password"
+    }
+  },
+  "GsuiteMCPServer": {
+    "command": "absolute-path-to-your-python-executable-in-virtual-environment",
+    "args": [
+      "<mcp_server.py-abs-path>"
+    ]
+  },
+  "mcp-gsuite": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "<dir_to>/mcp-gsuite",
+      "run",
+      "mcp-gsuite"
+    ]
+  },
+  "google-calendar": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@takumi0706/google-calendar-mcp"
+    ],
+    "env": {
+      "GOOGLE_CLIENT_ID": "your_client_id",
+      "GOOGLE_CLIENT_SECRET": "your_client_secret",
+      "GOOGLE_REDIRECT_URI": "http://localhost:4153/oauth2callback"
+    }
+  },
+  "google_workspace": {
+    "command": "uvx",
+    "args": [
+      "workspace-mcp"
+    ],
+    "env": {
+      "GOOGLE_OAUTH_CLIENT_ID": "your-client-id",
+      "GOOGLE_OAUTH_CLIENT_SECRET": "your-secret",
+      "OAUTHLIB_INSECURE_TRANSPORT": "1"
+    }
+  },
+  "context-apps": {
+    "url": "https://mcp-server.basaapp.com/mcp"
+  },
+  "google-mcp": {
+    "command": "bunx",
+    "args": [
+      "--no-cache",
+      "google-mcp@latest"
+    ],
+    "env": {
+      "GOOGLE_OAUTH_CLIENT_ID": "<YOUR_CLIENT_ID>",
+      "GOOGLE_OAUTH_CLIENT_SECRET": "<YOUR_CLIENT_SECRET>",
+      "GOOGLE_OAUTH_TOKEN_PATH": "<PATH_TO_STORE_TOKENS> CAN_BE_ANYWHERE_ON_YOUR_SYSTEM",
+      "GOOGLE_CLIENT_EMAIL": "<YOUR_SERVICE_ACCOUNT_EMAIL>",
+      "GOOGLE_PRIVATE_KEY": "<YOUR_SERVICE_ACCOUNT_PRIVATE_KEY>",
+      "GMAIL_USER_TO_IMPERSONATE": "<USER_TO_IMPERSONATE>"
+    }
+  },
+  "qrcode-mcp": {
+    "command": "python",
+    "args": [
+      "/ABSOLUTE/PATH/TO/qrcode_mcp/qrcode_mcp_server.py"
+    ],
+    "cwd": "/ABSOLUTE/PATH/TO/qrcode_mcp"
+  },
+  "bear": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-v",
+      "/Users/[YOUR_USER_NAME]/Library/Group Containers/9K33E3U3T4.net.shinyfrog.bear/Application Data:/app/db",
+      "-i",
+      "akseyh/bear-mcp-server"
+    ]
+  },
+  "Utopia": {
+    "command": "dotnet",
+    "args": [
+      "run",
+      "--project",
+      "<path_to_project_folder>/Utopia.csproj"
+    ]
+  },
+  "amazon-bedrock": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@zxkane/mcp-server-amazon-bedrock"
+    ],
+    "env": {
+      "AWS_PROFILE": "your_profile_name",
+      "AWS_ACCESS_KEY_ID": "your_access_key",
+      "AWS_SECRET_ACCESS_KEY": "your_secret_key",
+      "AWS_REGION": "us-east-1"
+    }
+  },
+  "unichat-mcp-server": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "{{your source code local directory}}/unichat-mcp-server",
+      "run",
+      "unichat-mcp-server"
+    ],
+    "env": {
+      "UNICHAT_MODEL": "SELECTED_UNICHAT_MODEL",
+      "UNICHAT_API_KEY": "YOUR_UNICHAT_API_KEY"
+    }
+  },
+  "mcp-installer": {
+    "command": "npx",
+    "args": [
+      "@anaisbetts/mcp-installer"
+    ]
+  },
+  "openai-assistant": {
+    "command": "python",
+    "args": [
+      "-m",
+      "mcp_simple_openai_assistant"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "your-api-key-here"
+    }
+  },
+  "simple-timeserver": {
+    "command": "python",
+    "args": [
+      "-m",
+      "mcp_simple_timeserver"
+    ]
+  },
+  "piapi": {
+    "command": "node",
+    "args": [
+      "/absolute/path/to/piapi-mcp-server/dist/index.js"
+    ],
+    "env": {
+      "PIAPI_API_KEY": "your_api_key_here"
+    }
+  },
+  "replicate-flux-mcp": {
+    "command": "env REPLICATE_API_TOKEN=YOUR_TOKEN npx",
+    "args": [
+      "-y",
+      "replicate-flux-mcp"
+    ]
+  },
+  "taskwarrior": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-server-taskwarrior"
+    ]
+  },
+  "notion-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "/Users/username/Projects/Python/notion-mcp/src",
+      "run",
+      "server.py"
+    ]
+  },
+  "chatgpt": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "\\path\\to\\mcp-chatgpt-responses",
+      "run",
+      "chatgpt_server.py"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "your-api-key-here",
+      "DEFAULT_MODEL": "gpt-4o",
+      "DEFAULT_TEMPERATURE": "0.7",
+      "MAX_TOKENS": "1000"
+    }
+  },
+  "mcp-graphql": {
+    "command": "npx",
+    "args": [
+      "mcp-graphql"
+    ],
+    "env": {
+      "ENDPOINT": "http://localhost:3000/graphql"
+    }
+  },
+  "boldsign": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@boldsign/mcp"
+    ],
+    "env": {
+      "BOLDSIGN_API_KEY": "YOUR_BOLDSIGN_API_KEY",
+      "BOLDSIGN_API_REGION": "US"
+    }
+  },
+  "ones-wiki": {
+    "command": "java",
+    "args": [
+      "-jar",
+      "/path/to/ones-wiki-mcp-server-0.0.1-SNAPSHOT.jar",
+      "--ones.host=your-ones-host.com",
+      "--ones.email=your-email@example.com",
+      "--ones.password=your-password"
+    ]
+  },
+  "wenyan-mcp": {
+    "name": "公众号助手",
+    "command": "wenyan-mcp",
+    "env": {
+      "WECHAT_APP_ID": "your_app_id",
+      "WECHAT_APP_SECRET": "your_app_secret"
+    }
+  },
+  "sqlite": {
+    "command": "python",
+    "args": [
+      "-m",
+      "mcp_server.sqlite_server"
+    ],
+    "env": {
+      "DATABASE_PATH": "database.db"
+    }
+  },
+  "notion-todo": {
+    "command": "/path/to/your/.venv/bin/python",
+    "args": [
+      "-m",
+      "notion_mcp"
+    ],
+    "cwd": "/path/to/notion-mcp"
+  },
+  "domain-lookup-mcp": {
+    "command": "/path/to/domain-lookup-mcp/domain-lookup-mcp",
+    "args": [],
+    "env": {}
+  },
+  "mcp-server-esignatures": {
+    "command": "uv",
+    "env": {
+      "ESIGNATURES_SECRET_TOKEN": "your-esignatures-api-secret-token"
+    },
+    "args": [
+      "--directory",
+      "/your-local-directories/mcp-server-esignatures",
+      "run",
+      "mcp-server-esignatures"
+    ]
+  },
+  "mcp-miro": {
+    "command": "/path/to/node-or-npx",
+    "arguments": [
+      "/path/to/mcp-miro/build/index.js",
+      "--token",
+      "MIRO-OAUTH-KEY"
+    ]
+  },
+  "keep-mcp-pipx": {
+    "command": "pipx",
+    "args": [
+      "run",
+      "keep-mcp"
+    ],
+    "env": {
+      "GOOGLE_EMAIL": "Your Google Email",
+      "GOOGLE_MASTER_TOKEN": "Your Google Master Token - see README.md"
+    }
+  },
+  "calculator": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-calculator"
+    ]
+  },
+  "mcp-difyworkflow-server": {
+    "command": "mcp-difyworkflow-server",
+    "args": [
+      "-base-url",
+      "http://localhost/v1"
+    ],
+    "env": {
+      "DIFY_WORKFLOW_NAME": "workflow-translator“,workflow-genImag",
+      "DIFY_API_KEYS": "appkey-xxxxxxxxxxxa,appkey-xxxxxxxxxxxb"
+    }
+  },
+  "growi": {
+    "command": "npx",
+    "args": [
+      "@growi/mcp-server"
+    ],
+    "env": {
+      "GROWI_APP_NAME_1": "main",
+      "GROWI_BASE_URL_1": "https://your-growi-instance.com",
+      "GROWI_API_TOKEN_1": "your_growi_api_token"
+    }
+  },
+  "free-will": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/gwbischof/free-will-mcp@v0.3",
+      "free-will-mcp"
+    ],
+    "env": {}
+  },
+  "Jotdown": {
+    "command": "/path_to_repo/Jotdown/target/release/Jotdown",
+    "args": [],
+    "env": {
+      "NOTION_TOKEN": "your_notion_intergration_token"
+    }
+  },
+  "raindrop": {
+    "command": "node",
+    "args": [
+      "PATH_TO_BUILD/index.js"
+    ],
+    "env": {
+      "RAINDROP_TOKEN": "your_access_token_here"
+    }
+  },
+  "attio": {
+    "command": "npx",
+    "args": [
+      "attio-mcp-server"
+    ],
+    "env": {
+      "ATTIO_API_KEY": "YOUR_ATTIO_API_KEY"
+    }
+  },
+  "make": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@makehq/mcp-server"
+    ],
+    "env": {
+      "MAKE_API_KEY": "<your-api-key>",
+      "MAKE_ZONE": "<your-zone>",
+      "MAKE_TEAM": "<your-team-id>"
+    }
+  },
+  "odoo": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-odoo"
+    ],
+    "env": {
+      "ODOO_URL": "https://your-odoo-instance.com",
+      "ODOO_API_KEY": "your-api-key-here"
+    }
+  },
+  "contentful": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@ivotoby/contentful-management-mcp-server"
+    ],
+    "env": {
+      "CONTENTFUL_MANAGEMENT_ACCESS_TOKEN": "<Your CMA token>"
+    }
+  },
+  "climatiq-mcp-server": {
+    "command": "climatiq-mcp-server",
+    "env": {
+      "CLIMATIQ_API_KEY": "your_climatiq_api_key"
+    }
+  },
+  "ticktick": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/jen6/ticktick-mcp.git",
+      "ticktick-mcp"
+    ]
+  },
+  "things": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "things-mcp"
+    ]
+  },
+  "miro": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@k-jarzyna/mcp-miro"
+    ],
+    "env": {
+      "MIRO_ACCESS_TOKEN": "your_miro_access_token"
+    }
+  },
+  "plane": {
+    "command": "node",
+    "args": [
+      "path/to/plane-mcp-server/build/index.js"
+    ],
+    "env": {
+      "PLANE_API_KEY": "your_plane_api_key_here",
+      "PLANE_WORKSPACE_SLUG": "your_workspace_slug_here"
+    }
+  },
+  "kibela": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@kiwamizamurai/mcp-kibela-server"
+    ],
+    "env": {
+      "KIBELA_TEAM": "YOUR_TEAM_NAME",
+      "KIBELA_TOKEN": "YOUR_TOKEN"
+    }
+  },
+  "mcp-kibela": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e",
+      "KIBELA_TEAM",
+      "-e",
+      "KIBELA_TOKEN",
+      "ghcr.io/kj455/mcp-kibela:latest"
+    ],
+    "env": {
+      "KIBELA_TEAM": "your-team-name from https://[team-name].kibe.la",
+      "KIBELA_TOKEN": "your-token"
+    }
+  },
+  "Confluence communication server": {
+    "command": "node",
+    "args": [
+      "/PATH_TO_THE_PROJECT/build/index.js"
+    ],
+    "env": {
+      "CONFLUENCE_URL": "https://XXXXXXXX.atlassian.net/wiki",
+      "CONFLUENCE_API_MAIL": "Your email",
+      "CONFLUENCE_API_KEY": "KEY_FROM: https://id.atlassian.com/manage-profile/security/api-tokens"
+    }
+  },
+  "Jira communication server": {
+    "command": "node",
+    "args": [
+      "/PATH_TO_THE_PROJECT/build/index.js"
+    ],
+    "env": {
+      "JIRA_URL": "https://XXXXXXXX.atlassian.net",
+      "JIRA_API_MAIL": "Your email",
+      "JIRA_API_KEY": "KEY_FROM : https://id.atlassian.com/manage-profile/security/api-tokens"
+    }
+  },
+  "strava": {
+    "command": "npx",
+    "args": [
+      "mcp-remote",
+      "https://mcp-strava-oauth.<your-subdomain>.workers.dev/sse"
+    ]
+  },
+  "mcp-hko": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "github:louiscklaw/mcp-hko"
+    ]
+  },
+  "giphy": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-server-giphy"
+    ],
+    "env": {
+      "GIPHY_API_KEY": "<YOUR_API_KEY>"
+    }
+  },
+  "spotify": {
+    "command": "node",
+    "args": [
+      "spotify-mcp-server/build/index.js"
+    ]
+  },
+  "mcp-obsidian": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "<dir_to>/mcp-obsidian",
+      "run",
+      "mcp-obsidian"
+    ],
+    "env": {
+      "OBSIDIAN_API_KEY": "<your_api_key_here>",
+      "OBSIDIAN_HOST": "<your_obsidian_host>",
+      "OBSIDIAN_PORT": "<your_obsidian_port>"
+    }
+  },
+  "device-controll": {
+    "command": "pathToEnv\\venv\\Scripts\\python.exe",
+    "args": [
+      "pathToProject\\ScreenPilot\\main.py"
+    ]
+  },
+  "mcp-openai": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mzxrai/mcp-openai@latest"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "your-api-key-here (get one from https://platform.openai.com/api-keys)"
+    }
+  },
+  "my_mcp_server": {
+    "command": "all-in-one-model-context-protocol",
+    "args": [
+      "-env",
+      "/path/to/.env"
+    ]
+  },
+  "omniparser_autogui_mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "D:\\CLONED_PATH\\omniparser-autogui-mcp",
+      "run",
+      "omniparser-autogui-mcp"
+    ],
+    "env": {
+      "PYTHONIOENCODING": "utf-8",
+      "OCR_LANG": "en"
+    }
+  },
+  "offorte-proposals": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@offorte/mcp-server"
+    ],
+    "env": {
+      "OFFORTE_ACCOUNT_NAME": "<YOUR_ACCOUNT_NAME>",
+      "OFFORTE_API_KEY": "<YOUR_TOKEN>"
+    }
+  },
+  "human": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-human@latest"
+    ]
+  },
+  "coda": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "coda-mcp@latest"
+    ],
+    "env": {
+      "API_KEY": "..."
+    }
+  },
+  "openai-server": {
+    "command": "python",
+    "args": [
+      "-m",
+      "src.mcp_server_openai.server"
+    ],
+    "env": {
+      "PYTHONPATH": "C:/path/to/your/mcp-server-openai",
+      "OPENAI_API_KEY": "your-key-here"
+    }
+  },
+  "hacker-news": {
+    "command": "node",
+    "args": [
+      "/path/to/hn-server/build/index.js"
+    ]
+  },
+  "chat-openai": {
+    "command": "npx",
+    "args": [
+      "@pyroprompts/any-chat-completions-mcp"
+    ],
+    "env": {
+      "AI_CHAT_KEY": "OPENAI_KEY",
+      "AI_CHAT_NAME": "OpenAI",
+      "AI_CHAT_MODEL": "gpt-4o",
+      "AI_CHAT_BASE_URL": "https://api.openai.com/v1"
+    }
+  },
+  "ethics-vibe-check": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@r-huijts/ethics-vibe-check"
+    ]
+  },
+  "think-mcp": {
+    "command": "uvx",
+    "args": [
+      "think-mcp"
+    ],
+    "enabled": true
+  },
+  "ancestry": {
+    "command": "mcp-server-ancestry",
+    "args": [
+      "--gedcom-path",
+      "path/to/your/gedcom/files"
+    ]
+  },
+  "rember": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@getrember/mcp",
+      "--api-key=YOUR_REMBER_API_KEY"
+    ]
+  },
+  "asana": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@roychri/mcp-server-asana"
+    ],
+    "env": {
+      "ASANA_ACCESS_TOKEN": "your-asana-access-token"
+    }
+  },
+  "screenmonitormcp-v2": {
+    "command": "python",
+    "args": [
+      "-m",
+      "screenmonitormcp_v2.mcp_main"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "your-openai-api-key-here",
+      "OPENAI_BASE_URL": "https://openrouter.ai/api/v1",
+      "OPENAI_MODEL": "qwen/qwen2.5-vl-32b-instruct:free"
+    }
+  },
+  "MCP-wolfram-alpha": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "C:\\Users\\root\\Documents\\MCP-wolfram-alpha",
+      "run",
+      "MCP-wolfram-alpha"
+    ],
+    "env": {
+      "WOLFRAM_API_KEY": "your-app-id"
+    }
+  },
+  "tiktok-mcp": {
+    "command": "node",
+    "args": [
+      "path\\build\\index.js"
+    ],
+    "env": {
+      "TIKNEURON_MCP_API_KEY": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    }
+  },
+  "apple-notes-mcp": {
+    "command": "uv",
+    "args": [
+      "--directory",
+      "{project_dir}",
+      "run",
+      "apple-notes-mcp"
+    ]
+  },
+  "notion": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@suekou/mcp-notion-server"
+    ],
+    "env": {
+      "NOTION_API_TOKEN": "your-integration-token"
+    }
+  },
+  "linear": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@tacticlaunch/mcp-linear"
+    ],
+    "env": {
+      "LINEAR_API_TOKEN": "<YOUR_TOKEN>"
+    }
+  },
+  "Perplexity": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-perplexity"
+    ],
+    "env": {
+      "PERPLEXITY_API_KEY": "your-perplexity-api-key"
+    }
+  },
+  "mcp-time": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@theo.foobar/mcp-time"
+    ]
+  },
+  "plugwise": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "plugwise-mcp-server@latest"
+    ],
+    "env": {
+      "HUB1": "abc12345",
+      "HUB1IP": "192.168.1.100",
+      "HUB2": "def67890",
+      "HUB2IP": "192.168.1.101"
+    }
+  },
+  "oura": {
+    "command": "uvx",
+    "args": [
+      "oura-mcp-server"
+    ],
+    "env": {
+      "OURA_API_TOKEN": "YOUR_OURA_API_TOKEN"
+    }
+  },
+  "interactive": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "interactive-mcp"
+    ]
+  },
+  "web3": {
+    "command": "uvx",
+    "args": [
+      "web3-mcp"
+    ],
+    "env": {
+      "ANKR_ENDPOINT": "https://rpc.ankr.com/..."
+    }
+  },
+  "anki": {
+    "command": "uv",
+    "args": [
+      "run",
+      "anki-mcp"
+    ]
+  },
+  "hackmd": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "hackmd-mcp"
+    ],
+    "env": {
+      "HACKMD_API_TOKEN": "your_api_token"
+    }
+  },
+  "mcp-datetime": {
+    "command": "uvx",
+    "args": [
+      "mcp-datetime"
+    ]
+  },
+  "nanana": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@nanana-ai/mcp-server-nano-banana"
+    ],
+    "env": {
+      "NANANA_API_TOKEN": "your-api-token-here"
+    }
+  }
+}

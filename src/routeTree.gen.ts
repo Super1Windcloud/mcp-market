@@ -24,6 +24,7 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as ProductivityRouteImport } from './routes/productivity'
 import { Route as OtherToolsRouteImport } from './routes/other-tools'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as NeteasecloudMcpRouteImport } from './routes/neteasecloud-mcp'
 import { Route as MultimediaRouteImport } from './routes/multimedia'
 import { Route as MonitoringRouteImport } from './routes/monitoring'
 import { Route as MediaRouteImport } from './routes/media'
@@ -133,6 +134,11 @@ const OtherToolsRoute = OtherToolsRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NeteasecloudMcpRoute = NeteasecloudMcpRouteImport.update({
+  id: '/neteasecloud-mcp',
+  path: '/neteasecloud-mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MultimediaRoute = MultimediaRouteImport.update({
@@ -348,6 +354,7 @@ export interface FileRoutesByFullPath {
   '/media': typeof MediaRoute
   '/monitoring': typeof MonitoringRoute
   '/multimedia': typeof MultimediaRoute
+  '/neteasecloud-mcp': typeof NeteasecloudMcpRoute
   '/news': typeof NewsRoute
   '/other-tools': typeof OtherToolsRoute
   '/productivity': typeof ProductivityRoute
@@ -400,6 +407,7 @@ export interface FileRoutesByTo {
   '/media': typeof MediaRoute
   '/monitoring': typeof MonitoringRoute
   '/multimedia': typeof MultimediaRoute
+  '/neteasecloud-mcp': typeof NeteasecloudMcpRoute
   '/news': typeof NewsRoute
   '/other-tools': typeof OtherToolsRoute
   '/productivity': typeof ProductivityRoute
@@ -453,6 +461,7 @@ export interface FileRoutesById {
   '/media': typeof MediaRoute
   '/monitoring': typeof MonitoringRoute
   '/multimedia': typeof MultimediaRoute
+  '/neteasecloud-mcp': typeof NeteasecloudMcpRoute
   '/news': typeof NewsRoute
   '/other-tools': typeof OtherToolsRoute
   '/productivity': typeof ProductivityRoute
@@ -507,6 +516,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/monitoring'
     | '/multimedia'
+    | '/neteasecloud-mcp'
     | '/news'
     | '/other-tools'
     | '/productivity'
@@ -559,6 +569,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/monitoring'
     | '/multimedia'
+    | '/neteasecloud-mcp'
     | '/news'
     | '/other-tools'
     | '/productivity'
@@ -611,6 +622,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/monitoring'
     | '/multimedia'
+    | '/neteasecloud-mcp'
     | '/news'
     | '/other-tools'
     | '/productivity'
@@ -664,6 +676,7 @@ export interface RootRouteChildren {
   MediaRoute: typeof MediaRoute
   MonitoringRoute: typeof MonitoringRoute
   MultimediaRoute: typeof MultimediaRoute
+  NeteasecloudMcpRoute: typeof NeteasecloudMcpRoute
   NewsRoute: typeof NewsRoute
   OtherToolsRoute: typeof OtherToolsRoute
   ProductivityRoute: typeof ProductivityRoute
@@ -786,6 +799,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/neteasecloud-mcp': {
+      id: '/neteasecloud-mcp'
+      path: '/neteasecloud-mcp'
+      fullPath: '/neteasecloud-mcp'
+      preLoaderRoute: typeof NeteasecloudMcpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/multimedia': {
@@ -1072,6 +1092,7 @@ const rootRouteChildren: RootRouteChildren = {
   MediaRoute: MediaRoute,
   MonitoringRoute: MonitoringRoute,
   MultimediaRoute: MultimediaRoute,
+  NeteasecloudMcpRoute: NeteasecloudMcpRoute,
   NewsRoute: NewsRoute,
   OtherToolsRoute: OtherToolsRoute,
   ProductivityRoute: ProductivityRoute,
