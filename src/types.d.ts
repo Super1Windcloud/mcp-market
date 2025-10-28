@@ -8,6 +8,7 @@ import type {
   ChatMessage,
   ExecuteToolResponse,
   MCPServerConfig,
+  MCPServerDisplayConfig,
   SendMessageResponse,
   StartServerResponse,
   StopServerResponse,
@@ -51,6 +52,7 @@ interface MCPContext {
     serverName: string,
     config: Partial<MCPServerConfig>,
   ) => Promise<{ success: boolean; config?: MCPServerConfig; error?: string }>;
+  listCustomServers: () => Promise<MCPServerDisplayConfig[]>;
 }
 
 declare global {

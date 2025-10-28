@@ -5,7 +5,7 @@ import { MCPChatManager } from "@/mcp/chatManager";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import type { MCPServerConfig } from "@/types/mcp";
+import type { MCPServerConfig, MCPServerDisplayConfig } from "@/types/mcp";
 
 let manager: MCPChatManager | null = null;
 let handlersRegistered = false;
@@ -25,6 +25,7 @@ const serializeTool = (tool: { name: string; description: string; inputSchema: u
 });
 
 const CONFIG_FILENAME = "mcp_config.json";
+const CUSTOM_CONFIG_FILENAME = "my_mcp_config.json";
 
 const getPublicConfigCandidates = (): string[] => {
   const appPath = app.getAppPath();
@@ -37,6 +38,7 @@ const getPublicConfigCandidates = (): string[] => {
 };
 
 let cachedPublicConfigPath: string | null = null;
+let cachedCustomConfigPath: string | null = null;
 
 const resolvePublicConfigPath = (): string => {
   if (cachedPublicConfigPath && existsSync(cachedPublicConfigPath)) {
@@ -135,6 +137,43 @@ const getProjectRootCandidates = (): string[] => {
   );
 };
 
+const resolveCustomConfigPath = (): string => {
+  if (cachedCustomConfigPath && existsSync(cachedCustomConfigPath)) {
+    return cachedCustomConfigPath;
+  }
+
+  for (const basePath of getProjectRootCandidates()) {
+    const candidate = path.join(basePath, "public", CUSTOM_CONFIG_FILENAME);
+    if (existsSync(candidate)) {
+      cachedCustomConfigPath = candidate;
+      return candidate;
+    }
+  }
+
+  throw new Error(`无法在以下路径找到 ${CUSTOM_CONFIG_FILENAME}`);
+};
+
+const loadCustomServerCatalog = async (): Promise<Record<string, MCPServerDisplayConfig>> => {
+  const configPath = resolveCustomConfigPath();
+  const raw = await readFile(configPath, "utf-8");
+  const parsed = JSON.parse(raw) as { mcpServers?: Record<string, MCPServerDisplayConfig> };
+
+  if (!parsed || typeof parsed !== "object" || !parsed.mcpServers || typeof parsed.mcpServers !== "object") {
+    return {};
+  }
+
+  const catalog: Record<string, MCPServerDisplayConfig> = {};
+  for (const [key, entry] of Object.entries(parsed.mcpServers)) {
+    if (!entry || typeof entry !== "object") continue;
+    catalog[key] = {
+      ...entry,
+      name: entry.name ?? key,
+    };
+  }
+
+  return catalog;
+};
+
 const resolveLocalBinary = (binName: string): string | null => {
   const binaryFile = process.platform === "win32" ? `${binName}.cmd` : binName;
   for (const basePath of getProjectRootCandidates()) {
@@ -195,6 +234,20 @@ const attachHandlers = () => {
     return;
   }
   handlersRegistered = true;
+
+  ipcMain.handle(MCP_CHANNELS.LIST_CUSTOM_SERVERS, async () => {
+    try {
+      const catalog = await loadCustomServerCatalog();
+      return Object.values(catalog);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`读取 ${CUSTOM_CONFIG_FILENAME} 失败:`, error);
+      if (message.includes("无法在以下路径找到")) {
+        return [];
+      }
+      throw error instanceof Error ? error : new Error(message);
+    }
+  });
 
   ipcMain.handle(MCP_CHANNELS.START_SERVER, async (_event, rawConfig) => {
     const { name, command, args, env } = rawConfig ?? {};

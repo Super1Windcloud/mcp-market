@@ -4,6 +4,7 @@ import type {
   ChatMessage,
   ExecuteToolResponse,
   MCPServerConfig,
+  MCPServerDisplayConfig,
   SendMessageResponse,
   StartServerResponse,
   StopServerResponse,
@@ -43,4 +44,7 @@ export const mcpContext = {
       serverName,
       config,
     ) as Promise<{ success: boolean; config?: MCPServerConfig; error?: string }>,
+
+  listCustomServers: () =>
+    ipcRenderer.invoke(MCP_CHANNELS.LIST_CUSTOM_SERVERS) as Promise<MCPServerDisplayConfig[]>,
 };

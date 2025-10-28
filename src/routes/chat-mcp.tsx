@@ -23,14 +23,28 @@ export const resolveServerConfig = async (displayName: string, url: string): Pro
 
       if (!resolvedConfig.command || !Array.isArray(resolvedConfig.args)) {
         console.warn(`MCP override for ${displayName} 缺少 command 或 args`);
-
       } else {
         if (isDev()) console.log("current mcp config", resolvedConfig);
         return resolvedConfig;
       }
     }
 
-    console.error(`MCP config for "${displayName}" not found`);
+    const catalog = typeof window.mcp.listCustomServers === "function"
+      ? await window.mcp.listCustomServers()
+      : [];
+    const fallback = (catalog ?? []).find((server) => server.name === displayName);
+    if (fallback && fallback.command && Array.isArray(fallback.args)) {
+      const normalized: MCPServerConfig = {
+        name: displayName,
+        command: fallback.command,
+        args: [...fallback.args],
+        env: fallback.env,
+      };
+      if (isDev()) console.log(`using fallback MCP config from catalog for ${displayName}`, normalized);
+      return normalized;
+    }
+
+    console.warn(`MCP config for "${displayName}" not found`);
     return {
       name: displayName,
       command: "not found",
@@ -60,13 +74,21 @@ export const Route = createFileRoute("/chat-mcp")({
   },
 });
 
+const initGuessChat = {
+  id: "first",
+  role: "system",
+  content: "请问我有什么可以帮助您的?",
+  timestamp: new Date(),
+} satisfies  ChatMessage;
+
 function MCPChat() {
   const { name, desc, url } = Route.useSearch();
   const navigate = useNavigate();
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([initGuessChat]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   const createMessage = (role: ChatMessage["role"], content: string): ChatMessage => ({
     id: typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : "${Date.now()}",
@@ -86,6 +108,8 @@ function MCPChat() {
   useEffect(() => {
     const initializeMCP = async () => {
       if (!name) return;
+      setIsInitializing(true); // ✅ 开始动画
+
       try {
         const config = await resolveServerConfig(name, url);
 
@@ -99,24 +123,26 @@ function MCPChat() {
         }
 
         const result = await window.mcp.startServer(config);
-        if (!result.success) {
-          throw new Error(result.error || "启动 MCP 服务器失败");
-        }
+        if (!result.success) throw new Error(result.error || "启动 MCP 服务器失败");
 
         const history = await window.mcp.getChatHistory(name) as ChatMessage[];
-        setMessages(hydrateMessages(history ?? []));
+        if (!history || history.length === 0) {
+          setMessages([initGuessChat]);
+        } else {
+          setMessages(hydrateMessages(history));
+        }
       } catch (error) {
         const errorMessage = createMessage(
           "system",
-          `连接到MCP服务器时出错: ${error instanceof Error ? error.message : `未知错误`}`,
+          `连接到 MCP 服务器时出错: ${error instanceof Error ? error.message : `未知错误`}`,
         );
         setMessages([errorMessage]);
+      } finally {
+        setIsInitializing(false); // ✅ 初始化完成
       }
     };
 
     void initializeMCP();
-    return () => {
-    };
   }, [name, desc]);
 
   useEffect(() => {
@@ -187,7 +213,7 @@ function MCPChat() {
     if (!name) return;
     try {
       await window.mcp.clearChatHistory(name);
-      setMessages([]);
+      setMessages([initGuessChat]);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -198,6 +224,20 @@ function MCPChat() {
       ]);
     }
   };
+
+  if (isInitializing) {
+    return (
+      <div
+        className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-gray-900 via-gray-800 to-black text-center animate-fadeIn">
+        <div className="relative flex items-center justify-center mb-4">
+          <div className="w-12 h-12 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+        <p className="text-sm text-gray-300 animate-pulse">
+          正在启动 {name} 服务，请稍候...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-full  bg-background">
@@ -220,7 +260,7 @@ function MCPChat() {
                 if (name) {
                   await window.mcp.stopServer(name);
                 }
-                await navigate({ to: ".." });
+                await navigate({ to: "/", replace: true });
               }}
             >
               返回
@@ -235,6 +275,7 @@ function MCPChat() {
           backdropFilter: "blur(12px)", // backdrop-blur-md
           border: "1px solid rgba(255, 255, 255, 0.1)", // border border-white/10
         }}>
+
           <div className="p-4 space-y-4">
             {messages.map((message) => (
               <div

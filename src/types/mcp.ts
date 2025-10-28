@@ -9,11 +9,22 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
+
+
 export interface MCPServerConfig {
   name: string;
   command: string;
   args: string[];
   env?: Record<string, string>;
+}
+
+export interface MCPServerDisplayConfig extends MCPServerConfig {
+  desc?: string;
+  url?: string;
+}
+
+export interface MCPConfigCatalog {
+  mcpServers: Record<string, MCPServerDisplayConfig>;
 }
 
 export interface ToolDefinition {

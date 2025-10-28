@@ -190,7 +190,7 @@ function MCPChat() {
             </Button>
             <Button
               variant="ghost"
-              onClick={() => navigate({ to: "/", replace: true })}
+              onClick={() => navigate({ to: ".." })}
             >
               返回
             </Button>

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "NeteaseCloud MCP": {
+      "name": "NeteaseCloud MCP",
+      "url": "https://github.com/Super1WindCloud",
+      "desc": "网易云音乐MCP智能控制器，提供全局快捷键、搜索单曲播放、搜索歌单播放、自定义歌单管理、每日推荐和私人漫游等丰富功能",
+      "command": "npx",
+      "args": [
+        "tsx",
+        "neteasecloud-mcp/src/server.ts"
+      ]
+    }
+  }
+}

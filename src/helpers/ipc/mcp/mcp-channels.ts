@@ -9,4 +9,5 @@ export const MCP_CHANNELS = {
   CLEAR_CHAT_HISTORY: 'mcp-clear-chat-history',
   GET_SERVER_CONFIG: 'mcp-get-server-config',
   UPSERT_SERVER_CONFIG: 'mcp-upsert-server-config',
+  LIST_CUSTOM_SERVERS: 'mcp-list-custom-servers',
 } as const;

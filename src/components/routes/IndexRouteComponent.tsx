@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GlassEffectCard } from "@/components/GlassEffectCard";
 import { McpSourceType } from "@/components/template/NavigationMenu";
 import { openExternalUrl } from "@/helpers/window_helpers";
@@ -6,14 +6,68 @@ import { RocketIcon } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 
 const IndexRouteComponent: React.FC = () => {
-
-  const mcps = [{
-    name: "NeteaseCloud MCP",
-    url: "https://github.com/Super1WindCloud",
-    desc: "网易云音乐MCP智能控制器，提供全局快捷键、搜索单曲播放、搜索歌单播放、自定义歌单管理、每日推荐和私人漫游等丰富功能",
-  }] as McpSourceType[];
-
   const navigate = useNavigate();
+  const [mcps, setMcps] = useState<McpSourceType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadMyMcps = async () => {
+      try {
+        const servers = await window.mcp.listCustomServers();
+        if (cancelled) return;
+        const items: McpSourceType[] = (servers ?? [])
+          .filter((server) => server?.name)
+          .map((server) => ({
+            name: server.name,
+            desc: server.desc ?? "",
+            url: server.url ?? "",
+          }));
+        setMcps(items);
+      } catch (error) {
+        if (cancelled) return;
+        console.error("加载 my_mcp_config.json 失败:", error);
+        setErrorMessage(error instanceof Error ? error.message : String(error));
+      } finally {
+        if (!cancelled) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    void loadMyMcps();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full text-muted-foreground">
+        正在加载 MCP 配置...
+      </div>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <div className="flex items-center justify-center h-full text-destructive">
+        读取 MCP 配置失败：{errorMessage}
+      </div>
+    );
+  }
+
+  if (mcps.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full text-muted-foreground">
+        尚未配置 MCP，可在 public/my_mcp_config.json 中添加条目。
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  p-4 mb-20 ">
       {

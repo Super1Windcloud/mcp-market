@@ -99,6 +99,17 @@ export function RouteComponent() {
 
   // 🔹 跳转到 Chat 页面
   const skipToChatMcp = async (name: string, desc: string, url: string) => {
+    const result = await resolveServerConfig(name, url);
+
+    if (Object.keys(result).length === 0) {
+      return;
+    }
+
+    if (mcpConfig.command === "not found" || result.command === "not found") {
+      toast.error("请手动配置该MCP");
+      return;
+    }
+
     await navigate({
       to: "/chat-mcp",
       search: { name, desc, url },
