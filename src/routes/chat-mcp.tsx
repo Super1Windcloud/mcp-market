@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 import { Send, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,7 @@ export const resolveServerConfig = async (displayName: string, url: string): Pro
     const catalog = typeof window.mcp.listCustomServers === "function"
       ? await window.mcp.listCustomServers()
       : [];
+
     const fallback = (catalog ?? []).find((server) => server.name === displayName);
     if (fallback && fallback.command && Array.isArray(fallback.args)) {
       const normalized: MCPServerConfig = {
@@ -83,12 +84,12 @@ const initGuessChat = {
 
 function MCPChat() {
   const { name, desc, url } = Route.useSearch();
-  const navigate = useNavigate();
   const [messages, setMessages] = useState<ChatMessage[]>([initGuessChat]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const [isInitializing, setIsInitializing] = useState(true);
+
 
   const createMessage = (role: ChatMessage["role"], content: string): ChatMessage => ({
     id: typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : "${Date.now()}",
@@ -152,6 +153,9 @@ function MCPChat() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const router = useRouter();
+  const onBack = () => router.history.back();
 
   const handleSendMessage = async () => {
     const trimmed = inputValue.trim();
@@ -260,7 +264,8 @@ function MCPChat() {
                 if (name) {
                   await window.mcp.stopServer(name);
                 }
-                await navigate({ to: "/", replace: true });
+
+                onBack();
               }}
             >
               返回

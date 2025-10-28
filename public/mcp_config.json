@@ -6322,12 +6322,25 @@
   },
   "OthmaneBlial/term_mcp_deepseek": {
     "name": "OthmaneBlial/term_mcp_deepseek",
-    "command": "草拟吗司马东西",
+    "command": "not Found ",
     "args": [
       "not found"
     ],
     "env": {
       "error": "请访问https://github.com/OthmaneBlial/term_mcp_deepseek 自行配置mcpServer"
+    }
+  },
+  "custom-mcp": {
+    "name": "custom-mcp",
+    "url": "https://www.google.com",
+    "desc": "custom-mcp",
+    "command": "python server.py",
+    "args": [
+      "--port",
+      "8080"
+    ],
+    "env": {
+      "DEBUG": "true"
     }
   }
 }

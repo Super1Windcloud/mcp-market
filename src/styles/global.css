@@ -4,6 +4,31 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes border-shine {
+    0% {
+        background-position: 0% 50%;
+        opacity: 0.7;
+        filter: brightness(1);
+    }
+    50% {
+        background-position: 100% 50%;
+        opacity: 1;
+        filter: brightness(1.5);
+    }
+    100% {
+        background-position: 0% 50%;
+        opacity: 0.7;
+        filter: brightness(1);
+    }
+}
+
+.animate-border-shine {
+    background-size: 200% 200%;
+    animation: border-shine 3s linear infinite;
+}
+
+
+
 @theme {
     --color-border: hsl(var(--border));
     --color-input: hsl(var(--input));

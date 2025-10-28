@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { GlassEffectCard } from "@/components/GlassEffectCard";
 import { McpSourceType } from "@/components/template/NavigationMenu";
 import { openExternalUrl } from "@/helpers/window_helpers";
-import { RocketIcon } from "lucide-react";
+import { PlusCircle, RocketIcon } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
+import { AddCustomMcpButton } from "@/components/AddCustomMcpButton.tsx";
 
 const IndexRouteComponent: React.FC = () => {
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ const IndexRouteComponent: React.FC = () => {
               <button
                 onClick={async () => {
                   await navigate({
-                    to: "/chat-mcp", replace: true, search: {
+                    to: "/chat-mcp", search: {
                       name: item.name,
                       desc: item.desc,
                       url: item.url,
@@ -110,11 +111,39 @@ const IndexRouteComponent: React.FC = () => {
             </GlassEffectCard>
           );
         })
+
       }
-
-
+      <AddCustomMcpButton />
     </div>
   );
 };
+
+export function AddCustomMcp() {
+  const openMcpConfigDialog =()=>{
+
+  }
+  return (
+    <div  onClick={openMcpConfigDialog} className="relative group cursor-pointer rounded-2xl overflow-hidden">
+      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div
+          className="absolute inset-[-2px] rounded-2xl bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 animate-border-shine blur-md"></div>
+      </div>
+
+      <GlassEffectCard
+        className="relative flex flex-col items-center justify-center h-64 text-muted-foreground
+                   border border-white/10 group-hover:border-transparent transition-all duration-300"
+      >
+        <PlusCircle
+          size={100}
+          className="text-blue-400 group-hover:text-blue-500 transition-all duration-300"
+        />
+        <span className="mt-4 text-sm text-gray-400 group-hover:text-blue-300 transition-all">
+          添加自定义 MCP
+        </span>
+      </GlassEffectCard>
+    </div>
+  );
+}
+
 
 export default IndexRouteComponent;

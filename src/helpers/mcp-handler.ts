@@ -11,9 +11,9 @@ const mcpServers = new Map<string, {
  * 注册MCP服务器进程及其消息处理函数
  */
 export function registerMCPHandler(
-  name: string, 
-  process: ChildProcess, 
-  onMessage: ((data: any) => void) | null
+  name: string,
+  process: ChildProcess,
+  onMessage: ((data: any) => void) | null,
 ) {
   // 如果已存在相同的服务器，先清理
   if (mcpServers.has(name)) {
@@ -25,17 +25,17 @@ export function registerMCPHandler(
   mcpServers.set(name, { process, onMessage });
 
   // 设置输出处理
-  process.stdout.on("data", (data) => {
+  process.stdout?.on("data", (data) => {
     const output = data.toString();
     console.log(`[MCP-${name}] stdout:`, output);
 
     try {
       // 尝试解析服务器的JSON-RPC响应
-      const lines = output.split('\n');
+      const lines = output.split("\n");
       for (const line of lines) {
-        if (line.trim() === '') continue;
+        if (line.trim() === "") continue;
         const response = JSON.parse(line.trim());
-        
+
         // 检查是否是响应
         if (response.id !== undefined) {
           // 调用注册的消息处理函数
@@ -50,7 +50,7 @@ export function registerMCPHandler(
     }
   });
 
-  process.stderr.on("data", (data) => {
+  process.stderr?.on("data", (data) => {
     console.error(`[MCP-${name}] stderr:`, data.toString());
   });
 
