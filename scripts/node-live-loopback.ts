@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 dotenv.config({
   path: "../.env",
 });
+
 const live = async () => {
   const deepgram = createClient(process.env.DEEPGRAM_API_KEY);
   const connection = deepgram.listen.live({
