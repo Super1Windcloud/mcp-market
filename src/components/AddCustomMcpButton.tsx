@@ -9,20 +9,26 @@ interface AddCustomMcpButtonProps {
   onSave?: () => Promise<void>;
 }
 
-export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
-  const [showEditor, setShowEditor] = useState(false);
-  const [jsonText, setJsonText] = useState(`{
+const initDefaultText = `{
   "name": "custom-mcp",
   "url": "https://www.google.com",
   "desc":"custom-mcp",
   "command": "python server.py",
   "args": ["--port", "8080"],
   "env": { "DEBUG": "true" }
-}`);
+}`;
 
-  // 🔹 ESC 关闭
+export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
+  const [showEditor, setShowEditor] = useState(false);
+  const [jsonText, setJsonText] = useState(initDefaultText);
+
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => e.key === "Escape" && setShowEditor(false);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowEditor(false);
+        setJsonText(initDefaultText);
+      }
+    };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
@@ -32,7 +38,6 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
     try {
       const parsed = JSON.parse(jsonText) as unknown;
 
-      // Handle different input formats
       let payload: MCPServerDisplayConfig[] | Record<string, MCPServerDisplayConfig> | MCPConfigCatalog;
 
       if (Array.isArray(parsed)) {
@@ -51,8 +56,8 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
           },
         };
       } else if (parsed && typeof parsed === "object") {
-        // If it's a Record of configs, pass it directly
-        payload = parsed as Record<string, MCPServerDisplayConfig>;
+        toast.error("不符合MCP 配置格式");
+        return;
       } else {
         throw new Error("配置格式无效：必须是对象或数组");
       }
@@ -132,7 +137,6 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
               spellCheck={false}
             />
 
-            {/* 底部按钮 */}
             <div className="flex justify-between mt-4">
               <Button
                 variant="ghost"
