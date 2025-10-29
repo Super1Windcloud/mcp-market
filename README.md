@@ -2,7 +2,7 @@
 
 > 🚀 一个精选的优秀模型上下文协议 (MCP) 服务器市场，基于 Electron Forge 与 shadcn-ui 构建
 
-![MCP Market](images/img.png)
+![MCP Market](images/img_2.png)
 
 ## 📋 项目简介
 

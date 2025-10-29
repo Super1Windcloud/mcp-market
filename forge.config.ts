@@ -1,3 +1,4 @@
+import path from "path";
 import type { ForgeConfig } from "@electron-forge/shared-types";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { MakerDeb } from "@electron-forge/maker-deb";
@@ -13,7 +14,7 @@ import MakerPKG from "@electron-forge/maker-pkg";
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    icon: "src/assets/icon",
+    icon: path.resolve(__dirname, "public", "icon.ico"),
     extraResource: ["public"],
     osxSign: {},
     osxNotarize: {
@@ -29,7 +30,9 @@ const config: ForgeConfig = {
   rebuildConfig: {},
 
   makers: [
-    new MakerSquirrel({}),
+    new MakerSquirrel({
+      setupIcon: path.resolve(__dirname, "public", "icon.ico"),
+    }),
     new MakerZIP({}, ["darwin"]),
     new MakerDMG({}),
     new MakerPKG({}),
@@ -44,6 +47,7 @@ const config: ForgeConfig = {
       shortcutName: "MCP Market",
       defaultInstallMode: "perUser",
       shortName: "mcp-market",
+      iconPath: path.resolve(__dirname, "public", "icon.ico"),
       ui: {
         chooseDirectory: true,
       },

@@ -2,6 +2,7 @@ import DragWindowRegion from "@/components/DragWindowRegion";
 import NavigationMenu from "@/components/template/NavigationMenu";
 import ToggleTheme from "@/components/ToggleTheme";
 import React from "react";
+import { ComicText } from "@/components/ui/comic-text.tsx";
 
 export default function BaseLayout({
                                      children,
@@ -13,8 +14,10 @@ export default function BaseLayout({
       <DragWindowRegion title="Mcp Market" />
 
       <div className="flex flex-row w-full justify-center items-center p-2">
-        <h1 className="text-3xl font-bold self-center">🌐 MCP Servers 市场</h1>
-        <ToggleTheme />
+        <ComicText fontSize={2}>
+          🌐 MCP Servers 市场
+        </ComicText>
+        <ToggleTheme  />
       </div>
 
       <div className="flex flex-1 w-full h-full min-h-0">
@@ -28,6 +31,7 @@ export default function BaseLayout({
           {children}
         </main>
       </div>
+
     </div>
   );
 }

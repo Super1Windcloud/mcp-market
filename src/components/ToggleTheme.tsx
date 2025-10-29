@@ -29,7 +29,7 @@ export default function ToggleTheme() {
   };
 
   return (
-    <div className={"cursor-pointer ml-4 "}>
+    <div className={"cursor-pointer ml-5  mt-3 scale-200"}>
       {
         theme === "dark" ? (
           <Sun size={16} onClick={handleClick} />
