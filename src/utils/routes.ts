@@ -1,8 +1,8 @@
 import { routeTree } from "@/routeTree.gen";
-import { createBrowserHistory, createRouter } from "@tanstack/react-router";
+import { createBrowserHistory, createHashHistory, createRouter } from "@tanstack/react-router";
+import { isDev } from "@/utils";
 
-
-const history = createBrowserHistory();
+const history = isDev() ? createBrowserHistory() : createHashHistory();
 
 export const router = createRouter({
   defaultPendingMinMs: 0,
