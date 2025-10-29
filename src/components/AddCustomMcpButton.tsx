@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { PlusCircle, X, Save, Wand2 } from "lucide-react";
 import { GlassEffectCard } from "@/components/GlassEffectCard";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,6 @@ const initDefaultText = `{
 export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
   const [showEditor, setShowEditor] = useState(false);
   const [jsonText, setJsonText] = useState(initDefaultText);
-  const confettiInstance = useRef<ReturnType<typeof confetti.create> | null>(null);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -36,17 +35,6 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    confettiInstance.current = confetti.create(undefined, {
-      resize: true,
-      useWorker: true,
-    });
-    return () => {
-      confettiInstance.current?.reset();
-      confettiInstance.current = null;
-    };
-  }, []);
 
   const handleSave = async () => {
     try {
@@ -88,26 +76,19 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
       if (onSave) {
         await onSave();
       }
-      handleClickConfetti();
+      handleClick();
     } catch (err) {
       toast.error("❌ 保存失败: " + (err instanceof Error ? err.message : String(err)));
     }
   };
-
-  const handleClickConfetti = () => {
-    if (typeof window === "undefined") return;
+  const handleClick = () => {
     const end = Date.now() + 3 * 1000; // 3 seconds
     const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
-    const fire = (options: Parameters<typeof confetti>[0]) => {
-      if (confettiInstance.current) {
-        confettiInstance.current(options);
-      } else {
-        confetti(options);
-      }
-    };
+
     const frame = () => {
       if (Date.now() > end) return;
-      fire({
+
+      confetti({
         particleCount: 2,
         angle: 60,
         spread: 55,
@@ -115,13 +96,14 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
         origin: { x: 0, y: 0.5 },
         colors: colors,
       });
-      fire({
+      confetti({
         particleCount: 2,
         angle: 120,
         spread: 55,
         startVelocity: 60,
         origin: { x: 1, y: 0.5 },
         colors: colors,
+
       });
 
       requestAnimationFrame(frame);
@@ -129,7 +111,6 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
 
     frame();
   };
-
 
   const handleFormat = () => {
     try {
@@ -168,9 +149,10 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
       </div>
 
       <ShineBorder duration={3600} borderWidth={2} shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
-      {/* 💬 弹出编辑器 */}
+
       {showEditor && (
         <div className="fixed inset-0 flex items-center justify-center  backdrop-blur-md z-50">
+
           <div
             className="dark:bg-gray-900/90 backdrop-blur-md rounded-xl shadow-2xl p-6 w-[700px]   h-full  max-h-2/3 relative flex flex-col">
             <div className="flex justify-between items-center mb-4">
