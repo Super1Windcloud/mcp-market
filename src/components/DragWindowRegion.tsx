@@ -5,6 +5,7 @@ import {
 } from "@/helpers/window_helpers";
 import { isMacOS } from "@/utils/platform";
 import React, { type ReactNode } from "react";
+import { SparklesText } from "@/components/ui/sparkles-text.tsx";
 
 interface DragWindowRegionProps {
   title?: ReactNode;
@@ -15,13 +16,13 @@ export default function DragWindowRegion({ title }: DragWindowRegionProps) {
     <div className="flex w-screen items-stretch justify-between">
       <div className="draglayer w-full">
         {title && !isMacOS() && (
-          <div className="flex flex-1 p-2 text-xs whitespace-nowrap text-gray-400 select-none">
+          <SparklesText className="flex flex-1 p-2 text-xs whitespace-nowrap text-gray-400 select-none">
             {title}
-          </div>
+          </SparklesText>
         )}
         {isMacOS() && (
           <div className="flex flex-1 p-2">
-            {/* Maintain the same height but do not display content */}
+
           </div>
         )}
       </div>

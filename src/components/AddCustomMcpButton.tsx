@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { PlusCircle, X, Save, Wand2 } from "lucide-react";
 import { GlassEffectCard } from "@/components/GlassEffectCard";
 import { Button } from "@/components/ui/button";
 import { MCPServerDisplayConfig, MCPConfigCatalog } from "@/types/mcp.ts";
 import { toast } from "sonner";
+import confetti from "canvas-confetti";
+import { ShineBorder } from "@/components/ui/shine-border.tsx";
 
 interface AddCustomMcpButtonProps {
   onSave?: () => Promise<void>;
@@ -21,6 +23,7 @@ const initDefaultText = `{
 export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
   const [showEditor, setShowEditor] = useState(false);
   const [jsonText, setJsonText] = useState(initDefaultText);
+  const confettiInstance = useRef<ReturnType<typeof confetti.create> | null>(null);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -33,6 +36,17 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    confettiInstance.current = confetti.create(undefined, {
+      resize: true,
+      useWorker: true,
+    });
+    return () => {
+      confettiInstance.current?.reset();
+      confettiInstance.current = null;
+    };
+  }, []);
 
   const handleSave = async () => {
     try {
@@ -62,20 +76,61 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
         throw new Error("配置格式无效：必须是对象或数组");
       }
 
-      await window.mcp.saveCustomServers(payload);
+      const result = await window.mcp.saveCustomServers(payload);
+      if (!result?.success) {
+        toast.error(`❌ 保存失败: ${result?.error ?? "未知错误"}`);
+        return;
+      }
+
       toast.success("✅ MCP 配置已保存！");
       setShowEditor(false);
 
-      // 保存后刷新列表
       if (onSave) {
         await onSave();
       }
+      handleClickConfetti();
     } catch (err) {
       toast.error("❌ 保存失败: " + (err instanceof Error ? err.message : String(err)));
     }
   };
 
-  // 🔹 一键格式化 JSON
+  const handleClickConfetti = () => {
+    if (typeof window === "undefined") return;
+    const end = Date.now() + 3 * 1000; // 3 seconds
+    const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+    const fire = (options: Parameters<typeof confetti>[0]) => {
+      if (confettiInstance.current) {
+        confettiInstance.current(options);
+      } else {
+        confetti(options);
+      }
+    };
+    const frame = () => {
+      if (Date.now() > end) return;
+      fire({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 0, y: 0.5 },
+        colors: colors,
+      });
+      fire({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 1, y: 0.5 },
+        colors: colors,
+      });
+
+      requestAnimationFrame(frame);
+    };
+
+    frame();
+  };
+
+
   const handleFormat = () => {
     try {
       const formatted = JSON.stringify(JSON.parse(jsonText), null, 2);
@@ -97,9 +152,10 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
         </div>
 
         <GlassEffectCard
-          className="relative flex flex-col items-center justify-center h-64 text-muted-foreground
+          className="relative flex flex-col items-center justify-center h-50 text-muted-foreground
                      border border-white/10 group-hover:border-transparent transition-all duration-300"
         >
+
           <PlusCircle
             size={100}
             className="text-blue-400 group-hover:text-blue-500 transition-all duration-300"
@@ -107,9 +163,11 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
           <span className="mt-4 text-sm text-gray-400 group-hover:text-blue-300 transition-all">
             添加自定义 MCP
           </span>
+
         </GlassEffectCard>
       </div>
 
+      <ShineBorder duration={3600} borderWidth={2} shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
       {/* 💬 弹出编辑器 */}
       {showEditor && (
         <div className="fixed inset-0 flex items-center justify-center  backdrop-blur-md z-50">

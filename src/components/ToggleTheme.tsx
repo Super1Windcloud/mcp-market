@@ -13,7 +13,6 @@ export default function ToggleTheme() {
 
     fetchTheme();
 
-    // Poll for theme changes periodically as a fallback
     const interval = setInterval(fetchTheme, 1000);
 
     return () => {
@@ -23,13 +22,12 @@ export default function ToggleTheme() {
 
   const handleClick = async () => {
     await toggleTheme();
-    // After toggling, fetch the new theme state
     const currentTheme = await getCurrentTheme();
     setTheme(currentTheme.local || "system");
   };
 
   return (
-    <div className={"cursor-pointer ml-5  mt-3 scale-200"}>
+    <div className={"cursor-pointer ml-5  mt-7 scale-200"}>
       {
         theme === "dark" ? (
           <Sun size={16} onClick={handleClick} />

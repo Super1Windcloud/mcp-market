@@ -20,11 +20,11 @@ const config: ForgeConfig = {
     osxNotarize: {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
-      tool: 'notarytool',
-      appleId: process.env.APPLE_ID || '',
-      appleIdPassword: process.env.APPLE_PASSWORD || '',
-      teamId: process.env.APPLE_TEAM_ID  || ' '
-    }
+      tool: "notarytool",
+      appleId: process.env.APPLE_ID || "",
+      appleIdPassword: process.env.APPLE_PASSWORD || "",
+      teamId: process.env.APPLE_TEAM_ID || " ",
+    },
   },
 
   rebuildConfig: {},
@@ -47,7 +47,7 @@ const config: ForgeConfig = {
       shortcutName: "MCP Market",
       defaultInstallMode: "perUser",
       shortName: "mcp-market",
-      iconPath: path.resolve(__dirname, "public", "icon.ico"),
+      icon: path.resolve(__dirname, "public", "icon.ico"),
       ui: {
         chooseDirectory: true,
       },

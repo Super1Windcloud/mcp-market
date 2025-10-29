@@ -8,7 +8,6 @@ import { resolveServerConfig } from "@/routes/chat-mcp";
 import { MCPServerConfig } from "@/types/mcp";
 import { toast } from "sonner";
 import { useAsync } from "react-use";
-import { RainbowButton } from "@/components/ui/rainbow-button.tsx";
 
 export function RouteComponent() {
   const allMcps = useMcpsStateStore(s => s.allMcps);
