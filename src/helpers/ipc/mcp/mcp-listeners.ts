@@ -430,8 +430,10 @@ const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
 
 const attachHandlers = () => {
   if (handlersRegistered) {
+    console.log("[MCP] Handlers already registered, skipping...");
     return;
   }
+  console.log("[MCP] Registering handlers...");
   handlersRegistered = true;
 
   ipcMain.handle(MCP_CHANNELS.LIST_CUSTOM_SERVERS, async () => {
@@ -484,6 +486,7 @@ const attachHandlers = () => {
   });
 
   ipcMain.handle(MCP_CHANNELS.DELETE_CUSTOM_SERVER, async (_event, serverName: string) => {
+    console.log(`[MCP] DELETE_CUSTOM_SERVER called with serverName: ${String(serverName)}`);
     try {
       if (!serverName || typeof serverName !== "string") {
         return { success: false, error: "缺少服务器名称" };
@@ -648,26 +651,34 @@ const attachHandlers = () => {
 };
 
 export function registerMCPServerListeners() {
+  console.log("[MCP] registerMCPServerListeners called, handlersRegistered:", handlersRegistered);
   if (handlersRegistered) {
+    console.log("[MCP] Handlers already registered, returning...");
+    return;
+  }
+
+  if (registrationPromise) {
+    console.log("[MCP] Registration promise already exists, waiting...");
     return;
   }
 
   if (app.isReady()) {
+    console.log("[MCP] App is ready, attaching handlers immediately");
     attachHandlers();
     return;
   }
 
-  if (!registrationPromise) {
-    registrationPromise = app
-      .whenReady()
-      .then(() => {
-        attachHandlers();
-      })
-      .catch((error: unknown) => {
-        console.error("注册 MCP 监听器失败:", error);
-        registrationPromise = null;
-      });
-  }
+  console.log("[MCP] App not ready, waiting for app.whenReady()");
+  registrationPromise = app
+    .whenReady()
+    .then(() => {
+      console.log("[MCP] App is now ready, attaching handlers");
+      attachHandlers();
+    })
+    .catch((error: unknown) => {
+      console.error("注册 MCP 监听器失败:", error);
+      registrationPromise = null;
+    });
 }
 
 // Ensure handlers are registered even if registerListeners isn't invoked yet.
