@@ -6,6 +6,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { MCPServerConfig, MCPServerDisplayConfig } from "@/types/mcp";
+import { writeSomeLogs } from "@/utils";
 
 let manager: MCPChatManager | null = null;
 let handlersRegistered = false;
@@ -109,6 +110,7 @@ const ensureWritableConfigPath = async (): Promise<string> => {
     }
     return overridePath;
   } catch (error) {
+    writeSomeLogs(error)
     // 最后的备选方案：使用 .vite/build/public
     const builtDir = path.join(process.cwd(), ".vite", "build", "public");
     const builtPath = path.join(builtDir, CONFIG_FILENAME);
@@ -407,9 +409,36 @@ const resolveArgumentPath = (value: string): string => {
   return value;
 };
 
+const isNeteaseServerConfig = (config: MCPServerConfig): boolean => {
+  const nameMatch = typeof config.name === "string" && config.name.toLowerCase().includes("neteasecloud");
+  const argsMatch = config.args.some(
+    (arg) => typeof arg === "string" && arg.includes("neteasecloud-mcp"),
+  );
+  return nameMatch || argsMatch;
+};
+
+const resolvePackagedNeteaseEntry = (): string | null => {
+  if (!app.isPackaged || typeof process.resourcesPath !== "string") {
+    return null;
+  }
+
+  const candidates = [
+    path.join(process.resourcesPath, "neteasecloud-mcp", "dist", "server.js"),
+    path.join(process.resourcesPath, "dist", "server.js"),
+  ];
+
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  return null;
+};
+
 const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
   let command = config.command;
   const args = [...config.args];
+  const mergedEnv = { ...(config.env ?? {}) };
 
   if (command === "npx" && args[0] === "tsx") {
     const localTsx = resolveLocalBinary("tsx");
@@ -419,12 +448,26 @@ const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
     }
   }
 
-  const normalizedArgs = args.map((arg) => resolveArgumentPath(arg));
+  let normalizedArgs = args.map((arg) => resolveArgumentPath(arg));
+
+  if (app.isPackaged && isNeteaseServerConfig(config)) {
+    const packagedEntry = resolvePackagedNeteaseEntry();
+    if (packagedEntry) {
+      command = process.execPath;
+      normalizedArgs = [packagedEntry];
+      mergedEnv.ELECTRON_RUN_AS_NODE = "1";
+      if (!mergedEnv.MCP_RESOURCE_BASE && typeof process.resourcesPath === "string") {
+        mergedEnv.MCP_RESOURCE_BASE = process.resourcesPath;
+      }
+      mergedEnv.MCP_NETEASE_ROOT = path.dirname(packagedEntry);
+    }
+  }
 
   return {
     ...config,
     command,
     args: normalizedArgs,
+    env: mergedEnv,
   };
 };
 

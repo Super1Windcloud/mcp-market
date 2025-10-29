@@ -7,18 +7,25 @@ import { writeSomeLogs } from "@/utils";
 
 const inDevelopment = process.env.NODE_ENV === "development";
 
-const iconPath = path.join(__dirname, "public", "icon.jpg");
-
-if (inDevelopment) {
-  console.log(iconPath);
-} else {
-  writeSomeLogs(iconPath);
-}
+const resolveAssetPath = (...segments: string[]) => {
+  if (app.isPackaged) {
+    return path.join(process.resourcesPath, ...segments);
+  }
+  return path.join(app.getAppPath(), ...segments);
+};
 
 let flag = false;
 
 function createWindow() {
   const preload = path.join(__dirname, "preload.js");
+  const iconPath = resolveAssetPath("public", "icon.jpg");
+
+  if (inDevelopment) {
+    console.log(iconPath);
+  } else {
+    writeSomeLogs(iconPath);
+  }
+
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -63,12 +70,20 @@ function createWindow() {
 }
 
 
+app.whenReady().then(() => {
+  if (app.isPackaged) {
+    process.env.MCP_RESOURCE_BASE = process.resourcesPath;
+  } else {
+    process.env.MCP_RESOURCE_BASE = app.getAppPath();
+  }
+  createWindow();
+});
+
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
-app.on("ready", createWindow);
 
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {

@@ -1,7 +1,7 @@
 import React from "react";
 
-export function GlassEffectCard({ children, className }: {
-  children: React.ReactNode, className ?: string
+export function GlassEffectCard({ children, className, noPadding }: {
+  children: React.ReactNode, className?: string, noPadding?: boolean,
 }) {
   return (
     <div
@@ -13,7 +13,7 @@ export function GlassEffectCard({ children, className }: {
           border: "1px solid rgba(255, 255, 255, 0.1)", // border border-white/10
           borderRadius: "15px",
           position: "relative",
-          padding: "1rem",
+          padding: !noPadding ? "1rem" : "0",
         }
       }
       className={className}

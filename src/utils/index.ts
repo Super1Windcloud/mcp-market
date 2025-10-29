@@ -69,11 +69,11 @@ class FileLogger {
 }
 
 
-export function writeSomeLogs(...messages: string[]) {
+export function writeSomeLogs(...messages: string[]): void {
   const logger = new FileLogger();
   messages.forEach((message) => logger.info(message));
 }
 
-export function  isDev(){
-  return process.env.NODE_ENV==='development'
+export function isDev() {
+  return process.env.NODE_ENV === "development";
 }

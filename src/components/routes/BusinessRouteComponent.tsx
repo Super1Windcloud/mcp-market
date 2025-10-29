@@ -8,6 +8,7 @@ import { resolveServerConfig } from "@/routes/chat-mcp";
 import { MCPServerConfig } from "@/types/mcp";
 import { toast } from "sonner";
 import { useAsync } from "react-use";
+import SpotlightCard from "@/components/SpotlightCard.tsx";
 
 export function RouteComponent() {
   const allMcps = useMcpsStateStore(s => s.allMcps);
@@ -123,37 +124,43 @@ export function RouteComponent() {
         {allMcps.map(mcp => {
           if (path.includes(mcp.route)) {
             return mcp.mcps.map((item, index) => (
-              <GlassEffectCard key={mcp.label + index} className="flex flex-col justify-between relative">
-                {/* 🔸右上角编辑按钮 */}
-                <div className="absolute top-1 right-1" title={"配置当前MCP"}>
+              <GlassEffectCard noPadding={true} key={mcp.label + index}
+                               className="h-full w-full">
+                <SpotlightCard
+                  className={"bg-transparent h-full  w-full border-none m-0 p-0 flex flex-col justify-between relative"}>
+
+
+                  <div className="absolute top-1 right-1" title={"配置当前MCP"}>
+                    <button
+                      onClick={() => openAndEditDefaultMcpConfig(item.name, item.url)}
+                      className="bg-gray-800/40 hover:bg-gray-700/60 text-white rounded-full shadow-md transition p-1.5"
+                      title="配置当前MCP"
+                    >
+                      <PencilIcon className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  <div className={"mx-3"}>
+                    <h3
+                      onClick={async () => await openExternalUrl(item.url)}
+                      className="cursor-pointer hover:underline font-semibold text-center break-words whitespace-normal"
+                    >
+                      {item.name}
+                    </h3>
+                    <p className="text-sm text-gray-400 dark:text-gray-400 break-words whitespace-normal">
+                      {item.desc}
+                    </p>
+                  </div>
+
                   <button
-                    onClick={() => openAndEditDefaultMcpConfig(item.name, item.url)}
-                    className="bg-gray-800/40 hover:bg-gray-700/60 text-white rounded-full shadow-md transition p-1.5"
-                    title="配置当前MCP"
+                    onClick={async () => await skipToChatMcp(item.name, item.desc, item.url)}
+                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-pink-500 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 mt-4"
                   >
-                    <PencilIcon className="w-4 h-4" />
+                    <RocketIcon className="w-5 h-5" />
+                    <span className="font-semibold">Start</span>
                   </button>
-                </div>
+                </SpotlightCard>
 
-                <div className={"mx-3"}>
-                  <h3
-                    onClick={async () => await openExternalUrl(item.url)}
-                    className="cursor-pointer hover:underline font-semibold text-center break-words whitespace-normal"
-                  >
-                    {item.name}
-                  </h3>
-                  <p className="text-sm text-gray-400 dark:text-gray-400 break-words whitespace-normal">
-                    {item.desc}
-                  </p>
-                </div>
-
-                <button
-                  onClick={async () => await skipToChatMcp(item.name, item.desc, item.url)}
-                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-pink-500 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 mt-4"
-                >
-                  <RocketIcon className="w-5 h-5" />
-                  <span className="font-semibold">Start</span>
-                </button>
               </GlassEffectCard>
             ));
           }

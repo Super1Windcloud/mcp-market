@@ -6,6 +6,7 @@ import { PlusCircle, RocketIcon, Trash2 } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { AddCustomMcpButton } from "@/components/AddCustomMcpButton.tsx";
 import { toast } from "sonner";
+import SpotlightCard from "@/components/SpotlightCard.tsx";
 
 const IndexRouteComponent: React.FC = () => {
   const navigate = useNavigate();
@@ -92,51 +93,54 @@ const IndexRouteComponent: React.FC = () => {
       {
         mcps.map((item) => {
           return (
-            <GlassEffectCard key={item.url} className="flex flex-col justify-between relative">
-              {/* 右上角删除按钮 */}
-              <div className="absolute top-2 right-2" title="删除当前MCP配置">
+            <GlassEffectCard key={item.url} noPadding={true}>
+              <SpotlightCard
+                className={"bg-transparent w-full h-full flex flex-col justify-between border-none"}>
+                <div className="absolute top-2 right-2" title="删除当前MCP配置">
+                  <button
+                    onClick={() => handleDeleteMcp(item.name)}
+                    className="bg-gray-800/40 hover:bg-red-600/60 text-white rounded-full shadow-md transition p-1.5"
+                    title="删除当前MCP配置"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+
+
+                <div>
+                  <h3
+                    onClick={async () => await openExternalUrl(item.url)}
+                    className="cursor-pointer hover:underline font-semibold text-center break-words whitespace-normal"
+                  >
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-gray-400 dark:text-gray-400 break-words whitespace-normal">
+                    {item.desc}
+                  </p>
+                </div>
+
                 <button
-                  onClick={() => handleDeleteMcp(item.name)}
-                  className="bg-gray-800/40 hover:bg-red-600/60 text-white rounded-full shadow-md transition p-1.5"
-                  title="删除当前MCP配置"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-
-              <div>
-                <h3
-                  onClick={async () => await openExternalUrl(item.url)}
-                  className="cursor-pointer hover:underline font-semibold text-center break-words whitespace-normal"
-                >
-                  {item.name}
-                </h3>
-                <p className="text-sm text-gray-400 dark:text-gray-400 break-words whitespace-normal">
-                  {item.desc}
-                </p>
-              </div>
-
-              <button
-                onClick={async () => {
-                  await navigate({
-                    to: "/chat-mcp", search: {
-                      name: item.name,
-                      desc: item.desc,
-                      url: item.url,
-                    },
-                  });
-                }}
-                className="
+                  onClick={async () => {
+                    await navigate({
+                      to: "/chat-mcp", search: {
+                        name: item.name,
+                        desc: item.desc,
+                        url: item.url,
+                      },
+                    });
+                  }}
+                  className="
       flex items-center justify-center gap-2
       bg-gradient-to-r from-blue-500 to-pink-500
       text-white px-4 py-2 rounded-full shadow-lg
       hover:shadow-xl hover:scale-105
       transition-all duration-200 mt-4
     "
-              >
-                <RocketIcon className="w-5 h-5" />
-                <span className="font-semibold">Start</span>
-              </button>
+                >
+                  <RocketIcon className="w-5 h-5" />
+                  <span className="font-semibold">Start</span>
+                </button>
+              </SpotlightCard>
             </GlassEffectCard>
           );
         })

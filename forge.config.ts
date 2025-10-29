@@ -14,8 +14,8 @@ import MakerPKG from "@electron-forge/maker-pkg";
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    icon: path.resolve(__dirname, "public", "icon.ico"),
-    extraResource: ["public"],
+    icon: path.resolve(__dirname, "public", "icon.jpg"),
+    extraResource: ["public", ".env", "neteasecloud-mcp/dist"],
     osxSign: {},
     osxNotarize: {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

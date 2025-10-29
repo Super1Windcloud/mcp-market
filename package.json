@@ -28,7 +28,9 @@
     "test:unit": "vitest",
     "test:e2e": "playwright test",
     "test:all": "vitest run && playwright test",
-    "knip": "knip",
+    "build:netease": "npm run --workspace neteasecloud-mcp build",
+    "prepackage": "npm run build:netease",
+    "premake": "npm run build:netease",
     "clean": "npx rimraf node_modules  package-lock.json"
   },
   "license": "MIT",

@@ -2,6 +2,18 @@ import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
 
+const getRuntimeBasePath = (): string => {
+  if (process.env.MCP_RESOURCE_BASE) {
+    return process.env.MCP_RESOURCE_BASE;
+  }
+
+  if (typeof process.resourcesPath === "string" && process.resourcesPath.length > 0) {
+    return process.resourcesPath;
+  }
+
+  return process.cwd();
+};
+
 export class Configuration {
   private readonly apiKey?: string;
 
@@ -14,20 +26,43 @@ export class Configuration {
   }
 
   private loadEnv(): void {
-    const absPath = path.resolve(".env");
-    dotenv.config({
-        path: absPath,
-      },
-    );
+    const basePath = getRuntimeBasePath();
+    const candidate = path.join(basePath, ".env");
+
+    const searchOrder = [candidate];
+    const fallback = path.resolve(".env");
+    if (!searchOrder.includes(fallback)) {
+      searchOrder.push(fallback);
+    }
+
+    for (const envPath of searchOrder) {
+      if (fs.existsSync(envPath)) {
+        dotenv.config({ path: envPath });
+        return;
+      }
+    }
   }
 
   loadConfig(filePath: string): Record<string, unknown> {
-    const absPath = path.resolve(filePath);
-    if (!fs.existsSync(absPath)) {
-      throw new Error(`配置文件不存在: ${absPath}`);
+    const basePath = getRuntimeBasePath();
+    const candidates: string[] = [];
+
+    if (path.isAbsolute(filePath)) {
+      candidates.push(filePath);
+    } else {
+      candidates.push(path.join(basePath, filePath));
+      candidates.push(path.join(basePath, "public", filePath));
+      candidates.push(path.resolve(filePath));
     }
-    const data = fs.readFileSync(absPath, "utf-8");
-    return JSON.parse(data);
+
+    for (const candidate of candidates) {
+      if (fs.existsSync(candidate)) {
+        const data = fs.readFileSync(candidate, "utf-8");
+        return JSON.parse(data);
+      }
+    }
+
+    throw new Error(`配置文件不存在: ${candidates.join(", ")}`);
   }
 
   get llmApiKey(): string {

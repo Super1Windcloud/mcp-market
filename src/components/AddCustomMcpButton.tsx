@@ -6,6 +6,7 @@ import { MCPServerDisplayConfig, MCPConfigCatalog } from "@/types/mcp.ts";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
 import { ShineBorder } from "@/components/ui/shine-border.tsx";
+import SpotlightCard from "./SpotlightCard";
 
 interface AddCustomMcpButtonProps {
   onSave?: () => Promise<void>;
@@ -133,7 +134,7 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
         </div>
 
         <GlassEffectCard
-          className="relative flex flex-col items-center justify-center h-50 text-muted-foreground
+          className="relative flex flex-col items-center justify-center h-full  text-muted-foreground
                      border border-white/10 group-hover:border-transparent transition-all duration-300"
         >
 
