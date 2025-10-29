@@ -10,7 +10,13 @@ MCP Market 是一个现代化的桌面应用，用于浏览、管理和配置 MC
 服务器。该应用提供了一个直观的用户界面，让用户能够轻松地发现、添加和管理自定义 MCP 服务器。
 
 ## ✨ 功能特性
+- 美观主题
+- 粒子特效
+- 集成大多数开源MCP 
+- 允许自定义MCP JSON配置
 
+
+## 技术栈
 - ⚡ **Electron Forge** - 用于打包、签名和分发 Electron 应用的完整工具
 - ⚛️ **React 19** - 最新版本的 React，支持 TypeScript
 - 🎨 **shadcn/ui** - 基于 Radix UI 和 Tailwind CSS 构建的可复用组件
@@ -22,17 +28,7 @@ MCP Market 是一个现代化的桌面应用，用于浏览、管理和配置 MC
 - 📦 **MCP 服务器管理** - 添加、编辑和管理自定义 MCP 服务器配置
 - 🔄 **实时配置同步** - 配置文件自动同步到打包后的目录
 - 🎯 **多路由支持** - 基于分类的导航系统
-
-## 技术栈
-
-- **框架**: React 19
-- **运行时**: Electron
-- **构建工具**: Vite
-- **样式**: Tailwind CSS + shadcn/ui
-- **语言**: TypeScript
-- **测试**: Vitest (单元测试), Playwright (端到端测试)
-- **包管理器**: npm
-
+ 
 ## 系统要求
 
 - Node.js (v18 或更高版本)
