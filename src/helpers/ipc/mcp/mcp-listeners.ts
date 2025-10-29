@@ -28,9 +28,17 @@ const serializeTool = (tool: { name: string; description: string; inputSchema: u
 const CONFIG_FILENAME = "mcp_config.json";
 const CUSTOM_CONFIG_FILENAME = "my_mcp_config.json";
 
+const getPreferredPublicDir = (): string => {
+  if (app.isPackaged && typeof process.resourcesPath === "string") {
+    return path.join(process.resourcesPath, "public");
+  }
+  return path.join(process.cwd(), ".vite", "build", "public");
+};
+
 const getPublicConfigCandidates = (): string[] => {
   const appPath = app.getAppPath();
   return [
+    path.join(getPreferredPublicDir(), CONFIG_FILENAME),
     // 优先查找打包后的目录
     path.join(appPath, "..", "..", ".vite", "build", "public", CONFIG_FILENAME),
     path.join(process.cwd(), ".vite", "build", "public", CONFIG_FILENAME),
@@ -75,52 +83,40 @@ const resolveReadableConfigPath = (): string => {
 };
 
 const ensureWritableConfigPath = async (): Promise<string> => {
+  const targetDir = getPreferredPublicDir();
+  const targetPath = path.join(targetDir, CONFIG_FILENAME);
+
   try {
-    // 优先尝试使用 .vite/build/public 中的文件
-    const builtPublicPath = path.join(process.cwd(), ".vite", "build", "public", CONFIG_FILENAME);
-    if (existsSync(builtPublicPath)) {
-      await mkdir(path.dirname(builtPublicPath), { recursive: true });
-      cachedPublicConfigPath = builtPublicPath;
-      return builtPublicPath;
-    }
+    await mkdir(targetDir, { recursive: true });
 
-    const publicPath = resolvePublicConfigPath();
-    if (!publicPath.includes(".asar")) {
-      // 如果现有路径不在 .asar 中，检查是否应该写入到 .vite/build/public
-      if (!publicPath.includes(".vite")) {
-        const builtDir = path.join(process.cwd(), ".vite", "build", "public");
-        await mkdir(builtDir, { recursive: true });
-        const builtPath = path.join(builtDir, CONFIG_FILENAME);
-        if (!existsSync(builtPath)) {
-          const source = await readFile(publicPath, "utf-8");
-          await writeFile(builtPath, source, "utf-8");
+    if (!existsSync(targetPath)) {
+      try {
+        const sourcePath = resolvePublicConfigPath();
+        if (sourcePath !== targetPath && existsSync(sourcePath)) {
+          const source = await readFile(sourcePath, "utf-8");
+          await writeFile(targetPath, source, "utf-8");
         }
-        cachedPublicConfigPath = builtPath;
-        return builtPath;
+      } catch (innerError) {
+        writeSomeLogs(innerError);
       }
-      await mkdir(path.dirname(publicPath), { recursive: true });
-      return publicPath;
     }
 
+    if (!existsSync(targetPath)) {
+      await writeFile(targetPath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
+    }
+  } catch (error) {
+    writeSomeLogs(error);
     const overridePath = getOverrideConfigPath();
     await mkdir(path.dirname(overridePath), { recursive: true });
     if (!existsSync(overridePath)) {
-      const source = await readFile(publicPath, "utf-8");
-      await writeFile(overridePath, source, "utf-8");
+      await writeFile(overridePath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
     }
+    cachedPublicConfigPath = overridePath;
     return overridePath;
-  } catch (error) {
-    writeSomeLogs(error)
-    // 最后的备选方案：使用 .vite/build/public
-    const builtDir = path.join(process.cwd(), ".vite", "build", "public");
-    const builtPath = path.join(builtDir, CONFIG_FILENAME);
-    await mkdir(builtDir, { recursive: true });
-    if (!existsSync(builtPath)) {
-      await writeFile(builtPath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
-    }
-    cachedPublicConfigPath = builtPath;
-    return builtPath;
   }
+
+  cachedPublicConfigPath = targetPath;
+  return targetPath;
 };
 
 const loadAllServerConfigs = async (): Promise<Record<string, Partial<MCPServerConfig>>> => {
@@ -199,11 +195,10 @@ const resolveCustomConfigPath = (): string => {
     return overridePath;
   }
 
-  // 优先查找 .vite/build/public 中的文件
-  const builtPath = path.join(process.cwd(), ".vite", "build", "public", CUSTOM_CONFIG_FILENAME);
-  if (existsSync(builtPath)) {
-    cachedCustomConfigPath = builtPath;
-    return builtPath;
+  const preferredPath = path.join(getPreferredPublicDir(), CUSTOM_CONFIG_FILENAME);
+  if (existsSync(preferredPath)) {
+    cachedCustomConfigPath = preferredPath;
+    return preferredPath;
   }
 
   for (const basePath of getProjectRootCandidates()) {
@@ -218,53 +213,40 @@ const resolveCustomConfigPath = (): string => {
 };
 
 const ensureWritableCustomConfigPath = async (): Promise<string> => {
+  const targetDir = getPreferredPublicDir();
+  const targetPath = path.join(targetDir, CUSTOM_CONFIG_FILENAME);
+
   try {
-    // 优先尝试使用 .vite/build/public 中的文件
-    const builtPublicPath = path.join(process.cwd(), ".vite", "build", "public", CUSTOM_CONFIG_FILENAME);
-    if (existsSync(builtPublicPath)) {
-      await mkdir(path.dirname(builtPublicPath), { recursive: true });
-      cachedCustomConfigPath = builtPublicPath;
-      return builtPublicPath;
-    }
+    await mkdir(targetDir, { recursive: true });
 
-    // 如果不存在，尝试从其他位置读取并写入到 .vite/build/public
-    const existingPath = resolveCustomConfigPath();
-    if (!existingPath.includes(".asar")) {
-      // 如果现有路径不在 .asar 中，检查是否应该写入到 .vite/build/public
-      if (!existingPath.includes(".vite")) {
-        const builtDir = path.join(process.cwd(), ".vite", "build", "public");
-        await mkdir(builtDir, { recursive: true });
-        const builtPath = path.join(builtDir, CUSTOM_CONFIG_FILENAME);
-        if (!existsSync(builtPath)) {
-          const source = await readFile(existingPath, "utf-8");
-          await writeFile(builtPath, source, "utf-8");
+    if (!existsSync(targetPath)) {
+      try {
+        const sourcePath = resolveCustomConfigPath();
+        if (sourcePath !== targetPath && existsSync(sourcePath)) {
+          const source = await readFile(sourcePath, "utf-8");
+          await writeFile(targetPath, source, "utf-8");
         }
-        cachedCustomConfigPath = builtPath;
-        return builtPath;
+      } catch (innerError) {
+        writeSomeLogs(innerError);
       }
-      await mkdir(path.dirname(existingPath), { recursive: true });
-      return existingPath;
     }
 
+    if (!existsSync(targetPath)) {
+      await writeFile(targetPath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
+    }
+  } catch (error) {
+    writeSomeLogs(error);
     const overridePath = getCustomConfigOverridePath();
     await mkdir(path.dirname(overridePath), { recursive: true });
     if (!existsSync(overridePath)) {
-      const source = await readFile(existingPath, "utf-8");
-      await writeFile(overridePath, source, "utf-8");
+      await writeFile(overridePath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
     }
     cachedCustomConfigPath = overridePath;
     return overridePath;
-  } catch {
-    // 最后的备选方案：使用 .vite/build/public
-    const builtDir = path.join(process.cwd(), ".vite", "build", "public");
-    const builtPath = path.join(builtDir, CUSTOM_CONFIG_FILENAME);
-    await mkdir(builtDir, { recursive: true });
-    if (!existsSync(builtPath)) {
-      await writeFile(builtPath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
-    }
-    cachedCustomConfigPath = builtPath;
-    return builtPath;
   }
+
+  cachedCustomConfigPath = targetPath;
+  return targetPath;
 };
 
 const loadCustomServerCatalog = async (): Promise<Record<string, MCPServerDisplayConfig>> => {
@@ -454,8 +436,7 @@ const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
     const packagedEntry = resolvePackagedNeteaseEntry();
     if (packagedEntry) {
       command = process.execPath;
-      normalizedArgs = [packagedEntry];
-      mergedEnv.ELECTRON_RUN_AS_NODE = "1";
+      normalizedArgs = ["--run-as-node", packagedEntry];
       if (!mergedEnv.MCP_RESOURCE_BASE && typeof process.resourcesPath === "string") {
         mergedEnv.MCP_RESOURCE_BASE = process.resourcesPath;
       }
