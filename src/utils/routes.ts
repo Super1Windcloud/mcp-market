@@ -1,4 +1,5 @@
 import { routeTree } from "@/routeTree.gen";
+// !electron 环境不能使用 createBrowserHistory
 import { createBrowserHistory, createHashHistory, createRouter } from "@tanstack/react-router";
 import { isDev } from "@/utils";
 
