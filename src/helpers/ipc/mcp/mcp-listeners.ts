@@ -483,6 +483,43 @@ const attachHandlers = () => {
     }
   });
 
+  ipcMain.handle(MCP_CHANNELS.DELETE_CUSTOM_SERVER, async (_event, serverName: string) => {
+    try {
+      if (!serverName || typeof serverName !== "string") {
+        return { success: false, error: "缺少服务器名称" };
+      }
+
+      const targetPath = await ensureWritableCustomConfigPath();
+
+      // 读取现有配置
+      let existingCatalog: Record<string, MCPServerDisplayConfig> = {};
+      try {
+        const raw = await readFile(targetPath, "utf-8");
+        const parsed = JSON.parse(raw) as unknown;
+        if (parsed && typeof parsed === "object" && "mcpServers" in parsed) {
+          const mcpServers = (parsed as { mcpServers?: unknown }).mcpServers;
+          if (mcpServers && typeof mcpServers === "object") {
+            existingCatalog = mcpServers as Record<string, MCPServerDisplayConfig>;
+          }
+        }
+      } catch {
+        // 文件不存在或无法解析，使用空对象
+        existingCatalog = {};
+      }
+
+      // 删除指定的服务器
+      delete existingCatalog[serverName];
+
+      // 写回配置文件
+      await writeFile(targetPath, JSON.stringify({ mcpServers: existingCatalog }, null, 2), "utf-8");
+      return { success: true };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`删除 MCP 服务器 ${String(serverName)} 失败:`, error);
+      return { success: false, error: message };
+    }
+  });
+
   ipcMain.handle(MCP_CHANNELS.START_SERVER, async (_event, rawConfig) => {
     const { name, command, args, env } = rawConfig ?? {};
     if (!name || !command || !Array.isArray(args)) {

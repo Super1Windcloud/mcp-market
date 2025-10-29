@@ -57,4 +57,10 @@ export const mcpContext = {
       count?: number;
       error?: string;
     }>,
+
+  deleteCustomServer: (serverName: string) =>
+    ipcRenderer.invoke(MCP_CHANNELS.DELETE_CUSTOM_SERVER, serverName) as Promise<{
+      success: boolean;
+      error?: string;
+    }>,
 };

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { GlassEffectCard } from "@/components/GlassEffectCard";
 import { McpSourceType } from "@/components/template/NavigationMenu";
 import { openExternalUrl } from "@/helpers/window_helpers";
-import { PlusCircle, RocketIcon } from "lucide-react";
+import { PlusCircle, RocketIcon, Trash2 } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { AddCustomMcpButton } from "@/components/AddCustomMcpButton.tsx";
+import { toast } from "sonner";
 
 const IndexRouteComponent: React.FC = () => {
   const navigate = useNavigate();
@@ -29,6 +30,20 @@ const IndexRouteComponent: React.FC = () => {
       setErrorMessage(error instanceof Error ? error.message : String(error));
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteMcp = async (mcpName: string) => {
+    try {
+      const result = await window.mcp.deleteCustomServer(mcpName);
+      if (result.success) {
+        toast.success(`✅ 已删除 MCP 配置: ${mcpName}`);
+        await loadMyMcps();
+      } else {
+        toast.error(`❌ 删除失败: ${result.error}`);
+      }
+    } catch (error) {
+      toast.error(`❌ 删除失败: ${error instanceof Error ? error.message : String(error)}`);
     }
   };
 
@@ -77,7 +92,18 @@ const IndexRouteComponent: React.FC = () => {
       {
         mcps.map((item) => {
           return (
-            <GlassEffectCard key={item.url} className="flex flex-col justify-between">
+            <GlassEffectCard key={item.url} className="flex flex-col justify-between relative">
+              {/* 右上角删除按钮 */}
+              <div className="absolute top-2 right-2" title="删除当前MCP配置">
+                <button
+                  onClick={() => handleDeleteMcp(item.name)}
+                  className="bg-gray-800/40 hover:bg-red-600/60 text-white rounded-full shadow-md transition p-1.5"
+                  title="删除当前MCP配置"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+
               <div>
                 <h3
                   onClick={async () => await openExternalUrl(item.url)}

@@ -6,7 +6,8 @@
 
 ## 📋 项目简介
 
-MCP Market 是一个现代化的桌面应用，用于浏览、管理和配置 MCP (Model Context Protocol) 服务器。该应用提供了一个直观的用户界面，让用户能够轻松地发现、添加和管理自定义 MCP 服务器。
+MCP Market 是一个现代化的桌面应用，用于浏览、管理和配置 MCP (Model Context Protocol)
+服务器。该应用提供了一个直观的用户界面，让用户能够轻松地发现、添加和管理自定义 MCP 服务器。
 
 ## ✨ 功能特性
 
@@ -136,6 +137,7 @@ mcp-market/
 2. **my_mcp_config.json** - 用户自定义的 MCP 服务器配置
 
 配置文件优先级：
+
 1. 用户数据目录中的覆盖文件
 2. `.vite/build/public/` 中的打包文件 ⭐
 3. `public/` 目录中的源文件
@@ -238,11 +240,13 @@ import { Search, User, Settings } from 'lucide-react';
 - **TypeScript** - 类型检查
 
 运行代码检查：
+
 ```bash
 npm run lint
 ```
 
 格式化代码：
+
 ```bash
 npm run format:write
 ```
@@ -250,15 +254,18 @@ npm run format:write
 ### 项目架构
 
 #### 主进程 (Main Process)
+
 - 处理应用生命周期
 - 管理窗口
 - 暴露 IPC 通道用于文件操作
 
 #### 预加载脚本 (Preload)
+
 - 安全地暴露 IPC 通道给渲染进程
 - 定义 `window.mcp` API
 
 #### 渲染进程 (Renderer)
+
 - React 应用
 - TanStack Router 路由管理
 - Zustand 状态管理
@@ -267,19 +274,26 @@ npm run format:write
 
 1. 编辑 `public/mcp_config.json` 或 `public/my_mcp_config.json`
 2. 添加新的服务器配置：
+
 ```json
 {
   "mcpServers": {
     "my-server": {
       "name": "My Server",
       "command": "node server.js",
-      "args": ["--port", "8080"],
-      "env": { "DEBUG": "true" },
+      "args": [
+        "--port",
+        "8080"
+      ],
+      "env": {
+        "DEBUG": "true"
+      },
       "desc": "My custom MCP server"
     }
   }
 }
 ```
+
 3. 应用会自动加载新配置
 
 ## 📸 应用截图
@@ -305,6 +319,7 @@ npm run format:write
 ## 👨‍💻 作者
 
 **SuperWindCloud**
+
 - Email: ss1178933440@gmail.com
 - GitHub: [Super1WindCloud](https://github.com/Super1WindCloud)
 
@@ -315,5 +330,6 @@ npm run format:write
 ## 📞 联系方式
 
 如有问题或建议，请通过以下方式联系：
+
 - 提交 GitHub Issue
 - 发送邮件至 ss1178933440@gmail.com

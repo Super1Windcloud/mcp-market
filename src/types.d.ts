@@ -59,6 +59,7 @@ interface MCPContext {
   saveCustomServers: (
     payload: MCPServerDisplayConfig[] | Record<string, MCPServerDisplayConfig> | MCPConfigCatalog,
   ) => Promise<{ success: boolean; count?: number; error?: string }>;
+  deleteCustomServer: (serverName: string) => Promise<{ success: boolean; error?: string }>;
 }
 
 declare global {
