@@ -9,19 +9,6 @@
         "tsx",
         "neteasecloud-mcp/src/server.ts"
       ]
-    },
-    "custom-mcp": {
-      "name": "custom-mcp",
-      "command": "python server.py",
-      "args": [
-        "--port",
-        "8080"
-      ],
-      "desc": "custom-mcp",
-      "url": "https://www.google.com",
-      "env": {
-        "DEBUG": "true"
-      }
     }
   }
 }
