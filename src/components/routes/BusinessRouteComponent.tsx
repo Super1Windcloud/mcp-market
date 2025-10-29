@@ -113,7 +113,7 @@ export function RouteComponent() {
 
     await navigate({
       to: "/chat-mcp",
-      search: { name, desc, url },
+      search: { name, desc, url, isMyMcp: false },
     });
   };
 

@@ -126,6 +126,7 @@ const IndexRouteComponent: React.FC = () => {
                         name: item.name,
                         desc: item.desc,
                         url: item.url,
+                        isMyMcp: true,
                       },
                     });
                   }}

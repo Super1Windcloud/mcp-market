@@ -1,4 +1,4 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, useRouter } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 import { Send, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -66,6 +66,7 @@ export const Route = createFileRoute("/chat-mcp")({
     name: string;
     desc: string;
     url: string;
+    isMyMcp?: boolean;
   } => {
     return {
       name: String(search.name || ""),
@@ -83,7 +84,7 @@ const initGuessChat = {
 } satisfies  ChatMessage;
 
 function MCPChat() {
-  const { name, desc, url } = Route.useSearch();
+  const { name, desc, url, isMyMcp } = Route.useSearch();
   const [messages, setMessages] = useState<ChatMessage[]>([initGuessChat]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -212,6 +213,7 @@ function MCPChat() {
       await handleSendMessage();
     }
   };
+  const navigate = useNavigate();
 
   const handleResetConversation = async () => {
     if (!name) return;
@@ -264,12 +266,15 @@ function MCPChat() {
                 if (name) {
                   await window.mcp.stopServer(name);
                 }
-
-                onBack();
+                if (!isMyMcp) {
+                  onBack();
+                } else {
+                  await navigate({ to: "/", replace: true });
+                }
               }}
             >
               返回
-            </Button>
+            </Button>;
           </div>
         </div>
       </div>
@@ -317,8 +322,10 @@ function MCPChat() {
           </div>
         </ScrollArea>
       </div>
+      ;
 
-      {/* 输入区域 */}
+      {/* 输入区域 */
+      }
       <div className="border-none  p-4">
         <div className="flex items-end gap-2">
           <div className="flex-1">
@@ -349,6 +356,8 @@ function MCPChat() {
           与 {name} 服务进行对话。此服务可通过MCP协议访问外部工具。
         </p>
       </div>
+      ;
     </div>
-  );
+  )
+    ;
 }
