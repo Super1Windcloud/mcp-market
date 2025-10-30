@@ -88,7 +88,7 @@
     "typescript-eslint": "^8.46.2",
     "unified": "^11.0.5",
     "vite": "^7.1.12",
-    "vitest": "^4.0.3"
+    "vitest": "^4.0.5"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
