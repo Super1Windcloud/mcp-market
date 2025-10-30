@@ -111,7 +111,6 @@ export class ChatSession {
 
     try {
       // CLI loop primarily for development/testing parity.
-      // eslint-disable-next-line no-constant-condition
       while (true) {
         const userInput = (await ask("You: ")).trim();
         if (["exit", "quit", "q"].includes(userInput)) break;
@@ -273,4 +272,3 @@ ${tools.map((tool) => tool.formatForLLM()).join("\n")}
     ].join("\n");
   }
 }
-

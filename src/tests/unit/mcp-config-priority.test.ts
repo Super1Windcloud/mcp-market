@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import path from "path";
 import { existsSync } from "fs";
 import { mkdir, writeFile, rm } from "fs/promises";
@@ -84,7 +84,6 @@ describe("MCP Config Priority Tests", () => {
 
   it("should handle mcp_config.json priority correctly", async () => {
     const builtConfigPath = path.join(builtPublicDir, "mcp_config.json");
-    const sourceConfigPath = path.join(sourcePublicDir, "mcp_config.json");
 
     const config = {
       mcpServers: {
@@ -106,4 +105,3 @@ describe("MCP Config Priority Tests", () => {
     expect(builtExists).toBe(true);
   });
 });
-

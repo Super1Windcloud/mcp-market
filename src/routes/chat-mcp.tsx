@@ -76,6 +76,21 @@ export const Route = createFileRoute("/chat-mcp")({
   },
 });
 
+const createChatMessage = (role: ChatMessage["role"], content: string): ChatMessage => ({
+  id: typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : String(Date.now()),
+  role,
+  content,
+  timestamp: new Date(),
+});
+
+const hydrateMessage = (message: ChatMessage): ChatMessage => ({
+  ...message,
+  timestamp: new Date(message.timestamp),
+});
+
+const hydrateMessages = (messageList: ChatMessage[]): ChatMessage[] =>
+  messageList.map(hydrateMessage);
+
 const initGuessChat = {
   id: "first",
   role: "system",
@@ -91,22 +106,6 @@ function MCPChat() {
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const [isInitializing, setIsInitializing] = useState(true);
 
-
-  const createMessage = (role: ChatMessage["role"], content: string): ChatMessage => ({
-    id: typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : "${Date.now()}",
-    role,
-    content,
-    timestamp: new Date(),
-  });
-
-  const hydrateMessage = (message: ChatMessage): ChatMessage => ({
-    ...message,
-    timestamp: new Date(message.timestamp),
-  });
-
-  const hydrateMessages = (messageList: ChatMessage[]): ChatMessage[] =>
-    messageList.map(hydrateMessage);
-
   useEffect(() => {
     const initializeMCP = async () => {
       if (!name) return;
@@ -120,7 +119,7 @@ function MCPChat() {
             typeof config.env?.error === "string"
               ? config.env.error
               : `未找到 ${name} 的 MCP 配置，请访问 ${url} 进行配置`;
-          setMessages([createMessage("system", hint)]);
+          setMessages([createChatMessage("system", hint)]);
           return;
         }
 
@@ -134,7 +133,7 @@ function MCPChat() {
           setMessages(hydrateMessages(history));
         }
       } catch (error) {
-        const errorMessage = createMessage(
+        const errorMessage = createChatMessage(
           "system",
           `连接到 MCP 服务器时出错: ${error instanceof Error ? error.message : `未知错误`}`,
         );
@@ -145,7 +144,7 @@ function MCPChat() {
     };
 
     void initializeMCP();
-  }, [name, desc]);
+  }, [name, url]);
 
   useEffect(() => {
     scrollToBottom();
@@ -164,7 +163,7 @@ function MCPChat() {
 
     // 清空输入框、渲染用户消息
     setInputValue("");
-    setMessages((prev) => [...prev, createMessage("user", trimmed)]);
+    setMessages((prev) => [...prev, createChatMessage("user", trimmed)]);
 
     setIsLoading(true);
 
@@ -174,7 +173,7 @@ function MCPChat() {
       if (!result.success) {
         setMessages((prev) => [
           ...prev,
-          createMessage("system", `处理消息时出错: ${result.error ?? "未知错误"}`),
+          createChatMessage("system", `处理消息时出错: ${result.error ?? "未知错误"}`),
         ]);
         return;
       }
@@ -196,7 +195,7 @@ function MCPChat() {
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        createMessage(
+        createChatMessage(
           "system",
           `处理消息时出错: ${error instanceof Error ? error.message : "未知错误"}`,
         ),
@@ -223,7 +222,7 @@ function MCPChat() {
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        createMessage(
+        createChatMessage(
           "system",
           `重置对话时出错: ${error instanceof Error ? error.message : `未知错误`}`,
         ),

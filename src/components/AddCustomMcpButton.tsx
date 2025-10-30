@@ -6,7 +6,6 @@ import { MCPServerDisplayConfig, MCPConfigCatalog } from "@/types/mcp.ts";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
 import { ShineBorder } from "@/components/ui/shine-border.tsx";
-import SpotlightCard from "./SpotlightCard";
 
 interface AddCustomMcpButtonProps {
   onSave?: () => Promise<void>;

@@ -4,7 +4,7 @@ import { ChildProcess } from "child_process";
 // 存储MCP服务器实例和相关回调
 const mcpServers = new Map<string, {
   process: ChildProcess;
-  onMessage: ((data: any) => void) | null;
+  onMessage: ((data: unknown) => void) | null;
 }>();
 
 /**
@@ -13,7 +13,7 @@ const mcpServers = new Map<string, {
 export function registerMCPHandler(
   name: string,
   process: ChildProcess,
-  onMessage: ((data: any) => void) | null,
+  onMessage: ((data: unknown) => void) | null,
 ) {
   // 如果已存在相同的服务器，先清理
   if (mcpServers.has(name)) {
@@ -63,7 +63,7 @@ export function registerMCPHandler(
 /**
  * 发送消息到指定的MCP服务器
  */
-export function sendToMCP(name: string, message: any): boolean {
+export function sendToMCP(name: string, message: unknown): boolean {
   const server = mcpServers.get(name);
   if (!server || !server.process.stdin) {
     console.error(`MCP服务器 ${name} 未找到或未正确初始化`);

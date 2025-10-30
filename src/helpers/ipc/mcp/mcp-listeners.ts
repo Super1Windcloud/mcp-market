@@ -52,7 +52,6 @@ const getPublicConfigCandidates = (): string[] => {
 };
 
 let cachedPublicConfigPath: string | null = null;
-let cachedCustomConfigPath: string | null = null;
 
 const getCustomConfigOverridePath = (): string => path.join(app.getPath("userData"), CUSTOM_CONFIG_FILENAME);
 
@@ -191,20 +190,17 @@ const getProjectRootCandidates = (): string[] => {
 const resolveCustomConfigPath = (): string => {
   const overridePath = getCustomConfigOverridePath();
   if (existsSync(overridePath)) {
-    cachedCustomConfigPath = overridePath;
     return overridePath;
   }
 
   const preferredPath = path.join(getPreferredPublicDir(), CUSTOM_CONFIG_FILENAME);
   if (existsSync(preferredPath)) {
-    cachedCustomConfigPath = preferredPath;
     return preferredPath;
   }
 
   for (const basePath of getProjectRootCandidates()) {
     const candidate = path.join(basePath, "public", CUSTOM_CONFIG_FILENAME);
     if (existsSync(candidate)) {
-      cachedCustomConfigPath = candidate;
       return candidate;
     }
   }
@@ -241,11 +237,9 @@ const ensureWritableCustomConfigPath = async (): Promise<string> => {
     if (!existsSync(overridePath)) {
       await writeFile(overridePath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
     }
-    cachedCustomConfigPath = overridePath;
     return overridePath;
   }
 
-  cachedCustomConfigPath = targetPath;
   return targetPath;
 };
 
@@ -391,36 +385,9 @@ const resolveArgumentPath = (value: string): string => {
   return value;
 };
 
-const isNeteaseServerConfig = (config: MCPServerConfig): boolean => {
-  const nameMatch = typeof config.name === "string" && config.name.toLowerCase().includes("neteasecloud");
-  const argsMatch = config.args.some(
-    (arg) => typeof arg === "string" && arg.includes("neteasecloud-mcp"),
-  );
-  return nameMatch || argsMatch;
-};
-
-const resolvePackagedNeteaseEntry = (): string | null => {
-  if (!app.isPackaged || typeof process.resourcesPath !== "string") {
-    return null;
-  }
-
-  const candidates = [
-    path.join(process.resourcesPath, "neteasecloud-mcp", "dist", "server.js"),
-    path.join(process.resourcesPath, "dist", "server.js"),
-  ];
-
-  for (const candidate of candidates) {
-    if (existsSync(candidate)) {
-      return candidate;
-    }
-  }
-  return null;
-};
-
 const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
   let command = config.command;
   const args = [...config.args];
-  const mergedEnv = { ...(config.env ?? {}) };
 
   if (command === "npx" && args[0] === "tsx") {
     const localTsx = resolveLocalBinary("tsx");
@@ -436,7 +403,8 @@ const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
     const packagedEntry = resolvePackagedNeteaseEntry();
     if (packagedEntry) {
       command = process.execPath;
-      normalizedArgs = ["--run-as-node", packagedEntry];
+      normalizedArgs = [packagedEntry];
+      mergedEnv.ELECTRON_RUN_AS_NODE = "1";
       if (!mergedEnv.MCP_RESOURCE_BASE && typeof process.resourcesPath === "string") {
         mergedEnv.MCP_RESOURCE_BASE = process.resourcesPath;
       }
@@ -448,7 +416,6 @@ const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
     ...config,
     command,
     args: normalizedArgs,
-    env: mergedEnv,
   };
 };
 

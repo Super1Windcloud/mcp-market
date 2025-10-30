@@ -25,10 +25,17 @@ export default defineConfig([
   includeIgnoreFile(prettierIgnorePath),
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
     rules: {
       "@typescript-eslint/ban-ts-comment": ["error", {
         "ts-ignore": "allow-with-description",
       }],
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
     },
   },
 

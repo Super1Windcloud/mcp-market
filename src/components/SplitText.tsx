@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText as GSAPSplitText } from 'gsap/SplitText';
-import { useGSAP } from '@gsap/react';
+import React, { useRef, useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText as GSAPSplitText } from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
 
@@ -12,43 +12,54 @@ export interface SplitTextProps {
   delay?: number;
   duration?: number;
   ease?: string | ((t: number) => number);
-  splitType?: 'chars' | 'words' | 'lines' | 'words, chars';
+  splitType?: "chars" | "words" | "lines" | "words, chars";
   from?: gsap.TweenVars;
   to?: gsap.TweenVars;
   threshold?: number;
   rootMargin?: string;
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
   textAlign?: React.CSSProperties['textAlign'];
   onLetterAnimationComplete?: () => void;
 }
 
 const SplitText: React.FC<SplitTextProps> = ({
   text,
-  className = '',
+  className = "",
   delay = 100,
   duration = 0.6,
-  ease = 'power3.out',
-  splitType = 'chars',
+  ease = "power3.out",
+  splitType = "chars",
   from = { opacity: 0, y: 40 },
   to = { opacity: 1, y: 0 },
   threshold = 0.1,
-  rootMargin = '-100px',
-  tag = 'p',
-  textAlign = 'center',
+  rootMargin = "-100px",
+  tag = "p",
+  textAlign = "center",
   onLetterAnimationComplete
 }) => {
   const ref = useRef<HTMLParagraphElement>(null);
-  const animationCompletedRef = useRef(false);
   const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    if (document.fonts.status === 'loaded') {
-      setFontsLoaded(true);
-    } else {
-      document.fonts.ready.then(() => {
+    let isActive = true;
+
+    const markLoaded = () => {
+      if (isActive) {
         setFontsLoaded(true);
+      }
+    };
+
+    if (document.fonts.status === "loaded") {
+      requestAnimationFrame(markLoaded);
+    } else {
+      document.fonts.ready.then(markLoaded).catch((error) => {
+        console.warn("[SplitText] Failed waiting for fonts:", error);
       });
     }
+
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   useGSAP(
@@ -61,7 +72,9 @@ const SplitText: React.FC<SplitTextProps> = ({
       if (el._rbsplitInstance) {
         try {
           el._rbsplitInstance.revert();
-        } catch (_) {}
+        } catch (error) {
+          console.warn("[SplitText] Failed to revert previous split instance:", error);
+        }
         el._rbsplitInstance = undefined;
       }
 
@@ -87,10 +100,10 @@ const SplitText: React.FC<SplitTextProps> = ({
       const splitInstance = new GSAPSplitText(el, {
         type: splitType,
         smartWrap: true,
-        autoSplit: splitType === 'lines',
-        linesClass: 'split-line',
-        wordsClass: 'split-word',
-        charsClass: 'split-char',
+        autoSplit: splitType === "lines",
+        linesClass: "split-line",
+        wordsClass: "split-word",
+        charsClass: "split-char",
         reduceWhiteSpace: false,
         onSplit: (self: GSAPSplitText) => {
           assignTargets(self);
@@ -110,10 +123,9 @@ const SplitText: React.FC<SplitTextProps> = ({
                 anticipatePin: 0.4
               },
               onComplete: () => {
-                animationCompletedRef.current = true;
                 onLetterAnimationComplete?.();
               },
-              willChange: 'transform, opacity',
+              willChange: "transform, opacity",
               force3D: true
             }
           );
@@ -126,7 +138,9 @@ const SplitText: React.FC<SplitTextProps> = ({
         });
         try {
           splitInstance.revert();
-        } catch (_) {}
+        } catch (error) {
+          console.warn("[SplitText] Failed to cleanup split instance:", error);
+        }
         el._rbsplitInstance = undefined;
       };
     },
@@ -152,41 +166,41 @@ const SplitText: React.FC<SplitTextProps> = ({
     const style: React.CSSProperties = {
       textAlign,
       wordWrap: 'break-word',
-      willChange: 'transform, opacity'
+      willChange: "transform, opacity"
     };
     const classes = `split-parent overflow-hidden inline-block whitespace-normal ${className}`;
     switch (tag) {
-      case 'h1':
+      case "h1":
         return (
           <h1 ref={ref} style={style} className={classes}>
             {text}
           </h1>
         );
-      case 'h2':
+      case "h2":
         return (
           <h2 ref={ref} style={style} className={classes}>
             {text}
           </h2>
         );
-      case 'h3':
+      case "h3":
         return (
           <h3 ref={ref} style={style} className={classes}>
             {text}
           </h3>
         );
-      case 'h4':
+      case "h4":
         return (
           <h4 ref={ref} style={style} className={classes}>
             {text}
           </h4>
         );
-      case 'h5':
+      case "h5":
         return (
           <h5 ref={ref} style={style} className={classes}>
             {text}
           </h5>
         );
-      case 'h6':
+      case "h6":
         return (
           <h6 ref={ref} style={style} className={classes}>
             {text}

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -150,4 +150,3 @@ describe("MCP Config Merge Functionality", () => {
     expect(result.mcpServers["new-mcp"]).toBeDefined();
   });
 });
-

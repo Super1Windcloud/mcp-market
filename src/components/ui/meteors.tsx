@@ -26,6 +26,7 @@ export const Meteors = ({
   )
 
   useEffect(() => {
+    let isActive = true
     const styles = [...new Array(number)].map(() => ({
       "--angle": -angle + "deg",
       top: "-5%",
@@ -35,7 +36,17 @@ export const Meteors = ({
         Math.floor(Math.random() * (maxDuration - minDuration) + minDuration) +
         "s",
     }))
-    setMeteorStyles(styles)
+
+    const id = requestAnimationFrame(() => {
+      if (isActive) {
+        setMeteorStyles(styles)
+      }
+    })
+
+    return () => {
+      isActive = false
+      cancelAnimationFrame(id)
+    }
   }, [number, minDelay, maxDelay, minDuration, maxDuration, angle])
 
   return (
