@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <title>MCP Market 安装器</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(120deg, #0a0a1a, #202040);
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 20vh;
+        }
+
+        .logo {
+            width: 96px;
+            height: 96px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.35);
+            margin-bottom: 18px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+
+        button {
+            background: #00b7ff;
+            border: none;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #0097d4;
+            transform: scale(1.05);
+        }
+
+        .input-row {
+            margin: 24px auto;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .input-row input {
+            width: 360px;
+            padding: 10px 14px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(10, 10, 26, 0.45);
+            color: #f4f6ff;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-row input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+        }
+
+        .input-row button {
+            padding: 10px 20px;
+        }
+
+        .options {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+            color: #d7e1ff;
+            font-size: 0.95em;
+        }
+
+        .options label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .options input {
+            width: 18px;
+            height: 18px;
+            accent-color: #00d4ff;
+        }
+
+        .progress {
+            width: 60%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar {
+            width: 0%;
+            height: 100%;
+            background: #00ffcc;
+            box-shadow: 0 0 10px #00ffcc;
+            transition: width 0.5s;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="__ICON_BASE64__" alt="MCP Market Logo" class="logo"/>
+    <h1>MCP Market 安装向导</h1>
+    <p class="desc">配置安装目录，点击安装即可静默完成部署。</p>
+
+    <div class="input-row">
+        <input id="install-path" type="text" placeholder="选择安装目录"/>
+        <button id="browse-btn" type="button">浏览...</button>
+    </div>
+
+    <button id="install-btn">立即安装</button>
+    <div class="options">
+        <label>
+            <input id="create-shortcut" type="checkbox" checked/>
+            创建桌面快捷方式
+        </label>
+    </div>
+    <div class="progress hidden">
+        <div class="bar"></div>
+        <span id="progress-text">准备安装...</span>
+    </div>
+    <button id="launch-btn" class="hidden">启动应用</button>
+</div>
+<script lang="js">
+    var DEFAULT_DIR = __DEFAULT_DIR__;
+    var installInput = document.getElementById("install-path");
+    var installBtn = document.getElementById("install-btn");
+    var browseBtn = document.getElementById("browse-btn");
+    var launchBtn = document.getElementById("launch-btn");
+    var shortcutCheckbox = document.getElementById("create-shortcut");
+    var bar = document.querySelector(".bar");
+    var progressText = document.getElementById("progress-text");
+    var progress = document.querySelector(".progress");
+
+    function invoke(payload) {
+        if (window.external && window.external.invoke) {
+            window.external.invoke(JSON.stringify(payload));
+        }
+    }
+
+    function setProgress(percent, text) {
+        bar.style.width = percent + "%";
+        progressText.textContent = text;
+    }
+
+    function beginInstall() {
+        installBtn.disabled = true;
+        browseBtn.disabled = true;
+        progress.classList.remove("hidden");
+        setProgress(10, "正在启动安装器...");
+        invoke({
+            action: "install",
+            target_dir: installInput.value,
+            create_shortcut: shortcutCheckbox.checked,
+        });
+    }
+
+    installBtn.addEventListener("click", function () {
+        if (!installInput.value || !installInput.value.replace(/\s+/g, "")) {
+            alert("请先选择安装目录");
+            return;
+        }
+        beginInstall();
+    });
+
+    browseBtn.addEventListener("click", function () {
+        invoke({action: "browse"});
+    });
+
+    launchBtn.addEventListener("click", function () {
+        window.close();
+    });
+
+    window.__onDirectoryPicked = function (path) {
+        if (path) {
+            installInput.value = path;
+        }
+    };
+
+    window.__onInvokeError = function (message) {
+        alert(message);
+    };
+
+    window.__onInstallStatus = function (success, message) {
+        setProgress(success ? 100 : 0, message || (success ? "安装完成" : "安装失败"));
+        progress.classList.toggle("hidden", !success);
+
+        if (success) {
+            installBtn.disabled = false;
+            browseBtn.disabled = false;
+            launchBtn.classList.remove("hidden");
+            installBtn.textContent = "重新安装";
+        } else {
+            installBtn.disabled = false;
+            browseBtn.disabled = false;
+        }
+    };
+
+    window.addEventListener("DOMContentLoaded", function () {
+        installInput.value = DEFAULT_DIR || "C:/Program Files/MCP Market";
+    });
+</script>
+</body>
+</html>
