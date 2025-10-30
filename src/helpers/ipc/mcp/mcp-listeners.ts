@@ -96,7 +96,7 @@ const ensureWritableConfigPath = async (): Promise<string> => {
           await writeFile(targetPath, source, "utf-8");
         }
       } catch (innerError) {
-        writeSomeLogs(innerError);
+        writeSomeLogs(innerError as string);
       }
     }
 
@@ -104,7 +104,7 @@ const ensureWritableConfigPath = async (): Promise<string> => {
       await writeFile(targetPath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
     }
   } catch (error) {
-    writeSomeLogs(error);
+    writeSomeLogs(error as string);
     const overridePath = getOverrideConfigPath();
     await mkdir(path.dirname(overridePath), { recursive: true });
     if (!existsSync(overridePath)) {
@@ -223,7 +223,7 @@ const ensureWritableCustomConfigPath = async (): Promise<string> => {
           await writeFile(targetPath, source, "utf-8");
         }
       } catch (innerError) {
-        writeSomeLogs(innerError);
+        writeSomeLogs(innerError as string);
       }
     }
 
@@ -231,7 +231,7 @@ const ensureWritableCustomConfigPath = async (): Promise<string> => {
       await writeFile(targetPath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
     }
   } catch (error) {
-    writeSomeLogs(error);
+    writeSomeLogs(error as string);
     const overridePath = getCustomConfigOverridePath();
     await mkdir(path.dirname(overridePath), { recursive: true });
     if (!existsSync(overridePath)) {
@@ -260,8 +260,7 @@ const loadCustomServerCatalog = async (): Promise<Record<string, MCPServerDispla
   const catalog: Record<string, MCPServerDisplayConfig> = {};
   for (const [key, entry] of Object.entries(mcpServers as Record<string, unknown>)) {
     if (!entry || typeof entry !== "object") continue;
-    const config = sanitizeDisplayConfig(entry, key);
-    catalog[key] = config;
+    catalog[key] = sanitizeDisplayConfig(entry, key);
   }
 
   return catalog;
