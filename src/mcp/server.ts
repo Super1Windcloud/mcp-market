@@ -2,6 +2,7 @@ import { ChildProcess, spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 import { EventEmitter } from "events";
+import { writeSomeLogs } from "@/utils";
 
 export interface ToolSchema {
   type: "object";
@@ -67,7 +68,9 @@ export class Server extends EventEmitter {
     return new Promise((resolve, reject) => {
       const { command, argsPrefix, needsShell } = this.resolveCommand();
       const spawnArgs = [...argsPrefix, ...this.config.args];
-
+      writeSomeLogs("launcher command :" + command);
+      const args = spawnArgs.join(" ");
+      writeSomeLogs("args :" + args);
       const proc = spawn(command, spawnArgs, {
         env: { ...process.env, ...(this.config.env || {}) },
         stdio: ["pipe", "pipe", "pipe"],
@@ -279,7 +282,7 @@ export class Server extends EventEmitter {
         return { command: npxCmd, argsPrefix: [], needsShell: true };
       }
 
-      return { command: "npx.cmd", argsPrefix: [], needsShell: true };
+      return { command: "npx", argsPrefix: [], needsShell: true };
     }
 
     const needsShell = /\.cmd$/i.test(configured);
