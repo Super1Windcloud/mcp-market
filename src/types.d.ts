@@ -35,7 +35,6 @@ interface ElectronWindow {
 
 interface ElectronAPI {
   openUrl: (url: string) => Promise<void>;
-  joinPath: (...args: string[]) => Promise<string>;
 }
 
 interface MCPContext {

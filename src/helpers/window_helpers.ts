@@ -14,7 +14,3 @@ export async function closeWindow() {
 export async function openExternalUrl(url: string) {
   await window.electronAPI.openUrl(url);
 }
-
-export async function joinPath(...paths: string[]) {
-  await window.electronAPI.joinPath(...paths);
-}

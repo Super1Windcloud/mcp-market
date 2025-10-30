@@ -1,4 +1,5 @@
 // src/helpers/ipc/mcp/mcp-context.ts
+import { ipcRenderer } from "electron";
 import { MCP_CHANNELS } from "./mcp-channels";
 import type {
   ChatMessage,
@@ -11,8 +12,6 @@ import type {
   StopServerResponse,
   ToolDefinition,
 } from "@/types/mcp";
-
-const { ipcRenderer } = window.require("electron");
 
 export const mcpContext = {
   startServer: (config: MCPServerConfig) =>

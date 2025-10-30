@@ -27,23 +27,27 @@ function createWindow() {
   }
 
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    title: "MCP MARKET",
-    show: false,
-    darkTheme: true,
-    icon: iconPath,
-    webPreferences: {
-      devTools: inDevelopment,
-      contextIsolation: true,
-      nodeIntegration: true,
-      nodeIntegrationInSubFrames: false,
-      preload: preload,
-    },
-    titleBarStyle: process.platform === "darwin" ? "hiddenInset" : "hidden",
-    trafficLightPosition:
-      process.platform === "darwin" ? { x: 5, y: 5 } : undefined,
-  });
+      width: 800,
+      height: 600,
+      title: "MCP MARKET",
+      show: false,
+      darkTheme: true,
+      icon: iconPath,
+      webPreferences: {
+        devTools: inDevelopment,
+        contextIsolation: true,
+        nodeIntegration: false,
+        webgl: true,
+        webSecurity: true,
+        nodeIntegrationInSubFrames: false,
+        preload: preload,
+      },
+      titleBarStyle:
+        process.platform === "darwin" ? "hiddenInset" : "hidden",
+      trafficLightPosition:
+        process.platform === "darwin" ? { x: 5, y: 5 } : undefined,
+    })
+  ;
   registerListeners(mainWindow);
 
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {

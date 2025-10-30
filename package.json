@@ -11,7 +11,8 @@
     "email": "ss1178933440@gmail.com"
   },
   "workspaces": [
-    "neteasecloud-mcp"
+    "neteasecloud-mcp",
+    "transcript"
   ],
   "homepage": "https://github.com/Super1WindCloud/mcp-market.git",
   "scripts": {
@@ -34,7 +35,8 @@
     "premake": "npm run build:netease",
     "clean": "npx rimraf node_modules  package-lock.json",
     "nsis": "makensis scripts/mcp-market-installer.nsi",
-    "inno": "iscc scripts/mcp-market-installer.iss"
+    "inno": "iscc scripts/mcp-market-installer.iss",
+    "t": "npm run --workspace transcript start"
   },
   "license": "MIT",
   "devDependencies": {
@@ -69,6 +71,7 @@
     "code-inspector-plugin": "^1.2.10",
     "cross-fetch": "^4.1.0",
     "electron": "^38.4.0",
+    "electron-audio-loopback": "^1.0.6",
     "electron-playwright-helpers": "^1.8.2",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
