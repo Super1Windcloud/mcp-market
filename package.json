@@ -33,7 +33,8 @@
     "prepackage": "npm run build:netease",
     "premake": "npm run build:netease",
     "clean": "npx rimraf node_modules  package-lock.json",
-    "installer": "makensis scripts/mcp-market-installer.nsi"
+    "nsis": "makensis scripts/mcp-market-installer.nsi",
+    "inno": "iscc scripts/mcp-market-installer.iss"
   },
   "license": "MIT",
   "devDependencies": {

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MCP Market 安装器</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+      body {
+          margin: 0;
+          font-family: "Microsoft YaHei", sans-serif;
+          background: linear-gradient(120deg, #0a0a1a, #202040);
+          color: white;
+          overflow: hidden;
+      }
+
+      .container {
+          text-align: center;
+          margin-top: 20vh;
+      }
+
+      h1 {
+          font-size: 2.5em;
+          color: #00d4ff;
+          text-shadow: 0 0 10px #00d4ff;
+      }
+
+      button {
+          background: #00b7ff;
+          border: none;
+          color: white;
+          padding: 12px 32px;
+          border-radius: 30px;
+          font-size: 1em;
+          cursor: pointer;
+          transition: all 0.3s;
+      }
+
+      button:hover {
+          background: #0097d4;
+          transform: scale(1.05);
+      }
+
+      .progress {
+          width: 60%;
+          height: 10px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 5px;
+          margin: 20px auto;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .bar {
+          width: 0%;
+          height: 100%;
+          background: #00ffcc;
+          box-shadow: 0 0 10px #00ffcc;
+          transition: width 0.5s;
+      }
+
+      .hidden {
+          display: none;
+      }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>MCP Market 安装向导</h1>
+  <p class="desc">全新体验，从此刻开始！</p>
+  <button id="install-btn">立即安装</button>
+  <div class="progress hidden">
+    <div class="bar"></div>
+    <span id="progress-text">安装中...</span>
+  </div>
+  <button id="launch-btn" class="hidden">启动应用</button>
+</div>
+<script lang="js">
+  const { exec } = require("child_process");
+  const installBtn = document.getElementById("install-btn");
+  const launchBtn = document.getElementById("launch-btn");
+  const bar = document.querySelector(".bar");
+  const progressText = document.getElementById("progress-text");
+  const progress = document.querySelector(".progress");
+
+  installBtn.addEventListener("click", () => {
+    installBtn.classList.add("hidden");
+    progress.classList.remove("hidden");
+
+    // 模拟进度条动画
+    let percent = 0;
+    const interval = setInterval(() => {
+      percent += 5;
+      bar.style.width = percent + "%";
+      progressText.textContent = "正在安装... " + percent + "%";
+      if (percent >= 100) {
+        clearInterval(interval);
+        setTimeout(finishInstall, 500);
+      }
+    }, 300);
+
+    // 实际执行安装
+    exec(`"installer\\nsis\\mcp-market-installer-core.exe"`, (err) => {
+      if (err) {
+        console.error("安装失败:", err);
+        alert("安装失败，请重试！");
+      }
+    });
+  });
+
+  function finishInstall() {
+    progress.classList.add("hidden");
+    launchBtn.classList.remove("hidden");
+    progressText.textContent = "安装完成！";
+  }
+
+  launchBtn.addEventListener("click", () => {
+    exec(`"C:\\Program Files\\MCP Market\\mcp-market.exe"`);
+    window.close();
+  });
+
+
+</script>
+</body>
+</html>
