@@ -32,7 +32,8 @@
     "build:netease": "npm run --workspace neteasecloud-mcp build",
     "prepackage": "npm run build:netease",
     "premake": "npm run build:netease",
-    "clean": "npx rimraf node_modules  package-lock.json"
+    "clean": "npx rimraf node_modules  package-lock.json",
+    "installer": "makensis scripts/mcp-market-installer.nsi"
   },
   "license": "MIT",
   "devDependencies": {

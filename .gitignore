@@ -97,4 +97,6 @@ out/
 /playwright/.cache/
 /.tanstack
 /.idea
+installer
+
 
