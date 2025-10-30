@@ -385,6 +385,25 @@ const resolveArgumentPath = (value: string): string => {
   return value;
 };
 
+const mapArgsForRuntime = (args: string[]): string[] => {
+  if (!app.isPackaged || typeof process.resourcesPath !== "string") {
+    return args;
+  }
+
+  const packagedServer = path.join(process.resourcesPath, "dist", "server.js");
+  if (!existsSync(packagedServer)) {
+    return args;
+  }
+
+  const normalizedEntry = path.normalize(packagedServer);
+
+  return args.map((arg) =>
+    typeof arg === "string" && arg.includes("neteasecloud-mcp/src/server.ts")
+      ? normalizedEntry
+      : arg,
+  );
+};
+
 const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
   let command = config.command;
   const args = [...config.args];
@@ -397,20 +416,7 @@ const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
     }
   }
 
-  let normalizedArgs = args.map((arg) => resolveArgumentPath(arg));
-
-  if (app.isPackaged && isNeteaseServerConfig(config)) {
-    const packagedEntry = resolvePackagedNeteaseEntry();
-    if (packagedEntry) {
-      command = process.execPath;
-      normalizedArgs = [packagedEntry];
-      mergedEnv.ELECTRON_RUN_AS_NODE = "1";
-      if (!mergedEnv.MCP_RESOURCE_BASE && typeof process.resourcesPath === "string") {
-        mergedEnv.MCP_RESOURCE_BASE = process.resourcesPath;
-      }
-      mergedEnv.MCP_NETEASE_ROOT = path.dirname(packagedEntry);
-    }
-  }
+  const normalizedArgs = mapArgsForRuntime(args.map((arg) => resolveArgumentPath(arg)));
 
   return {
     ...config,
@@ -523,7 +529,25 @@ const attachHandlers = () => {
     try {
       const currentManager = getManager();
       const normalizedConfig = normalizeServerConfig({ name, command, args, env });
+      if (app.isPackaged) {
+        const envKeys = normalizedConfig.env ? Object.keys(normalizedConfig.env).join(",") : "none";
+        const prettyArgs = normalizedConfig.args.map((value) =>
+          typeof value === "string" ? value.replace(/\\\\/g, "\\").replace(/\\/g, "/") : value,
+        );
+        writeSomeLogs(
+          `[MCP][start] name=${name}`,
+          `command=${normalizedConfig.command}`,
+          `args=${JSON.stringify(prettyArgs)}`,
+          `envKeys=${envKeys}`,
+        );
+      }
       const { tools } = await currentManager.startServer(normalizedConfig);
+      if (app.isPackaged) {
+        writeSomeLogs(
+          `[MCP][start] name=${name} status=success`,
+          `tools=${tools.length}`,
+        );
+      }
       return {
         success: true,
         tools: tools.map((tool) => serializeTool(tool)),
@@ -531,6 +555,12 @@ const attachHandlers = () => {
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       console.error(`启动 MCP 服务器 ${String(name)} 失败:`, error);
+      if (app.isPackaged) {
+        writeSomeLogs(
+          `[MCP][start] name=${String(name)} status=error`,
+          `reason=${message}`,
+        );
+      }
       return { success: false, error: message };
     }
   });

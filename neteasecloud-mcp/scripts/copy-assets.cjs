@@ -37,7 +37,7 @@ const copyDirectory = (sourceRelative, targetRelative = sourceRelative) => {
 const main = () => {
   fs.mkdirSync(distDir, { recursive: true });
 
-  const filesToCopy = ["config.json", "netease_config.json", "playlists.json", "README.md"];
+  const filesToCopy = ["config.json", "netease_config.json", "playlists.json", "README.md", "package.json"];
   filesToCopy.forEach((file) => copyFile(file));
 
   copyDirectory("config");
