@@ -17,7 +17,7 @@ const resolveAssetPath = (...segments: string[]) => {
 let flag = false;
 
 function createWindow() {
-  const preload = path.join(__dirname, "preload.js");
+  const preload = path.join(__dirname, "preload.cjs");
   const iconPath = resolveAssetPath("public", "icon.jpg");
 
   if (inDevelopment) {

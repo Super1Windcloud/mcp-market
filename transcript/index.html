@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>Transcript</title>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+               script-src 'self' 'unsafe-inline';
+               style-src 'self' 'unsafe-inline';
+               connect-src 'self' ws: wss: https://api.deepgram.com;
+               img-src 'self' data: blob:;">
+
   <style>
       body {
           font-family: "Segoe UI", Roboto, sans-serif;
@@ -94,60 +101,12 @@
   </div>
 
   <div class="transcript-box" id="transcriptBox">
-    <p id="transcriptText">等待语音输入...</p>
+    <p><strong>实时转录：</strong><span id="partialTranscript">等待语音输入...</span></p>
+    <p><strong>最终结果：</strong><span id="finalTranscript">—</span></p>
   </div>
 </div>
 
-<script lang="js">
-  const statusEl = document.getElementById("status");
-  const transcriptEl = document.getElementById("transcriptText");
-  const startBtn = document.getElementById("startBtn");
-  const stopBtn = document.getElementById("stopBtn");
-
-  startBtn.onclick = () => {
-    if (!window.electronAPI) {
-      alert("electronAPI :" + window.electronAPI.toString());
-    }
-    window.electronAPI.startTranscription();
-    statusEl.textContent = "连接中...";
-    statusEl.className = "status connecting";
-    startBtn.disabled = true;
-    stopBtn.disabled = false;
-  };
-
-  stopBtn.onclick = () => {
-    if (!window.electronAPI) {
-      alert("electronAPI :" + window.electronAPI.toString());
-    }
-    window.electronAPI.stopTranscription();
-    startBtn.disabled = false;
-    stopBtn.disabled = true;
-  };
-
-  // 实时接收转录文本
-  window.electronAPI.onTranscript((text) => {
-    transcriptEl.textContent += text + " ";
-  });
-
-  // 接收状态更新
-  window.electronAPI.onStatus((status) => {
-    switch (status) {
-      case "connected":
-        statusEl.textContent = "已连接 ✅";
-        statusEl.className = "status connected";
-        break;
-      case "error":
-        statusEl.textContent = "连接错误 ❌";
-        statusEl.className = "status disconnected";
-        break;
-      case "stopped":
-      case "closed":
-        statusEl.textContent = "已停止";
-        statusEl.className = "status disconnected";
-        break;
-    }
-  });
-
+<script src="./render.js" lang="js">
 
 </script>
 </body>
