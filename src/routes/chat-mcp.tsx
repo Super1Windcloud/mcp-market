@@ -246,7 +246,6 @@ function MCPChat() {
 
   return (
     <div className="flex flex-col h-full  bg-background">
-      {/* 顶部导航栏 */}
       <div className="border-none">
         <div className="flex items-center justify-between p-4">
           <div>
@@ -273,7 +272,7 @@ function MCPChat() {
               }}
             >
               返回
-            </Button>;
+            </Button>
           </div>
         </div>
       </div>
@@ -321,10 +320,6 @@ function MCPChat() {
           </div>
         </ScrollArea>
       </div>
-      ;
-
-      {/* 输入区域 */
-      }
       <div className="border-none  p-4">
         <div className="flex items-end gap-2">
           <div className="flex-1">
@@ -355,7 +350,6 @@ function MCPChat() {
           与 {name} 服务进行对话。此服务可通过MCP协议访问外部工具。
         </p>
       </div>
-      ;
     </div>
   )
     ;
