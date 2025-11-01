@@ -443,37 +443,7 @@ const resolveArgumentPath = (value: string): string => {
   return value;
 };
 
-const mapArgsForRuntime = (args: string[]): string[] => {
-  if (!app.isPackaged || typeof process.resourcesPath !== "string") {
-    return args;
-  }
-
-  let packagedServer = path.join(process.resourcesPath, "dist", "server.js");
-  let version = app.getVersion();
-  version = "app-" + version;
-  const squirrelPath = path.join(
-    process.resourcesPath,
-    version,
-    "dist",
-    "server.js",
-  );
-
-  writeSomeLogs("squirrelPath : " + squirrelPath);
-  if (!existsSync(packagedServer) && !existsSync(squirrelPath)) {
-    return args;
-  }
-  if (existsSync(squirrelPath)) {
-    packagedServer = squirrelPath;
-  }
-
-  const normalizedEntry = path.normalize(packagedServer);
-
-  return args.map((arg) =>
-    typeof arg === "string" && arg.includes("neteasecloud-mcp/src/server.ts")
-      ? normalizedEntry
-      : arg,
-  );
-};
+const mapArgsForRuntime = (args: string[]): string[] => args;
 
 const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
   let command = config.command;

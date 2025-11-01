@@ -1,8 +1,20 @@
 {
   "name": "neteasecloud-mcp",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Model Context Protocol server for controlling NetEase Cloud Music (TypeScript port)",
+  "private": false,
+  "authors": "Super1WindCloud",
+  "licenses": "MIT",
+  "homepage": "https://github.com/Super1WindCloud",
   "type": "module",
+  "main": "./dist/server.js",
+  "bin": {
+    "neteasecloud-mcp": "./dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json && node ./scripts/copy-assets.cjs",
     "start": "tsx src/server.ts",
@@ -32,7 +44,5 @@
     "cloudmusic",
     "selenium",
     "typescript"
-  ],
-  "author": "Auto-converted by Codex",
-  "license": "MIT"
+  ]
 }

@@ -750,6 +750,9 @@ registerTool(
 
 server
   .start({ transportType: "stdio" })
+  .then(() => {
+    console.log("ready");
+  })
   .catch((error) => {
     console.error("Failed to start MCP server:", error);
     process.exit(1);

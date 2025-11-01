@@ -7,7 +7,6 @@ import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
 // import { MakerWix } from "@electron-forge/maker-wix";
-import MakerSquirrel from "@electron-forge/maker-squirrel";
 import MakerDMG from "@electron-forge/maker-dmg";
 import MakerPKG from "@electron-forge/maker-pkg";
 
@@ -15,7 +14,7 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     icon: path.resolve(__dirname, "public", "icon.jpg"),
-    extraResource: ["public", ".env", "neteasecloud-mcp/dist"],
+    extraResource: ["public", ".env"],
     osxSign: {},
     osxNotarize: {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -32,10 +31,6 @@ const config: ForgeConfig = {
   publishAutoUpdate: true,
 
   makers: [
-    new MakerSquirrel({
-      name: "McpMarket",
-      setupIcon: path.resolve(__dirname, "public", "icon.ico"),
-    }),
     new MakerZIP({}, ["darwin"]),
     new MakerDMG({}),
     new MakerPKG({}),

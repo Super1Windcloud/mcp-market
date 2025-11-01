@@ -41,6 +41,20 @@ const main = () => {
   filesToCopy.forEach((file) => copyFile(file));
 
   copyDirectory("config");
+
+  const serverEntry = path.join(distDir, "server.js");
+  if (fs.existsSync(serverEntry)) {
+    const shebang = "#!/usr/bin/env node\n";
+    const original = fs.readFileSync(serverEntry, "utf8");
+    if (!original.startsWith(shebang)) {
+      fs.writeFileSync(serverEntry, shebang + original, "utf8");
+    }
+    try {
+      fs.chmodSync(serverEntry, 0o755);
+    } catch {
+      // ignore on platforms that do not support chmod
+    }
+  }
 };
 
 main();

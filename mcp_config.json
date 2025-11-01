@@ -3,8 +3,8 @@
     "neteasecloud": {
       "command": "npx",
       "args": [
-        "tsx",
-        "neteasecloud-mcp/src/server.ts"
+        "-y",
+        "neteasecloud-mcp@latest"
       ]
     }
   }

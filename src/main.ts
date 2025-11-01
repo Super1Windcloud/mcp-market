@@ -1,55 +1,93 @@
-import { app, BrowserWindow, autoUpdater } from "electron";
+import { app, BrowserWindow } from "electron";
 import { globalShortcut } from "electron/main";
 import registerListeners from "./helpers/ipc/listeners-register";
 import path from "path";
 import fs from "fs";
 
-import { updateElectronApp } from "update-electron-app";
 import { writeSomeLogs } from "@/utils";
-import startup from "electron-squirrel-startup";
 
-if (startup) {
-  app.quit();
-}
+import { VelopackApp, UpdateManager } from "velopack";
 
-app.setAppUserModelId("com.squirrel.McpMarket.McpMarket");
+VelopackApp.build().run();
+
 const initAutoUpdater = () => {
-  const toStrings = (args: unknown[]) =>
-    args.map((arg) => {
-      if (arg instanceof Error) {
-        return `${arg.name}: ${arg.message}\n${arg.stack ?? ""}`;
-      }
-      if (typeof arg === "string") {
-        return arg;
-      }
-      try {
-        return JSON.stringify(arg);
-      } catch {
-        return String(arg);
-      }
-    });
+  if (!app.isPackaged) {
+    writeSomeLogs("[velopack] skip updater in dev mode");
+    return;
+  }
 
-  const log = (level: "info" | "warn" | "error", args: unknown[]) => {
-    writeSomeLogs(`[auto-update] ${level}`, ...toStrings(args));
+  const feedUrl =
+    process.env.VELOPACK_FEED_URL ??
+    `https://github.com/Super1WindCloud/mcp-market/releases/download/latest`;
+  const channel = process.env.VELOPACK_CHANNEL;
+  const allowDowngrade = process.env.VELOPACK_ALLOW_DOWNGRADE === "true";
+
+  if (!feedUrl) {
+    writeSomeLogs("[velopack] feed url missing");
+    return;
+  }
+
+  const updater = new UpdateManager();
+  updater.setUrlOrPath(feedUrl);
+
+  if (channel) {
+    updater.setExplicitChannel(channel);
+  }
+
+  if (allowDowngrade) {
+    updater.setAllowDowngrade(true);
+  }
+
+  const runUpdateCheck = async () => {
+    try {
+      if (!updater.isInstalled()) {
+        writeSomeLogs("[velopack] application not installed, skip update");
+        return;
+      }
+
+      writeSomeLogs("[velopack] checking for updates", feedUrl);
+      const updateInfo = await updater.checkForUpdatesAsync();
+      if (!updateInfo) {
+        writeSomeLogs("[velopack] no updates available");
+        return;
+      }
+
+      const targetRelease = updateInfo.targetFullRelease;
+      if (!targetRelease) {
+        writeSomeLogs("[velopack] update info missing target release");
+        return;
+      }
+
+      writeSomeLogs(
+        "[velopack] update available",
+        `version=${targetRelease.version}`,
+        `file=${targetRelease.fileName}`,
+      );
+
+      let lastLoggedProgress = -1;
+      await updater.downloadUpdatesAsync(targetRelease, (progress) => {
+        if (progress > lastLoggedProgress) {
+          lastLoggedProgress = progress;
+          writeSomeLogs(`[velopack] download ${progress}%`);
+        }
+      });
+
+      writeSomeLogs(
+        "[velopack] applying update",
+        `version=${targetRelease.version}`,
+      );
+      updater.waitExitThenApplyUpdates(targetRelease, true, true);
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : JSON.stringify(error);
+      const stack = error instanceof Error && error.stack ? error.stack : "";
+      writeSomeLogs("[velopack] update failed", message, stack);
+    }
   };
 
-  updateElectronApp({
-    logger: {
-      log: (...args: unknown[]) => log("info", args),
-      info: (...args: unknown[]) => log("info", args),
-      warn: (...args: unknown[]) => log("warn", args),
-      error: (...args: unknown[]) => log("error", args),
-    },
-  });
-
-  autoUpdater.on("error", (error) => {
-    writeSomeLogs(
-      "[auto-update] error event",
-      error?.message ?? String(error),
-      error instanceof Error ? (error.stack ?? "") : "",
-    );
-  });
+  void runUpdateCheck();
 };
+
 const inDevelopment = process.env.NODE_ENV === "development";
 
 const resolveAssetPath = (...segments: string[]) => {
