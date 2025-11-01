@@ -29,6 +29,8 @@ const config: ForgeConfig = {
 
   rebuildConfig: {},
 
+  publishAutoUpdate: true,
+
   makers: [
     new MakerSquirrel({
       setupIcon: path.resolve(__dirname, "public", "icon.ico"),
@@ -53,6 +55,19 @@ const config: ForgeConfig = {
     //   },
 
     // }),
+  ],
+  publishers: [
+    {
+      name: "@electron-forge/publisher-github",
+      config: {
+        repository: {
+          owner: "Super1WindCloud",
+          name: "mcp-market",
+        },
+        draft: false,
+        prerelease: false,
+      },
+    },
   ],
   plugins: [
     new VitePlugin({
