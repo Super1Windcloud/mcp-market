@@ -99,4 +99,4 @@ out/
 /.idea
 installer
 wrapper/target
-justfile
+velopack
