@@ -6,7 +6,13 @@ import fs from "fs";
 
 import { updateElectronApp } from "update-electron-app";
 import { writeSomeLogs } from "@/utils";
+import startup from "electron-squirrel-startup";
 
+if (startup) {
+  app.quit();
+}
+
+app.setAppUserModelId("com.squirrel.McpMarket.McpMarket");
 const initAutoUpdater = () => {
   const toStrings = (args: unknown[]) =>
     args.map((arg) => {
@@ -40,7 +46,7 @@ const initAutoUpdater = () => {
     writeSomeLogs(
       "[auto-update] error event",
       error?.message ?? String(error),
-      error instanceof Error ? error.stack ?? "" : "",
+      error instanceof Error ? (error.stack ?? "") : "",
     );
   });
 };

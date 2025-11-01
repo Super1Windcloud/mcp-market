@@ -19,7 +19,11 @@ const getManager = (): MCPChatManager => {
   return manager;
 };
 
-const serializeTool = (tool: { name: string; description: string; inputSchema: unknown }) => ({
+const serializeTool = (tool: {
+  name: string;
+  description: string;
+  inputSchema: unknown;
+}) => ({
   name: tool.name,
   description: tool.description,
   inputSchema: tool.inputSchema,
@@ -42,7 +46,14 @@ const getPublicConfigCandidates = (): string[] => {
     // 优先查找打包后的目录
     path.join(appPath, "..", "..", ".vite", "build", "public", CONFIG_FILENAME),
     path.join(process.cwd(), ".vite", "build", "public", CONFIG_FILENAME),
-    path.join(process.resourcesPath, "..", ".vite", "build", "public", CONFIG_FILENAME),
+    path.join(
+      process.resourcesPath,
+      "..",
+      ".vite",
+      "build",
+      "public",
+      CONFIG_FILENAME,
+    ),
     // 然后查找其他位置
     path.join(appPath, "public", CONFIG_FILENAME),
     path.join(appPath, "..", "public", CONFIG_FILENAME),
@@ -53,7 +64,8 @@ const getPublicConfigCandidates = (): string[] => {
 
 let cachedPublicConfigPath: string | null = null;
 
-const getCustomConfigOverridePath = (): string => path.join(app.getPath("userData"), CUSTOM_CONFIG_FILENAME);
+const getCustomConfigOverridePath = (): string =>
+  path.join(app.getPath("userData"), CUSTOM_CONFIG_FILENAME);
 
 const resolvePublicConfigPath = (): string => {
   if (cachedPublicConfigPath && existsSync(cachedPublicConfigPath)) {
@@ -68,10 +80,13 @@ const resolvePublicConfigPath = (): string => {
     }
   }
 
-  throw new Error(`无法在以下路径找到 ${CONFIG_FILENAME}: ${candidates.join(", ")}`);
+  throw new Error(
+    `无法在以下路径找到 ${CONFIG_FILENAME}: ${candidates.join(", ")}`,
+  );
 };
 
-const getOverrideConfigPath = (): string => path.join(app.getPath("userData"), CONFIG_FILENAME);
+const getOverrideConfigPath = (): string =>
+  path.join(app.getPath("userData"), CONFIG_FILENAME);
 
 const resolveReadableConfigPath = (): string => {
   const overridePath = getOverrideConfigPath();
@@ -101,14 +116,22 @@ const ensureWritableConfigPath = async (): Promise<string> => {
     }
 
     if (!existsSync(targetPath)) {
-      await writeFile(targetPath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
+      await writeFile(
+        targetPath,
+        JSON.stringify({ mcpServers: {} }, null, 2),
+        "utf-8",
+      );
     }
   } catch (error) {
     writeSomeLogs(error as string);
     const overridePath = getOverrideConfigPath();
     await mkdir(path.dirname(overridePath), { recursive: true });
     if (!existsSync(overridePath)) {
-      await writeFile(overridePath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
+      await writeFile(
+        overridePath,
+        JSON.stringify({ mcpServers: {} }, null, 2),
+        "utf-8",
+      );
     }
     cachedPublicConfigPath = overridePath;
     return overridePath;
@@ -118,7 +141,9 @@ const ensureWritableConfigPath = async (): Promise<string> => {
   return targetPath;
 };
 
-const loadAllServerConfigs = async (): Promise<Record<string, Partial<MCPServerConfig>>> => {
+const loadAllServerConfigs = async (): Promise<
+  Record<string, Partial<MCPServerConfig>>
+> => {
   const configPath = resolveReadableConfigPath();
   const raw = await readFile(configPath, "utf-8");
   const parsed = JSON.parse(raw) as unknown;
@@ -181,7 +206,9 @@ const getProjectRootCandidates = (): string[] => {
   return Array.from(
     new Set(
       candidates
-        .filter((candidate) => typeof candidate === "string" && candidate.length > 0)
+        .filter(
+          (candidate) => typeof candidate === "string" && candidate.length > 0,
+        )
         .map((candidate) => path.resolve(candidate)),
     ),
   );
@@ -193,7 +220,10 @@ const resolveCustomConfigPath = (): string => {
     return overridePath;
   }
 
-  const preferredPath = path.join(getPreferredPublicDir(), CUSTOM_CONFIG_FILENAME);
+  const preferredPath = path.join(
+    getPreferredPublicDir(),
+    CUSTOM_CONFIG_FILENAME,
+  );
   if (existsSync(preferredPath)) {
     return preferredPath;
   }
@@ -228,14 +258,22 @@ const ensureWritableCustomConfigPath = async (): Promise<string> => {
     }
 
     if (!existsSync(targetPath)) {
-      await writeFile(targetPath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
+      await writeFile(
+        targetPath,
+        JSON.stringify({ mcpServers: {} }, null, 2),
+        "utf-8",
+      );
     }
   } catch (error) {
     writeSomeLogs(error as string);
     const overridePath = getCustomConfigOverridePath();
     await mkdir(path.dirname(overridePath), { recursive: true });
     if (!existsSync(overridePath)) {
-      await writeFile(overridePath, JSON.stringify({ mcpServers: {} }, null, 2), "utf-8");
+      await writeFile(
+        overridePath,
+        JSON.stringify({ mcpServers: {} }, null, 2),
+        "utf-8",
+      );
     }
     return overridePath;
   }
@@ -243,7 +281,9 @@ const ensureWritableCustomConfigPath = async (): Promise<string> => {
   return targetPath;
 };
 
-const loadCustomServerCatalog = async (): Promise<Record<string, MCPServerDisplayConfig>> => {
+const loadCustomServerCatalog = async (): Promise<
+  Record<string, MCPServerDisplayConfig>
+> => {
   const configPath = resolveCustomConfigPath();
   const raw = await readFile(configPath, "utf-8");
   const parsed = JSON.parse(raw) as unknown;
@@ -258,7 +298,9 @@ const loadCustomServerCatalog = async (): Promise<Record<string, MCPServerDispla
   }
 
   const catalog: Record<string, MCPServerDisplayConfig> = {};
-  for (const [key, entry] of Object.entries(mcpServers as Record<string, unknown>)) {
+  for (const [key, entry] of Object.entries(
+    mcpServers as Record<string, unknown>,
+  )) {
     if (!entry || typeof entry !== "object") continue;
     catalog[key] = sanitizeDisplayConfig(entry, key);
   }
@@ -266,20 +308,30 @@ const loadCustomServerCatalog = async (): Promise<Record<string, MCPServerDispla
   return catalog;
 };
 
-const sanitizeDisplayConfig = (entry: unknown, fallbackName?: string): MCPServerDisplayConfig => {
+const sanitizeDisplayConfig = (
+  entry: unknown,
+  fallbackName?: string,
+): MCPServerDisplayConfig => {
   if (!entry || typeof entry !== "object") {
     console.error(entry);
     throw new Error("MCP 配置条目格式无效");
   }
 
   const raw = entry as Partial<MCPServerDisplayConfig>;
-  const resolvedName = typeof raw.name === "string" && raw.name.trim().length > 0 ? raw.name.trim() : fallbackName;
+  const resolvedName =
+    typeof raw.name === "string" && raw.name.trim().length > 0
+      ? raw.name.trim()
+      : fallbackName;
 
   if (!resolvedName) {
     throw new Error("MCP 配置缺少 name 字段");
   }
 
-  if (!raw.command || typeof raw.command !== "string" || raw.command.trim().length === 0) {
+  if (
+    !raw.command ||
+    typeof raw.command !== "string" ||
+    raw.command.trim().length === 0
+  ) {
     throw new Error(`MCP 配置 ${resolvedName} 缺少 command 字段`);
   }
 
@@ -289,16 +341,19 @@ const sanitizeDisplayConfig = (entry: unknown, fallbackName?: string): MCPServer
 
   const normalizedEnv =
     raw.env && typeof raw.env === "object"
-      ? Object.entries(raw.env).reduce<Record<string, string>>((acc, [key, value]) => {
-        if (!key || typeof key !== "string") {
-          return acc;
-        }
-        if (value === undefined || value === null) {
-          return acc;
-        }
-        acc[key] = typeof value === "string" ? value : String(value);
-        return acc;
-      }, {})
+      ? Object.entries(raw.env).reduce<Record<string, string>>(
+          (acc, [key, value]) => {
+            if (!key || typeof key !== "string") {
+              return acc;
+            }
+            if (value === undefined || value === null) {
+              return acc;
+            }
+            acc[key] = typeof value === "string" ? value : String(value);
+            return acc;
+          },
+          {},
+        )
       : undefined;
 
   const normalized: MCPServerDisplayConfig = {
@@ -322,7 +377,9 @@ const sanitizeDisplayConfig = (entry: unknown, fallbackName?: string): MCPServer
   return normalized;
 };
 
-const normalizeCustomServerCatalogInput = (input: unknown): Record<string, MCPServerDisplayConfig> => {
+const normalizeCustomServerCatalogInput = (
+  input: unknown,
+): Record<string, MCPServerDisplayConfig> => {
   if (Array.isArray(input)) {
     return input.reduce<Record<string, MCPServerDisplayConfig>>((acc, item) => {
       const config = sanitizeDisplayConfig(item);
@@ -333,18 +390,20 @@ const normalizeCustomServerCatalogInput = (input: unknown): Record<string, MCPSe
 
   if (input && typeof input === "object") {
     const maybeCatalog = input as { mcpServers?: unknown };
-    if (maybeCatalog.mcpServers && typeof maybeCatalog.mcpServers === "object") {
+    if (
+      maybeCatalog.mcpServers &&
+      typeof maybeCatalog.mcpServers === "object"
+    ) {
       return normalizeCustomServerCatalogInput(maybeCatalog.mcpServers);
     }
 
-    return Object.entries(input as Record<string, unknown>).reduce<Record<string, MCPServerDisplayConfig>>(
-      (acc, [key, value]) => {
-        const config = sanitizeDisplayConfig(value, key);
-        acc[config.name] = config;
-        return acc;
-      },
-      {},
-    );
+    return Object.entries(input as Record<string, unknown>).reduce<
+      Record<string, MCPServerDisplayConfig>
+    >((acc, [key, value]) => {
+      const config = sanitizeDisplayConfig(value, key);
+      acc[config.name] = config;
+      return acc;
+    }, {});
   }
 
   throw new Error("自定义 MCP 配置格式无效");
@@ -389,9 +448,22 @@ const mapArgsForRuntime = (args: string[]): string[] => {
     return args;
   }
 
-  const packagedServer = path.join(process.resourcesPath, "dist", "server.js");
-  if (!existsSync(packagedServer)) {
+  let packagedServer = path.join(process.resourcesPath, "dist", "server.js");
+  let version = app.getVersion();
+  version = "app-" + version;
+  const squirrelPath = path.join(
+    process.resourcesPath,
+    version,
+    "dist",
+    "server.js",
+  );
+
+  writeSomeLogs("squirrelPath : " + squirrelPath);
+  if (!existsSync(packagedServer) && !existsSync(squirrelPath)) {
     return args;
+  }
+  if (existsSync(squirrelPath)) {
+    packagedServer = squirrelPath;
   }
 
   const normalizedEntry = path.normalize(packagedServer);
@@ -415,7 +487,9 @@ const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
     }
   }
 
-  const normalizedArgs = mapArgsForRuntime(args.map((arg) => resolveArgumentPath(arg)));
+  const normalizedArgs = mapArgsForRuntime(
+    args.map((arg) => resolveArgumentPath(arg)),
+  );
 
   return {
     ...config,
@@ -445,79 +519,101 @@ const attachHandlers = () => {
       throw error instanceof Error ? error : new Error(message);
     }
   });
-  ipcMain.handle(MCP_CHANNELS.SAVE_CUSTOM_SERVERS, async (_event, payload: unknown) => {
-    try {
-      const newCatalog = normalizeCustomServerCatalogInput(payload);
-      const targetPath = await ensureWritableCustomConfigPath();
-
-      // 读取现有配置
-      let existingCatalog: Record<string, MCPServerDisplayConfig> = {};
+  ipcMain.handle(
+    MCP_CHANNELS.SAVE_CUSTOM_SERVERS,
+    async (_event, payload: unknown) => {
       try {
-        const raw = await readFile(targetPath, "utf-8");
-        const parsed = JSON.parse(raw) as unknown;
-        if (parsed && typeof parsed === "object" && "mcpServers" in parsed) {
-          const mcpServers = (parsed as { mcpServers?: unknown }).mcpServers;
-          if (mcpServers && typeof mcpServers === "object") {
-            existingCatalog = mcpServers as Record<string, MCPServerDisplayConfig>;
+        const newCatalog = normalizeCustomServerCatalogInput(payload);
+        const targetPath = await ensureWritableCustomConfigPath();
+
+        // 读取现有配置
+        let existingCatalog: Record<string, MCPServerDisplayConfig> = {};
+        try {
+          const raw = await readFile(targetPath, "utf-8");
+          const parsed = JSON.parse(raw) as unknown;
+          if (parsed && typeof parsed === "object" && "mcpServers" in parsed) {
+            const mcpServers = (parsed as { mcpServers?: unknown }).mcpServers;
+            if (mcpServers && typeof mcpServers === "object") {
+              existingCatalog = mcpServers as Record<
+                string,
+                MCPServerDisplayConfig
+              >;
+            }
           }
+        } catch {
+          // 文件不存在或无法解析，使用空对象
+          existingCatalog = {};
         }
-      } catch {
-        // 文件不存在或无法解析，使用空对象
-        existingCatalog = {};
+
+        // 合并新配置到现有配置
+        const mergedCatalog = {
+          ...existingCatalog,
+          ...newCatalog,
+        };
+
+        await writeFile(
+          targetPath,
+          JSON.stringify({ mcpServers: mergedCatalog }, null, 2),
+          "utf-8",
+        );
+        return { success: true, count: Object.keys(mergedCatalog).length };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(`写入 ${CUSTOM_CONFIG_FILENAME} 失败:`, error);
+        return { success: false, error: message };
       }
+    },
+  );
 
-      // 合并新配置到现有配置
-      const mergedCatalog = {
-        ...existingCatalog,
-        ...newCatalog,
-      };
-
-      await writeFile(targetPath, JSON.stringify({ mcpServers: mergedCatalog }, null, 2), "utf-8");
-      return { success: true, count: Object.keys(mergedCatalog).length };
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      console.error(`写入 ${CUSTOM_CONFIG_FILENAME} 失败:`, error);
-      return { success: false, error: message };
-    }
-  });
-
-  ipcMain.handle(MCP_CHANNELS.DELETE_CUSTOM_SERVER, async (_event, serverName: string) => {
-    console.log(`[MCP] DELETE_CUSTOM_SERVER called with serverName: ${String(serverName)}`);
-    try {
-      if (!serverName || typeof serverName !== "string") {
-        return { success: false, error: "缺少服务器名称" };
-      }
-
-      const targetPath = await ensureWritableCustomConfigPath();
-
-      // 读取现有配置
-      let existingCatalog: Record<string, MCPServerDisplayConfig> = {};
+  ipcMain.handle(
+    MCP_CHANNELS.DELETE_CUSTOM_SERVER,
+    async (_event, serverName: string) => {
+      console.log(
+        `[MCP] DELETE_CUSTOM_SERVER called with serverName: ${String(serverName)}`,
+      );
       try {
-        const raw = await readFile(targetPath, "utf-8");
-        const parsed = JSON.parse(raw) as unknown;
-        if (parsed && typeof parsed === "object" && "mcpServers" in parsed) {
-          const mcpServers = (parsed as { mcpServers?: unknown }).mcpServers;
-          if (mcpServers && typeof mcpServers === "object") {
-            existingCatalog = mcpServers as Record<string, MCPServerDisplayConfig>;
-          }
+        if (!serverName || typeof serverName !== "string") {
+          return { success: false, error: "缺少服务器名称" };
         }
-      } catch {
-        // 文件不存在或无法解析，使用空对象
-        existingCatalog = {};
+
+        const targetPath = await ensureWritableCustomConfigPath();
+
+        // 读取现有配置
+        let existingCatalog: Record<string, MCPServerDisplayConfig> = {};
+        try {
+          const raw = await readFile(targetPath, "utf-8");
+          const parsed = JSON.parse(raw) as unknown;
+          if (parsed && typeof parsed === "object" && "mcpServers" in parsed) {
+            const mcpServers = (parsed as { mcpServers?: unknown }).mcpServers;
+            if (mcpServers && typeof mcpServers === "object") {
+              existingCatalog = mcpServers as Record<
+                string,
+                MCPServerDisplayConfig
+              >;
+            }
+          }
+        } catch {
+          // 文件不存在或无法解析，使用空对象
+          existingCatalog = {};
+        }
+
+        // 删除指定的服务器
+        delete existingCatalog[serverName];
+
+        // 写回配置文件
+        await writeFile(
+          targetPath,
+          JSON.stringify({ mcpServers: existingCatalog }, null, 2),
+          "utf-8",
+        );
+        return { success: true };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(`删除 MCP 服务器 ${String(serverName)} 失败:`, error);
+        return { success: false, error: message };
       }
-
-      // 删除指定的服务器
-      delete existingCatalog[serverName];
-
-      // 写回配置文件
-      await writeFile(targetPath, JSON.stringify({ mcpServers: existingCatalog }, null, 2), "utf-8");
-      return { success: true };
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      console.error(`删除 MCP 服务器 ${String(serverName)} 失败:`, error);
-      return { success: false, error: message };
-    }
-  });
+    },
+  );
 
   ipcMain.handle(MCP_CHANNELS.START_SERVER, async (_event, rawConfig) => {
     const { name, command, args, env } = rawConfig ?? {};
@@ -527,11 +623,20 @@ const attachHandlers = () => {
 
     try {
       const currentManager = getManager();
-      const normalizedConfig = normalizeServerConfig({ name, command, args, env });
+      const normalizedConfig = normalizeServerConfig({
+        name,
+        command,
+        args,
+        env,
+      });
       if (app.isPackaged) {
-        const envKeys = normalizedConfig.env ? Object.keys(normalizedConfig.env).join(",") : "none";
+        const envKeys = normalizedConfig.env
+          ? Object.keys(normalizedConfig.env).join(",")
+          : "none";
         const prettyArgs = normalizedConfig.args.map((value) =>
-          typeof value === "string" ? value.replace(/\\\\/g, "\\").replace(/\\/g, "/") : value,
+          typeof value === "string"
+            ? value.replace(/\\\\/g, "\\").replace(/\\/g, "/")
+            : value,
         );
         writeSomeLogs(
           `[MCP][start] name=${name}`,
@@ -590,36 +695,48 @@ const attachHandlers = () => {
 
   ipcMain.handle(
     MCP_CHANNELS.EXECUTE_TOOL,
-    async (_event, name: string, toolName: string, args: Record<string, unknown>) => {
+    async (
+      _event,
+      name: string,
+      toolName: string,
+      args: Record<string, unknown>,
+    ) => {
       try {
         const currentManager = getManager();
         const result = await currentManager.executeTool(name, toolName, args);
         return { success: true, result };
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        console.error(`执行 MCP 服务器 ${String(name)} 的工具 ${toolName} 失败:`, error);
+        console.error(
+          `执行 MCP 服务器 ${String(name)} 的工具 ${toolName} 失败:`,
+          error,
+        );
         return { success: false, error: message };
       }
     },
   );
 
-  ipcMain.handle(MCP_CHANNELS.SEND_MESSAGE, async (_event, name: string, message: string) => {
-    try {
-      const currentManager = getManager();
-      const result = await currentManager.sendMessage(name, message);
-      return {
-        success: !result.error,
-        userMessage: result.userMessage,
-        assistantMessage: result.assistantMessage,
-        toolMessages: result.toolMessages,
-        error: result.error,
-      };
-    } catch (error) {
-      const messageText = error instanceof Error ? error.message : String(error);
-      console.error(`向 MCP 服务器 ${String(name)} 发送消息失败:`, error);
-      return { success: false, error: messageText };
-    }
-  });
+  ipcMain.handle(
+    MCP_CHANNELS.SEND_MESSAGE,
+    async (_event, name: string, message: string) => {
+      try {
+        const currentManager = getManager();
+        const result = await currentManager.sendMessage(name, message);
+        return {
+          success: !result.error,
+          userMessage: result.userMessage,
+          assistantMessage: result.assistantMessage,
+          toolMessages: result.toolMessages,
+          error: result.error,
+        };
+      } catch (error) {
+        const messageText =
+          error instanceof Error ? error.message : String(error);
+        console.error(`向 MCP 服务器 ${String(name)} 发送消息失败:`, error);
+        return { success: false, error: messageText };
+      }
+    },
+  );
 
   ipcMain.handle(MCP_CHANNELS.GET_CHAT_HISTORY, (_event, name: string) => {
     try {
@@ -644,16 +761,19 @@ const attachHandlers = () => {
     }
   });
 
-  ipcMain.handle(MCP_CHANNELS.GET_SERVER_CONFIG, async (_event, name: string) => {
-    try {
-      const configs = await loadAllServerConfigs();
-      return configs[name] ?? null;
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      console.error(`读取 MCP 配置 ${String(name)} 失败:`, error);
-      throw new Error(message);
-    }
-  });
+  ipcMain.handle(
+    MCP_CHANNELS.GET_SERVER_CONFIG,
+    async (_event, name: string) => {
+      try {
+        const configs = await loadAllServerConfigs();
+        return configs[name] ?? null;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(`读取 MCP 配置 ${String(name)} 失败:`, error);
+        throw new Error(message);
+      }
+    },
+  );
 
   ipcMain.handle(
     MCP_CHANNELS.UPSERT_SERVER_CONFIG,
@@ -671,7 +791,10 @@ const attachHandlers = () => {
 };
 
 export function registerMCPServerListeners() {
-  console.log("[MCP] registerMCPServerListeners called, handlersRegistered:", handlersRegistered);
+  console.log(
+    "[MCP] registerMCPServerListeners called, handlersRegistered:",
+    handlersRegistered,
+  );
   if (handlersRegistered) {
     console.log("[MCP] Handlers already registered, returning...");
     return;

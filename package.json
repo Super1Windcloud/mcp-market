@@ -1,7 +1,7 @@
 {
   "name": "mcp-market",
-  "productName": "mcp-market",
-  "version": "1.0.4",
+  "productName": "Mcp Market",
+  "version": "1.0.6",
   "description": "这是 一个精选的优秀模型上下文协议 (MCP) 服务器市场",
   "main": ".vite/build/main.js",
   "private": true,

@@ -33,6 +33,7 @@ const config: ForgeConfig = {
 
   makers: [
     new MakerSquirrel({
+      name: "McpMarket",
       setupIcon: path.resolve(__dirname, "public", "icon.ico"),
     }),
     new MakerZIP({}, ["darwin"]),
