@@ -19,8 +19,6 @@ const initAutoUpdater = () => {
   const feedUrl =
     process.env.VELOPACK_FEED_URL ??
     `https://github.com/Super1WindCloud/mcp-market/releases/download/latest`;
-  const channel = process.env.VELOPACK_CHANNEL;
-  const allowDowngrade = process.env.VELOPACK_ALLOW_DOWNGRADE === "true";
 
   if (!feedUrl) {
     writeSomeLogs("[velopack] feed url missing");
@@ -28,15 +26,9 @@ const initAutoUpdater = () => {
   }
 
   const updater = new UpdateManager();
+  
   updater.setUrlOrPath(feedUrl);
-
-  if (channel) {
-    updater.setExplicitChannel(channel);
-  }
-
-  if (allowDowngrade) {
-    updater.setAllowDowngrade(true);
-  }
+ 
 
   const runUpdateCheck = async () => {
     try {

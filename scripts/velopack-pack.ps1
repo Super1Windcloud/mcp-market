@@ -26,6 +26,7 @@ vpk pack `
   --mainExe 'Mcp Market.exe' `
   --packTitle 'MCP Market' `
   --packAuthors 'SuperWindCloud' `
-  --outputDir $outputDir
+  --outputDir $outputDir `
+  --icon  "public/icon.ico"
 
 Write-Host "Velopack packages generated in '$outputDir'."

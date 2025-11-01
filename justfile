@@ -15,7 +15,7 @@ publish:
     npm run publish
 
 pack:
-	pwsh -NoLogo -NoProfile -File ./scripts/velopack-pack.ps1
+	pwsh -NoLogo -NoProfile -File ./scripts/velopack-pack.ps1 &&   ./velopack/Releases/com.superwindcloud.mcp-market-win-Setup.exe
 
 upload:
 	pwsh -NoLogo -NoProfile -File ./scripts/velopack-upload.ps1

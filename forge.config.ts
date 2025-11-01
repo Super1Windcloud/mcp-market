@@ -14,7 +14,7 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     icon: path.resolve(__dirname, "public", "icon.jpg"),
-    extraResource: ["public", ".env"],
+    extraResource: ["public", ".env", "node_modules/velopack/bin"],
     osxSign: {},
     osxNotarize: {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -96,6 +96,10 @@ const config: ForgeConfig = {
       [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
+    {
+      name: "@electron-forge/plugin-auto-unpack-natives",
+      config: {},
+    },
   ],
 };
 
