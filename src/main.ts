@@ -8,10 +8,6 @@ import { updateElectronApp } from "update-electron-app";
 import { writeSomeLogs } from "@/utils";
 
 const initAutoUpdater = () => {
-  if (!app.isPackaged) {
-    return;
-  }
-
   const toStrings = (args: unknown[]) =>
     args.map((arg) => {
       if (arg instanceof Error) {
