@@ -9,6 +9,7 @@ import { FuseV1Options, FuseVersion } from "@electron/fuses";
 // import { MakerWix } from "@electron-forge/maker-wix";
 import MakerDMG from "@electron-forge/maker-dmg";
 import MakerPKG from "@electron-forge/maker-pkg";
+import { AutoUnpackNativesPlugin } from "@electron-forge/plugin-auto-unpack-natives";
 
 const config: ForgeConfig = {
   packagerConfig: {
@@ -96,10 +97,7 @@ const config: ForgeConfig = {
       [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
-    {
-      name: "@electron-forge/plugin-auto-unpack-natives",
-      config: {},
-    },
+    new AutoUnpackNativesPlugin({}),
   ],
 };
 
