@@ -6,7 +6,7 @@ import { MakerRpm } from "@electron-forge/maker-rpm";
 import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
-// import { MakerWix } from "@electron-forge/maker-wix";
+import { MakerWix } from "@electron-forge/maker-wix";
 import MakerDMG from "@electron-forge/maker-dmg";
 import MakerPKG from "@electron-forge/maker-pkg";
 import { AutoUnpackNativesPlugin } from "@electron-forge/plugin-auto-unpack-natives";
@@ -15,7 +15,7 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     icon: path.resolve(__dirname, "public", "icon.jpg"),
-    extraResource: ["public", ".env", "node_modules/velopack/bin"],
+    extraResource: ["public", ".env"],
     osxSign: {},
     osxNotarize: {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -37,21 +37,20 @@ const config: ForgeConfig = {
     new MakerPKG({}),
     new MakerRpm({}),
     new MakerDeb({}),
-    // new MakerWix({
-    //   name: "MCP Market",
-    //   description: "An Electron + Vite App using WSI installer",
-    //   manufacturer: "Superwindcloud",
-    //   version: "1.0.0",
-    //   exe: "mcp-market",
-    //   shortcutName: "MCP Market",
-    //   defaultInstallMode: "perUser",
-    //   shortName: "mcp-market",
-    //   icon: path.resolve(__dirname, "public", "icon.ico"),
-    //   ui: {
-    //     chooseDirectory: true,
-    //   },
-
-    // }),
+    new MakerWix({
+      name: "MCP Market",
+      description: "An Electron + Vite App using WSI installer",
+      manufacturer: "Superwindcloud",
+      version: "1.0.0",
+      exe: "mcp-market",
+      shortcutName: "MCP Market",
+      defaultInstallMode: "perUser",
+      shortName: "mcp-market",
+      icon: path.resolve(__dirname, "public", "icon.ico"),
+      ui: {
+        chooseDirectory: true,
+      },
+    }),
   ],
   publishers: [
     {
