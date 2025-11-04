@@ -11,8 +11,7 @@
     "email": "ss1178933440@gmail.com"
   },
   "workspaces": [
-    "neteasecloud-mcp",
-    "transcript"
+    "neteasecloud-mcp"
   ],
   "repository": {
     "type": "git",
@@ -20,7 +19,7 @@
   },
   "homepage": "https://github.com/Super1WindCloud/mcp-market.git",
   "scripts": {
-    "taze": "taze  major -w -r ",
+    "taze": "taze  major -w -r -x @electron/fuses",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -58,7 +57,7 @@
     "@electron-forge/plugin-vite": "^7.10.2",
     "@electron-forge/publisher-github": "^7.10.2",
     "@electron-forge/shared-types": "^7.10.2",
-    "@electron/fuses": "^2.0.0",
+    "@electron/fuses": "^1.8.0",
     "@eslint/compat": "^1.4.1",
     "@eslint/js": "^9.39.1",
     "@playwright/test": "^1.56.1",

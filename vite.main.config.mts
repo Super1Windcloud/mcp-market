@@ -3,12 +3,20 @@ import path from "path";
 import fs from "fs";
 
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ["velopack"],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
   publicDir: path.resolve(__dirname, "public"),
+  build: {
+    rollupOptions: {
+      external: ["velopack"],
+    },
+  },
   plugins: [
     {
       name: "copy-public-folder",

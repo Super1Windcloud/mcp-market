@@ -31,6 +31,11 @@ class FileLogger {
         await fs.promises.rename(this.logFilePath, newPath);
       }
     } catch (error) {
+      const nodeError = error as NodeJS.ErrnoException;
+      if (nodeError?.code === "ENOENT") {
+        // No log file yet; nothing to rotate.
+        return;
+      }
       console.error("Failed to get file stats:", error);
     }
   }

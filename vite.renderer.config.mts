@@ -7,6 +7,9 @@ import { codeInspectorPlugin } from "code-inspector-plugin";
 
 export default defineConfig({
   plugins: [
+    codeInspectorPlugin({
+      bundler: "vite",
+    }),
     tanstackRouter({
       target: "react",
       autoCodeSplitting: true,
@@ -16,9 +19,6 @@ export default defineConfig({
       babel: {
         plugins: ["babel-plugin-react-compiler"],
       },
-    }),
-    codeInspectorPlugin({
-      bundler: "vite",
     }),
   ],
   publicDir: path.resolve(__dirname, "public"),
