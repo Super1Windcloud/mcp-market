@@ -90,7 +90,6 @@ app.whenReady().then(() => {
   } else {
     process.env.MCP_RESOURCE_BASE = app.getAppPath();
   }
-  initAutoUpdater();
   createWindow();
 });
 
