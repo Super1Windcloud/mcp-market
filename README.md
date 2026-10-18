@@ -145,6 +145,29 @@ mcp-market/
 2. `.vite/build/public/` 中的打包文件 ⭐
 3. `public/` 目录中的源文件
 
+### Parallel 网页搜索与页面读取
+
+全新安装的首页包含 **Parallel Search**，点击 **Start** 后即可在 MCP 对话中搜索网页、读取指定 URL 并总结结果。
+[Parallel Search MCP](https://docs.parallel.ai/integrations/mcp/search-mcp) 无需 Parallel 账户或 API 密钥，匿名搜索使用 Fast 模式，适用于探索和轻量使用，并有免费额度限制。
+对话模型仍需在 `.env` 中配置 `SILICONFLOW_API_KEY`。
+
+已有用户配置不会自动迁移。需要添加时，在首页的自定义 MCP JSON 编辑器中保存：
+
+```json
+{
+  "name": "Parallel Search",
+  "url": "https://docs.parallel.ai/integrations/mcp/search-mcp",
+  "desc": "免费网页搜索与页面读取",
+  "transport": "streamable-http",
+  "endpoint": "https://search.parallel.ai/mcp"
+}
+```
+
+HTTP MCP 使用 `endpoint` 连接服务；`url` 仍是展示用的文档链接。可选 `headers` 可保存显式配置的认证头，`timeoutMs` 设置请求超时（默认 30000 毫秒），`disabled: true` 阻止启动。
+应用不会从环境变量自动读取 Parallel 密钥。已有覆盖配置优先，连接失败时不会切换到其他服务；删除条目后不会自动恢复。只有点击 **Start** 才会连接服务，离开对话时点击 **返回** 可停止连接和未完成的工具请求。
+原有 `command`、`args`、`env` 本地 MCP 配置继续使用 stdio。
+
+
 ## 🏗️ 生产构建
 
 要创建应用程序的可分发版本：

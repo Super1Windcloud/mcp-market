@@ -3,6 +3,11 @@ import fs from "fs";
 import path from "path";
 import { EventEmitter } from "events";
 import { writeSomeLogs } from "@/utils";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+import { parseServerConfig, type ServerConfig } from "./serverConfig";
+import { version } from "../../package.json";
+export type { ServerConfig } from "./serverConfig";
 
 export interface ToolSchema {
   type: "object";
@@ -44,35 +49,49 @@ export class Tool {
   }
 }
 
-export interface ServerConfig {
-  command: string;
-  args: string[];
-  env?: Record<string, string>;
-}
-
 export class Server extends EventEmitter {
   name: string;
   config: ServerConfig;
   process: ChildProcess | null = null;
   capabilities: Record<string, unknown> | null = null;
   tools: Tool[] = [];
+  private httpClient: Client | null = null;
   private pendingRequests = new Map<number, { resolve: (v: unknown) => void; reject: (e: unknown) => void }>();
 
   constructor(name: string, config: ServerConfig) {
     super();
     this.name = name;
-    this.config = config;
+    this.config = parseServerConfig(config);
   }
 
   async initialize(): Promise<void> {
+    if (this.config.disabled) throw new Error(`MCP 服务 "${this.name}" 已禁用`);
+    if (this.config.transport === "streamable-http") {
+      const client = new Client({ name: "mcp-market", version });
+      const headers = new Headers(this.config.headers);
+      headers.set("User-Agent", `mcp-market/${version}`);
+      const transport = new StreamableHTTPClientTransport(new URL(this.config.endpoint), {
+        requestInit: { headers },
+      });
+      this.httpClient = client;
+      try {
+        await client.connect(transport, { timeout: this.config.timeoutMs ?? 30000 });
+        this.capabilities = client.getServerCapabilities() ?? {};
+      } catch (error) {
+        await this.cleanup();
+        throw error;
+      }
+      return;
+    }
+    const config = this.config;
     return new Promise((resolve, reject) => {
       const { command, argsPrefix, needsShell } = this.resolveCommand();
-      const spawnArgs = [...argsPrefix, ...this.config.args];
+      const spawnArgs = [...argsPrefix, ...config.args];
       writeSomeLogs("launcher command :" + command);
       const args = spawnArgs.join(" ");
       writeSomeLogs("args :" + args);
       const proc = spawn(command, spawnArgs, {
-        env: { ...process.env, ...(this.config.env || {}) },
+        env: { ...process.env, ...(config.env || {}) },
         stdio: ["pipe", "pipe", "pipe"],
         shell: needsShell,
       });
@@ -205,6 +224,19 @@ export class Server extends EventEmitter {
   }
 
   async listTools(): Promise<Tool[]> {
+    if (this.config.transport === "streamable-http") {
+      if (!this.httpClient) throw new Error("HTTP MCP 未初始化");
+      const tools: Tool[] = [];
+      let cursor: string | undefined;
+      do {
+        const result = await this.httpClient.listTools({ cursor }, { timeout: this.config.timeoutMs ?? 30000 });
+        tools.push(...result.tools.map((tool) =>
+          new Tool(tool.name, tool.description ?? "", tool.inputSchema as ToolSchema)));
+        cursor = result.nextCursor;
+      } while (cursor);
+      this.tools = tools;
+      return tools;
+    }
     if (!this.process) throw new Error("进程未初始化");
     const id = Math.floor(Math.random() * 100000);
     const payload = {
@@ -231,6 +263,11 @@ export class Server extends EventEmitter {
   }
 
   async executeTool(toolName: string, args: Record<string, unknown>): Promise<unknown> {
+    if (this.config.transport === "streamable-http") {
+      if (!this.httpClient) throw new Error("HTTP MCP 未初始化");
+      return this.httpClient.callTool({ name: toolName, arguments: args }, undefined,
+        { timeout: this.config.timeoutMs ?? 30000 });
+    }
     if (!this.process) throw new Error("进程未初始化");
 
     console.log(`[${this.name}] 执行工具: ${toolName} 参数:`, args);
@@ -257,6 +294,9 @@ export class Server extends EventEmitter {
 
 
   async cleanup(): Promise<void> {
+    const client = this.httpClient;
+    this.httpClient = null;
+    if (client) await client.close();
     if (this.process) {
       console.log(`[${this.name}] 关闭进程`);
       this.process.kill();
@@ -265,6 +305,7 @@ export class Server extends EventEmitter {
   }
 
   private resolveCommand(): { command: string; argsPrefix: string[]; needsShell: boolean } {
+    if (this.config.transport === "streamable-http") throw new Error("HTTP MCP 不使用本地命令");
     const configured = this.config.command;
     if (process.platform !== "win32") {
       return { command: configured, argsPrefix: [], needsShell: false };
