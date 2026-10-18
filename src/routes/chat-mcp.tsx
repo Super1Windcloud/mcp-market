@@ -6,59 +6,12 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import React from "react";
-import type { ChatMessage, MCPServerConfig, SendMessageResponse } from "@/types/mcp";
+import type { ChatMessage, SendMessageResponse } from "@/types/mcp";
 import { openExternalUrl } from "@/helpers/window_helpers";
-import { isDev } from "@/utils";
 
 
-export const resolveServerConfig = async (displayName: string, url: string): Promise<MCPServerConfig> => {
-  try {
-    const override = await window.mcp.getServerConfig(displayName);
-
-    if (override) {
-      const resolvedConfig = {
-        ...override,
-        name: displayName,
-      } as MCPServerConfig;
-
-      if (!resolvedConfig.command || !Array.isArray(resolvedConfig.args)) {
-        console.warn(`MCP override for ${displayName} 缺少 command 或 args`);
-      } else {
-        if (isDev()) console.log("current mcp config", resolvedConfig);
-        return resolvedConfig;
-      }
-    }
-
-    const catalog = typeof window.mcp.listCustomServers === "function"
-      ? await window.mcp.listCustomServers()
-      : [];
-
-    const fallback = (catalog ?? []).find((server) => server.name === displayName);
-    if (fallback && fallback.command && Array.isArray(fallback.args)) {
-      const normalized: MCPServerConfig = {
-        name: displayName,
-        command: fallback.command,
-        args: [...fallback.args],
-        env: fallback.env,
-      };
-      if (isDev()) console.log(`using fallback MCP config from catalog for ${displayName}`, normalized);
-      return normalized;
-    }
-
-    console.warn(`MCP config for "${displayName}" not found`);
-    return {
-      name: displayName,
-      command: "not found",
-      args: ["not found"],
-      env: { error: `请访问${url} 自行配置mcpServer` },
-
-    };
-  } catch (error) {
-    console.error("resolveServerConfig error:", error);
-    throw error;
-  }
-};
-
+export { resolveServerConfig } from "@/mcp/resolveServerConfig";
+import { resolveServerConfig } from "@/mcp/resolveServerConfig";
 
 export const Route = createFileRoute("/chat-mcp")({
   component: MCPChat,
@@ -114,8 +67,8 @@ function MCPChat() {
       try {
         const config = await resolveServerConfig(name, url);
 
-        if (!config.command || config.command === "not found") {
-          const hint =
+        if (config.disabled || (config.transport !== "streamable-http" && config.command === "not found")) {
+          const hint = config.disabled ? `MCP 服务 "${name}" 已禁用` :
             typeof config.env?.error === "string"
               ? config.env.error
               : `未找到 ${name} 的 MCP 配置，请访问 ${url} 进行配置`;

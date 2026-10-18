@@ -7,6 +7,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { MCPServerConfig, MCPServerDisplayConfig } from "@/types/mcp";
 import { writeSomeLogs } from "@/utils";
+import { parseServerConfig } from "@/mcp/serverConfig";
 
 let manager: MCPChatManager | null = null;
 let handlersRegistered = false;
@@ -327,39 +328,9 @@ const sanitizeDisplayConfig = (
     throw new Error("MCP 配置缺少 name 字段");
   }
 
-  if (
-    !raw.command ||
-    typeof raw.command !== "string" ||
-    raw.command.trim().length === 0
-  ) {
-    throw new Error(`MCP 配置 ${resolvedName} 缺少 command 字段`);
-  }
-
-  const rawArgs = Array.isArray(raw.args) ? raw.args : [];
-  const normalizedArgs = rawArgs.map((arg) => String(arg));
-  const command = raw.command.trim();
-
-  const normalizedEnv =
-    raw.env && typeof raw.env === "object"
-      ? Object.entries(raw.env).reduce<Record<string, string>>(
-          (acc, [key, value]) => {
-            if (!key || typeof key !== "string") {
-              return acc;
-            }
-            if (value === undefined || value === null) {
-              return acc;
-            }
-            acc[key] = typeof value === "string" ? value : String(value);
-            return acc;
-          },
-          {},
-        )
-      : undefined;
-
   const normalized: MCPServerDisplayConfig = {
+    ...parseServerConfig({ ...raw, args: Array.isArray(raw.args) ? raw.args : [] }),
     name: resolvedName,
-    command,
-    args: normalizedArgs,
   };
 
   if (raw.desc && typeof raw.desc === "string") {
@@ -368,10 +339,6 @@ const sanitizeDisplayConfig = (
 
   if (raw.url && typeof raw.url === "string") {
     normalized.url = raw.url;
-  }
-
-  if (normalizedEnv && Object.keys(normalizedEnv).length > 0) {
-    normalized.env = normalizedEnv;
   }
 
   return normalized;
@@ -446,6 +413,7 @@ const resolveArgumentPath = (value: string): string => {
 const mapArgsForRuntime = (args: string[]): string[] => args;
 
 const normalizeServerConfig = (config: MCPServerConfig): MCPServerConfig => {
+  if (config.transport === "streamable-http") return config;
   let command = config.command;
   const args = [...config.args];
 
@@ -586,20 +554,17 @@ const attachHandlers = () => {
   );
 
   ipcMain.handle(MCP_CHANNELS.START_SERVER, async (_event, rawConfig) => {
-    const { name, command, args, env } = rawConfig ?? {};
-    if (!name || !command || !Array.isArray(args)) {
-      return { success: false, error: "缺少必要的 MCP 配置参数" };
+    const { name } = rawConfig ?? {};
+    if (!name || typeof name !== "string") {
+      return { success: false, error: "缺少 MCP 服务名称" };
     }
 
     try {
       const currentManager = getManager();
       const normalizedConfig = normalizeServerConfig({
-        name,
-        command,
-        args,
-        env,
+        ...parseServerConfig(rawConfig), name,
       });
-      if (app.isPackaged) {
+      if (app.isPackaged && normalizedConfig.transport !== "streamable-http") {
         const envKeys = normalizedConfig.env
           ? Object.keys(normalizedConfig.env).join(",")
           : "none";

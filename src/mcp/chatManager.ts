@@ -3,6 +3,7 @@ import { Configuration } from "./config";
 import { ChatSession, ChatSessionReply } from "./chatSession";
 import { LLMClient } from "./llmClient";
 import { Server, Tool } from "./server";
+import { parseServerConfig } from "./serverConfig";
 import type { ChatMessage, ChatRole, MCPServerConfig } from "@/types/mcp";
 
 interface SessionEntry {
@@ -30,15 +31,22 @@ export class MCPChatManager {
   }
 
   async startServer(payload: MCPServerConfig): Promise<{ tools: Tool[] }> {
-    const { name, command, args, env } = payload;
+    const { name } = payload;
+    const config = parseServerConfig(payload);
+    if (config.disabled) throw new Error(`MCP 服务 "${name}" 已禁用`);
 
     if (this.sessions.has(name)) {
       await this.stopServer(name);
     }
 
-    const server = new Server(name, { command, args, env });
+    const server = new Server(name, config);
     const session = new ChatSession([server], this.llmClient);
-    await session.initialize();
+    try {
+      await session.initialize();
+    } catch (error) {
+      await session.dispose();
+      throw error;
+    }
 
     this.sessions.set(name, {
       server,

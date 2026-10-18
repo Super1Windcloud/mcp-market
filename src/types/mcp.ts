@@ -1,4 +1,5 @@
 import type { ToolSchema } from "@/mcp/server";
+import type { ServerConfig } from "@/mcp/serverConfig";
 
 export type ChatRole = "user" | "assistant" | "system";
 
@@ -11,17 +12,12 @@ export interface ChatMessage {
 
 
 
-export interface MCPServerConfig {
-  name: string;
-  command: string;
-  args: string[];
-  env?: Record<string, string>;
-}
+export type MCPServerConfig = ServerConfig & { name: string };
 
-export interface MCPServerDisplayConfig extends MCPServerConfig {
+export type MCPServerDisplayConfig = MCPServerConfig & {
   desc?: string;
   url?: string;
-}
+};
 
 export interface MCPConfigCatalog {
   mcpServers: Record<string, MCPServerDisplayConfig>;

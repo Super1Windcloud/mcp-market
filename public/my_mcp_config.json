@@ -1,5 +1,12 @@
 {
   "mcpServers": {
+    "Parallel Search": {
+      "name": "Parallel Search",
+      "url": "https://docs.parallel.ai/integrations/mcp/search-mcp",
+      "desc": "免费网页搜索与页面读取，无需 Parallel 账户或 API 密钥；搜索使用 Fast 模式。",
+      "transport": "streamable-http",
+      "endpoint": "https://search.parallel.ai/mcp"
+    },
     "NeteaseCloud MCP": {
       "name": "NeteaseCloud MCP",
       "url": "https://github.com/Super1WindCloud",

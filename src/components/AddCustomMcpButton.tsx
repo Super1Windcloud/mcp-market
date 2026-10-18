@@ -48,7 +48,7 @@ export function AddCustomMcpButton({ onSave }: AddCustomMcpButtonProps) {
       } else if (parsed && typeof parsed === "object" && "mcpServers" in parsed) {
         // If it already has mcpServers, use as-is
         payload = parsed as MCPConfigCatalog;
-      } else if (parsed && typeof parsed === "object" && "name" in parsed && "command" in parsed) {
+      } else if (parsed && typeof parsed === "object" && "name" in parsed && ("command" in parsed || "transport" in parsed)) {
         // If it's a single config object, wrap it with the name as key
         const config = parsed as MCPServerDisplayConfig;
         const key = config.name || "custom-mcp";
